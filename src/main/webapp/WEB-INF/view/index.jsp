@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -44,6 +45,8 @@
 	            	<div>
 			      		Carrousel des derniers sites ajoutés ?
 			      	</div>
+			      	<div>${user.pseudo}</div>
+			      	<p><c:out value="${ user.pseudo }" /></p>
 			    </div>
 			</div>
 			<div class="row">

@@ -1,15 +1,16 @@
-package dev.gaellerauffet.lesamisdelescalade.controllers;
+package dev.gaellerauffet.lesamisdelescalade.site.resources;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
- 
+
 @Controller
-public class HomeController {
- 
-	@RequestMapping("/")
+public class UserController {
+	
+	@RequestMapping("/acces-compte")
     public String index(Model model) {
-        return "index";
+		model.addAttribute("title", "Les sites");
+        return "acces-compte";
     }
-   
+
 }

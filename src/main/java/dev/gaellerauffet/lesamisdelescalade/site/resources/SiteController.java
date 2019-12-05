@@ -1,4 +1,4 @@
-package dev.gaellerauffet.lesamisdelescalade.controllers;
+package dev.gaellerauffet.lesamisdelescalade.site.resources;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
