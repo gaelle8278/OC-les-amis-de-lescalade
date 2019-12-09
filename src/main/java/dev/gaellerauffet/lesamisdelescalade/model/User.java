@@ -5,53 +5,65 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Type;
 
 @Entity
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "first_name")
+	@NotBlank(message = "Name is mandatory")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
+	@NotBlank(message = "L'adresse e-mail est obligatoire")
 	private String email;
+	
 	private String pseudo;
 	private String password;
 	private String phone;
-	private String region;
+	private String city;
 	
+	@Column(name = "postal_code")
+	private String postalCode;
+
 	@Column(columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean checkedCGU=false;
+	private boolean checkedCGU = false;
 	@Column(columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean active=false;
+	private boolean active = true;
+
+	protected User() {
+	}
+
 	
-	protected User() {}
-	
-	public User(String firstName, String lastName) {
-	    this.firstName = firstName;
-	    this.lastName = lastName;
-	  }	
-	
-	@Override
-	public String toString() {
-		return String.format(
-	       "Utilisateur[id=%d, firstName='%s', lastName='%s']",
-	        id, firstName, lastName);
+	public User(String firstName, String lastName, String email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email= email;
 	}
 	
+	public User(String firstName, String email) {
+		this.firstName = firstName;
+		this.email= email;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Utilisateur[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
+	}
+
 	public Integer getId() {
 		return id;
 	}
-
 
 	public String getFirstName() {
 		return firstName;
@@ -101,12 +113,12 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getRegion() {
-		return region;
+	public String getCity() {
+		return city;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setCity(String region) {
+		this.city = region;
 	}
 
 	public boolean isCheckedCGU() {
@@ -124,6 +136,21 @@ public class User {
 	public void setActive(boolean isActive) {
 		this.active = isActive;
 	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+	
 	
 	
 

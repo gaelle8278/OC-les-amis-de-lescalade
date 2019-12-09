@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Les amis de l'escalade</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicons -->
+<link th:href="@{/img/favicon.png}" rel="icon">
+<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS File -->
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/animate/animate.min.css}" rel="stylesheet">
+<link th:href="@{/assets/ionicons/css/ionicons.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/owlcarousel/assets/owl.carousel.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/lightbox/css/lightbox.min.css}"
+	rel="stylesheet">
+
+<!-- Main Stylesheet File -->
+<link th:href="@{/css/style.css}" rel="stylesheet">
+
+<!-- =======================================================
+    Theme Name: Rapid
+    Theme URL: https://bootstrapmade.com/rapid-multipurpose-bootstrap-business-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+	<!--==========================
+  Header
+  ============================-->
+	<header id="header">
+		<div id="topbar">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<!--  session dependant : link adapt if user connected and member -->
+						<a class="btn btn-primary float-md-right"
+							th:href="@{/acces-compte}">Accéder à mon compte</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="logo float-left">
+				<!-- Uncomment below if you prefer to use an image logo -->
+				<!-- <h1 class="text-light"><a href="#intro" class="scrollto"><span>Rapid</span></a></h1>-->
+				<a href="#header" class="scrollto"><img src="img/logo.png"
+					alt="" class="img-fluid"></a>
+			</div>
+			<nav class="main-nav float-right d-none d-lg-block">
+				<ul>
+					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/les-sites}">Les sites</a></li>
+					<li><a th:href="@{/recherche-site}">Trouver un site</a></li>
+				</ul>
+			</nav>
+			<!-- .main-nav -->
+		</div>
+	</header>
+	<!-- #header -->
+
+
+	<main id="main">
+		<section id="spot-add" class="section-bg">
+	      	<div class="container">
+	        	<header class="section-header">
+	          		<h3 class="section-title" th:text="${spot.name}"></h3>
+	        	</header>
+	        	<div class="row my-2">
+	        		<div class="col" th:text="${spot.region}"></div>
+	        	</div>
+	        	<div class="row my-2">
+	        		<div class="col col-md-4" th:text="'Type : ' + ${spot.type}"></div>
+	        		<div class="col col-md-4" th:text="'Orientation : ' + ${spot.orientation}"></div>
+	        		<div class="col col-md-4" th:text="'Hauteur : ' + ${spot.height}"></div>
+	        	</div>
+	        	<div class="row my-2">
+	        		<div class="col col-md-2"><span class="font-weight-bold">Remarques</span></div>
+	        		<div class="col col-md-10" th:text="${spot.notice}"></div>
+	        	</div>
+				<div class="row my-2">
+					<div class="col"  th:text="${spot.description}"></div>
+		    	</div>
+		    	<div class="row my-2">
+		    		<div class="col">
+		    			<a class="btn btn-primary" th:href="@{/les-sites}">Retour à la liste des sites</a>
+		    		</div>
+		    	</div>
+	       </div>
+	     </section>
+	</main>
+
+	<!--==========================
+    Footer
+  	============================-->
+	<footer id="footer" class="section-bg">
+		<div class="container">
+			<div class="copyright">
+				&copy; Copyright <strong>Les amis de l'escalade</strong>. Tous droits réservés
+			</div>
+		</div>
+	</footer>
+	<!-- #footer -->
+
+	<!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>-->
+	<!-- Uncomment below i you want to use a preloader -->
+	<!-- <div id="preloader"></div> -->
+
+	<!-- JavaScript Libraries -->
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
+
+	<!-- Template Main Javascript File -->
+	<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

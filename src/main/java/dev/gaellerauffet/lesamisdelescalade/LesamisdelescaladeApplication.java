@@ -14,26 +14,18 @@ import dev.gaellerauffet.lesamisdelescalade.persistance.UserRepository;
 
 @SpringBootApplication
 public class LesamisdelescaladeApplication {
-
-	/*public static void main(String[] args) {
-		SpringApplication.run(LesamisdelescaladeApplication.class, args);
-	}*/
 	
 	private static final Logger log = LoggerFactory.getLogger(LesamisdelescaladeApplication.class);
 
 	public static void main(String[] args) {
-	    SpringApplication.run(LesamisdelescaladeApplication.class);
+	    SpringApplication.run(LesamisdelescaladeApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner demo(UserRepository repository) {
 	    return (args) -> {
 	      // save a few customers
-	      /*repository.save(new User("Jack", "Bauer"));
-	      repository.save(new User("Chloe", "O'Brian"));
-	      repository.save(new User("Kim", "Bauer"));
-	      repository.save(new User("David", "Palmer"));*/
-	      repository.save(new User("Bob", "Marchand"));
+	      repository.save(new User("Luc", "Clinm", "luc@hotmail.com"));
 
 	      // fetch all customers
 	      log.info("Customers found with findAll():");
@@ -61,7 +53,7 @@ public class LesamisdelescaladeApplication {
 	      // }
 	      log.info("");
 	    };
-	  }
+	  }*/
 
 
 }
