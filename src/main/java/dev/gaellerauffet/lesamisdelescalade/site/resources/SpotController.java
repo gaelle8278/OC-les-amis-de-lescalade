@@ -54,7 +54,7 @@ public class SpotController {
 	@PostMapping("/recherche-site")
     public String search( @Valid @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, Model model) {
 		//recherche des sites selon les critères de recherche
-		List<Spot> foundedSpots = spotService.getSpotsFromSearchCriteria(spotsearchform);
+		List<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform);
 		model.addAttribute("foundedSpots", foundedSpots);
 		//liste des régions
 		List<String> listRegions =  spotService.getListRegionsForForm();

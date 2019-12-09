@@ -22,7 +22,7 @@ public interface SpotService {
 
 	List<Spot> getSpotsByRegion(String region);
 
-	List<Spot> getSpotsFromSearchCriteria(SpotSearchForm spotsearchform);
+	List<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform);
 
 	void add(Spot spot);
 

@@ -2,6 +2,10 @@ package dev.gaellerauffet.lesamisdelescalade.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 
 public interface UserService {
@@ -16,6 +20,8 @@ public interface UserService {
 	void updateUser(User user);
 
 	void deleteUser(int id);
+
+	Page<User> findAllPaginated(Pageable pageable);
 	
 	//obtenir les sites d'un user
 	//obtenir les topos d'un User

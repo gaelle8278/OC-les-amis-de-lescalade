@@ -29,7 +29,7 @@ public class Spot {
 	private int userId = 1;
 	
 
-	protected Spot() {}
+	public Spot() {}
 
 
 	public Integer getId() {

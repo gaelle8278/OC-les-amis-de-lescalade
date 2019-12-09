@@ -3,6 +3,9 @@ package dev.gaellerauffet.lesamisdelescalade.site.resources;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.services.UserService;
 
@@ -18,6 +22,14 @@ public class UserController {
 
 	@Autowired
     UserService userService;
+	
+	
+	@GetMapping("/les-utilisateurs")
+	public String listUsers(@PageableDefault(size = 10) Pageable pageable, Model model) {
+		Page<User> page = userService.findAllPaginated(pageable);
+		model.addAttribute("page", page);
+        return "user/list";
+	}
 	
 	@PostMapping("/user/add")
 	public String addUser(@Valid User user, BindingResult result, Model model) {

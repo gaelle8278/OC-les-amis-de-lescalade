@@ -21,53 +21,18 @@
 	rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
-	rel="stylesheet">
-<link th:href="@{/assets/animate/animate.min.css}" rel="stylesheet">
-<link th:href="@{/assets/ionicons/css/ionicons.min.css}"
-	rel="stylesheet">
-<link th:href="@{/assets/owlcarousel/assets/owl.carousel.min.css}"
-	rel="stylesheet">
-<link th:href="@{/assets/lightbox/css/lightbox.min.css}"
-	rel="stylesheet">
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">>
 
 <!-- Main Stylesheet File -->
 <link th:href="@{/css/style.css}" rel="stylesheet">
-
-<!-- =======================================================
-    Theme Name: Rapid
-    Theme URL: https://bootstrapmade.com/rapid-multipurpose-bootstrap-business-template/
-    Author: BootstrapMade.com
-    License: https://bootstrapmade.com/license/
-  ======================================================= -->
+->
 </head>
 
 <body>
 	<!--==========================
-  Header
-  ============================-->
-	<header id="header">
-		<div id="topbar">
-			
-		</div>
-		<div class="container">
-			<div class="logo float-left">
-				<!-- Uncomment below if you prefer to use an image logo -->
-				<!-- <h1 class="text-light"><a href="#intro" class="scrollto"><span>Rapid</span></a></h1>-->
-				<a href="#header" class="scrollto"><img src="img/logo.png"
-					alt="" class="img-fluid"></a>
-			</div>
-			<nav class="main-nav float-right d-none d-lg-block">
-				<ul>
-					<li class="active"><a th:href="@{/}">Home</a></li>
-					
-				</ul>
-			</nav>
-			<!-- .main-nav -->
-		</div>
-	</header>
-	<!-- #header -->
-
+  	Header
+  	============================-->
+	<header th:replace="commons/header :: header"></header>
 
 	<main id="main">
 	     <section id="admin-homepage" class="section-bg">
@@ -82,17 +47,7 @@
 	<!--==========================
     Footer
   	============================-->
-	<footer id="footer" class="section-bg">
-		
-
-		<div class="container">
-			<div class="copyright">
-				&copy; Copyright <strong>Les amis de l'escalade</strong>. Tous
-				droits réservés
-			</div>
-		</div>
-	</footer>
-	<!-- #footer -->
+	<footer th:replace="commons/footer :: footer"></footer>
 
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 	<!-- Uncomment below i you want to use a preloader -->
@@ -102,14 +57,7 @@
 	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-	<script th:src="@{/assets/easing/easing.min.js}"></script>
 	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
-	<script th:src="@{/assets/wow/wow.min.js}"></script>
-	<script th:src="@{/assets/waypoints/waypoints.min.js}"></script>
-	<script th:src="@{/assets/counterup/counterup.min.js}"></script>
-	<script th:src="@{/assets/owlcarousel/owl.carousel.min.js}"></script>
-	<script th:src="@{/assets/isotope/isotope.pkgd.min.js}"></script>
-	<script th:src="@{/assets/lightbox/js/lightbox.min.js}"></script>
 
 	<!-- Template Main Javascript File -->
 	<script th:src="@{/js/main.js}"></script>

@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <title>Les amis de l'escalade</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
+<meta charset="utf-8">
+<title>Les amis de l'escalade</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
 
-  <!-- Favicons -->
-  <link th:href="@{/img/favicon.png}" rel="icon">
-  <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+<!-- Favicons -->
+<link th:href="@{/img/favicon.png}" rel="icon">
+<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+	rel="stylesheet">
 
-  <!-- Bootstrap CSS File -->
-  <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Bootstrap CSS File -->
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+	rel="stylesheet">
 
-  <!-- Libraries CSS Files -->
-  <link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-  <link th:href="@{/assets/animate/animate.min.css}" rel="stylesheet">
-  <link th:href="@{/assets/ionicons/css/ionicons.min.css}" rel="stylesheet">
-  <link th:href="@{/assets/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-  <link th:href="@{/assets/lightbox/css/lightbox.min.css}" rel="stylesheet">
+<!-- Libraries CSS Files -->
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/animate/animate.min.css}" rel="stylesheet">
+<link th:href="@{/assets/ionicons/css/ionicons.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/owlcarousel/assets/owl.carousel.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/lightbox/css/lightbox.min.css}"
+	rel="stylesheet">
 
-  <!-- Main Stylesheet File -->
-  <link th:href="@{/css/style.css}" rel="stylesheet">
+<!-- Main Stylesheet File -->
+<link th:href="@{/css/style.css}" rel="stylesheet">
 
-  <!-- =======================================================
+<!-- =======================================================
     Theme Name: Rapid
     Theme URL: https://bootstrapmade.com/rapid-multipurpose-bootstrap-business-template/
     Author: BootstrapMade.com
@@ -36,280 +43,305 @@
 </head>
 
 <body>
-  <!--==========================
-  Header
-  ============================-->
-  <header id="header">
-    <div id="topbar">
-		<div class="container">
-          	<div class="row">
-				<div class="col">
-					<!--  session dependant : link adapt if user connected and member -->
-					<a class="btn btn-primary float-md-right" th:href="@{/acces-compte}">Accéder à mon compte</a>
-				</div>
-			</div>
-      	</div>
-    </div>
-    <div class="container">
-      <div class="logo float-left">
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <h1 class="text-light"><a href="#intro" class="scrollto"><span>Rapid</span></a></h1>-->
-        <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a>
-      </div>
+	<!--==========================
+  	Header
+  	============================-->
+	<header th:replace="commons/header :: header"></header>
 
-      <nav class="main-nav float-right d-none d-lg-block">
-        <ul>
-          <li class="active"><a th:href="@{/}">Home</a></li>
-          <li><a th:href="@{/les-sites}">Les sites</a></li>
-          <li><a th:href="@{/recherche-site}">Trouver un site</a></li>
-        </ul>
-      </nav><!-- .main-nav -->
-      
-    </div>
-  </header><!-- #header -->
-
-  <!--==========================
+	<!--==========================
     Intro Section
-  ============================-->
-  <section id="intro" class="clearfix">
-    <div class="container d-flex h-100">
-      <div class="row justify-content-center align-self-center">
-        <div class="col-md-6 intro-info order-md-first order-last">
-          <h2>Les amis <br>de <span>l'escalade</span></h2>
-          <!-- <div>
+  	============================-->
+	<section id="intro" class="clearfix">
+		<div class="container d-flex h-100">
+			<div class="row justify-content-center align-self-center">
+				<div class="col-md-6 intro-info order-md-first order-last">
+					<h2>
+						Les amis <br>de <span>l'escalade</span>
+					</h2>
+					<!-- <div>
             <a href="#about" class="btn-get-started scrollto">Get Started</a>
           </div>-->
-        </div>
-        <div class="col-md-6 intro-img order-md-last order-first">
-          <img th:src="@{/img/presentation.jpg}" alt="" class="img-fluid">
-        </div>
-      </div>
-    </div>
-  </section><!-- #intro -->
+				</div>
+				<div class="col-md-6 intro-img order-md-last order-first">
+					<img th:src="@{/img/presentation.jpg}" alt="" class="img-fluid">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- #intro -->
 
-  <main id="main">
-    <!--==========================
-      Services Section
-    ============================-->
-    <section id="services" class="section-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 wow bounceInUp" data-wow-duration="1.4s">
-            <div class="box">
-              <div class="icon" style="background: #fceef3;"><i class="ion-ios-analytics-outline" style="color: #ff689b;"></i></div>
-              <h4 class="title"><a th:href="@{les-sites}">Les sites</a></h4>
-              <p class="description">Les sites d'escalade</p>
-            </div>
-          </div>
-          <div class="col-md-6 wow bounceInUp" data-wow-duration="1.4s">
-            <div class="box">
-              <div class="icon" style="background: #fff0da;"><i class="ion-ios-bookmarks-outline" style="color: #e98e06;"></i></div>
-              <h4 class="title"><a th:href="@{/recherche-site}">Trouver un site</a></h4>
-              <p class="description">Trouver votre prochaine grimpe</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- #services -->
+	<main id="main">
+		<!--==========================
+      	Services Section
+    	============================-->
+		<section id="services" class="section-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 wow bounceInUp" data-wow-duration="1.4s">
+						<div class="box">
+							<div class="icon" style="background: #fceef3;">
+								<i class="ion-ios-analytics-outline" style="color: #ff689b;"></i>
+							</div>
+							<h4 class="title">
+								<a th:href="@{les-sites}">Les sites</a>
+							</h4>
+							<p class="description">Les sites d'escalade</p>
+						</div>
+					</div>
+					<div class="col-md-6 wow bounceInUp" data-wow-duration="1.4s">
+						<div class="box">
+							<div class="icon" style="background: #fff0da;">
+								<i class="ion-ios-bookmarks-outline" style="color: #e98e06;"></i>
+							</div>
+							<h4 class="title">
+								<a th:href="@{/recherche-site}">Trouver un site</a>
+							</h4>
+							<p class="description">Trouver votre prochaine grimpe</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- #services -->
 
-    <!--==========================
-      Call To Action Section
-    ============================-->
-    <section id="call-to-action" class="wow fadeInUp">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-9 text-center text-lg-left">
-            <h3 class="cta-title">Devenir Membre</h3>
-            <p class="cta-text"> </p>
-          </div>
-          <div class="col-lg-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" th:href="@{/inscription}">Créer un compte</a>
-          </div>
-        </div>
-      </div>
-    </section><!-- #call-to-action -->
+		<!--==========================
+      	Call To Action Section
+    	============================-->
+		<section id="call-to-action" class="wow fadeInUp">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-9 text-center text-lg-left">
+						<h3 class="cta-title">Devenir Membre</h3>
+						<p class="cta-text"></p>
+					</div>
+					<div class="col-lg-3 cta-btn-container text-center">
+						<a class="cta-btn align-middle" th:href="@{/inscription}">Créer
+							un compte</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- #call-to-action -->
 
-    <!--==========================
-      Portfolio Section
-    ============================-->
-    <section id="portfolio" class="section-bg">
-      <div class="container">
+		<!--==========================
+      	Portfolio Section
+    	============================-->
+		<section id="portfolio" class="section-bg">
+			<div class="container">
 
-        <header class="section-header">
-          <h3 class="section-title">Le portfolio</h3>
-        </header>
+				<header class="section-header">
+					<h3 class="section-title">Le portfolio</h3>
+				</header>
 
-        <div class="row">
-          <div class="col-lg-12">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
-            </ul>
-          </div>
-        </div>
+				<div class="row">
+					<div class="col-lg-12">
+						<ul id="portfolio-flters">
+							<li data-filter="*" class="filter-active">All</li>
+							<li data-filter=".filter-app">App</li>
+							<li data-filter=".filter-card">Card</li>
+							<li data-filter=".filter-web">Web</li>
+						</ul>
+					</div>
+				</div>
 
-        <div class="row portfolio-container">
+				<div class="row portfolio-container">
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/app1.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">App 1</a></h4>
-                <p>App</p>
-                <div>
-                  <a href="img/portfolio/app1.jpg" data-lightbox="portfolio" data-title="App 1" class="link-preview" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/app1.jpg}" class="img-fluid" alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">App 1</a>
+								</h4>
+								<p>App</p>
+								<div>
+									<a href="img/portfolio/app1.jpg" data-lightbox="portfolio"
+										data-title="App 1" class="link-preview" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="0.1s">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/web3.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">Web 3</a></h4>
-                <p>Web</p>
-                <div>
-                  <a href="img/portfolio/web3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 3" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-web"
+						data-wow-delay="0.1s">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/web3.jpg}" class="img-fluid" alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">Web 3</a>
+								</h4>
+								<p>Web</p>
+								<div>
+									<a href="img/portfolio/web3.jpg" class="link-preview"
+										data-lightbox="portfolio" data-title="Web 3" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app" data-wow-delay="0.2s">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/app2.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">App 2</a></h4>
-                <p>App</p>
-                <div>
-                  <a href="img/portfolio/app2.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 2" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-app"
+						data-wow-delay="0.2s">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/app2.jpg}" class="img-fluid" alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">App 2</a>
+								</h4>
+								<p>App</p>
+								<div>
+									<a href="img/portfolio/app2.jpg" class="link-preview"
+										data-lightbox="portfolio" data-title="App 2" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/card2.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">Card 2</a></h4>
-                <p>Card</p>
-                <div>
-                  <a href="img/portfolio/card2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 2" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/card2.jpg}" class="img-fluid"
+								alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">Card 2</a>
+								</h4>
+								<p>Card</p>
+								<div>
+									<a href="img/portfolio/card2.jpg" class="link-preview"
+										data-lightbox="portfolio" data-title="Card 2" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="0.1s">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/web2.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">Web 2</a></h4>
-                <p>Web</p>
-                <div>
-                  <a href="img/portfolio/web2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 2" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-web"
+						data-wow-delay="0.1s">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/web2.jpg}" class="img-fluid" alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">Web 2</a>
+								</h4>
+								<p>Web</p>
+								<div>
+									<a href="img/portfolio/web2.jpg" class="link-preview"
+										data-lightbox="portfolio" data-title="Web 2" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app" data-wow-delay="0.2s">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/app3.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">App 3</a></h4>
-                <p>App</p>
-                <div>
-                  <a href="img/portfolio/app3.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 3" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-app"
+						data-wow-delay="0.2s">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/app3.jpg}" class="img-fluid" alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">App 3</a>
+								</h4>
+								<p>App</p>
+								<div>
+									<a href="img/portfolio/app3.jpg" class="link-preview"
+										data-lightbox="portfolio" data-title="App 3" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/card1.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">Card 1</a></h4>
-                <p>Card</p>
-                <div>
-                  <a href="img/portfolio/card1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 1" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/card1.jpg}" class="img-fluid"
+								alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">Card 1</a>
+								</h4>
+								<p>Card</p>
+								<div>
+									<a href="img/portfolio/card1.jpg" class="link-preview"
+										data-lightbox="portfolio" data-title="Card 1" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card" data-wow-delay="0.1s">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/card3.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">Card 3</a></h4>
-                <p>Card</p>
-                <div>
-                  <a href="img/portfolio/card3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 3" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-card"
+						data-wow-delay="0.1s">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/card3.jpg}" class="img-fluid"
+								alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">Card 3</a>
+								</h4>
+								<p>Card</p>
+								<div>
+									<a href="img/portfolio/card3.jpg" class="link-preview"
+										data-lightbox="portfolio" data-title="Card 3" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="0.2s">
-            <div class="portfolio-wrap">
-              <img th:src="@{/img/portfolio/web1.jpg}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4><a href="#">Web 1</a></h4>
-                <p>Web</p>
-                <div>
-                  <a href="img/portfolio/web1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 1" title="Preview"><i class="ion ion-eye"></i></a>
-                  <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="col-lg-4 col-md-6 portfolio-item filter-web"
+						data-wow-delay="0.2s">
+						<div class="portfolio-wrap">
+							<img th:src="@{/img/portfolio/web1.jpg}" class="img-fluid" alt="">
+							<div class="portfolio-info">
+								<h4>
+									<a href="#">Web 1</a>
+								</h4>
+								<p>Web</p>
+								<div>
+									<a href="img/portfolio/web1.jpg" class="link-preview"
+										data-lightbox="portfolio" data-title="Web 1" title="Preview"><i
+										class="ion ion-eye"></i></a> <a href="#" class="link-details"
+										title="More Details"><i class="ion ion-android-open"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-        </div>
+				</div>
 
-      </div>
-    </section><!-- #portfolio -->
-  </main>
+			</div>
+		</section>
+		<!-- #portfolio -->
+	</main>
 
-  <!--==========================
+	<!--==========================
     Footer
-  ============================-->
-  <footer id="footer" class="section-bg">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong>Les amis de l'escalade</strong>. Tous droits réservés
-      </div>
-    </div>
-  </footer><!-- #footer -->
+ 	 ============================-->
+	<footer th:replace="commons/footer :: footer"></footer>
 
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-  <!-- Uncomment below i you want to use a preloader -->
-  <!-- <div id="preloader"></div> -->
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	<!-- Uncomment below i you want to use a preloader -->
+	<!-- <div id="preloader"></div> -->
 
-  <!-- JavaScript Libraries -->
-  <!--  <script th:src="@{assets/jquery/jquery.min.js}"></script>
-  <script th:src="@{lib/bootstrap/js/bootstrap.bundle.min.js}"></script>-->
-  <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-  <script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
-  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-  <script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
-  <script th:src="@{/assets/wow/wow.min.js}"></script>
-  
-  <!-- Template Main Javascript File -->
-  <script th:src="@{/js/main.js}"></script>
-  
+	<!-- JavaScript Libraries -->
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
+	<script th:src="@{/assets/wow/wow.min.js}"></script>
+
+	<!-- Template Main Javascript File -->
+	<script th:src="@{/js/main.js}"></script>
+
 </body>
 </html>

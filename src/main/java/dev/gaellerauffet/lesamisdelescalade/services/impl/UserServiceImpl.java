@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.persistance.UserRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.UserService;
@@ -19,7 +22,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUser(int id) {
 		User user = userRepository.findById(id);
-		
 		return user;
 	}
 
@@ -30,16 +32,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(int id) {
-		User user = userRepository.findById(id);
-				///.orElseThrow(() -> new IllegalArgumentException("Id non trouvé:" + id));
-		
-		userRepository.delete(user);
-		
+		userRepository.deleteById(id);
 	}
 
 	@Override
 	public void updateUser(User user) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -47,6 +44,12 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUsers() {
 		List<User> users = userRepository.findAll();
 		return users;
+	}
+
+	@Override
+	public Page<User> findAllPaginated(Pageable pageable) {
+		Page<User> page = userRepository.findAll(pageable);
+		return page;
 	}
 	
 	

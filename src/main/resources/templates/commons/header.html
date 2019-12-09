@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<header id="header" th:fragment="header">
+		<div id="topbar">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<!--  session dependant : link adapt if user connected and member -->
+						<a class="btn btn-primary float-md-right"
+							th:href="@{/acces-compte}">Accéder à mon compte</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="logo float-left">
+				<!-- Uncomment below if you prefer to use an image logo -->
+				<!-- <h1 class="text-light"><a href="#intro" class="scrollto"><span>Rapid</span></a></h1>-->
+				<a href="#header" class="scrollto"><img src="img/logo.png"
+					alt="" class="img-fluid"></a>
+			</div>
+			<nav class="main-nav float-right d-none d-lg-block">
+				<ul>
+					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/les-sites}">Les sites</a></li>
+					<li><a th:href="@{/recherche-site}">Trouver un site</a></li>
+					<li><a th:href="@{/les-utilisateurs}">Les utilisateurs</a></li>
+				</ul>
+			</nav>
+			<!-- .main-nav -->
+		</div>
+	</header>
+	<!-- #header -->
+
+</body>
+</html>

@@ -79,7 +79,7 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public List<Spot> getSpotsFromSearchCriteria(SpotSearchForm spotsearchform) {
+	public List<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform) {
 		List<Spot> foundedSpots = new ArrayList<Spot>();
 		if(! spotsearchform.getRegion().contentEquals("- Choississez une région -") && ! spotsearchform.getName().contentEquals("")) {
 			foundedSpots = spotRepository.findByRegionContainsAndNameContains(spotsearchform.getRegion(), spotsearchform.getName());

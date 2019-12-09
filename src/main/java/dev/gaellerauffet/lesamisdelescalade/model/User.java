@@ -41,20 +41,10 @@ public class User {
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean active = true;
 
-	protected User() {
+	public User() {
 	}
 
 	
-	public User(String firstName, String lastName, String email) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email= email;
-	}
-	
-	public User(String firstName, String email) {
-		this.firstName = firstName;
-		this.email= email;
-	}
 
 	@Override
 	public String toString() {
