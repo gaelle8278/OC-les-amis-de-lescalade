@@ -1,5 +1,7 @@
 package dev.gaellerauffet.lesamisdelescalade.site.resources;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,13 @@ public class UserController {
     UserService userService;
 	
 	
+	@GetMapping("/user/{id}")
+	public String displayUser(@PathVariable("id") int id, Model model) {
+		User user = userService.getUser(id);
+		model.addAttribute("user", user);
+        return "user/profile";
+	}
+	
 	@GetMapping("/les-utilisateurs")
 	public String listUsers(@PageableDefault(size = 10) Pageable pageable, Model model) {
 		Page<User> page = userService.findAllPaginated(pageable);
@@ -31,38 +40,50 @@ public class UserController {
         return "user/list";
 	}
 	
+	
+	@GetMapping("/adduser")
+	public String displayUserAddForm(User user) {
+		return "user/add";
+	}
+	
 	@PostMapping("/user/add")
 	public String addUser(@Valid User user, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			return "compte/inscription"; 
+			return "user/add"; 
 		}
-		userService.addUser(user);
+		userService.add(user);
 		
 		//redirect
-		return "compte/connexion";
+		return "redirect:/les-utilisateurs";
+	}
+	
+	
+	@GetMapping("/user/edit/{id}")
+	public String displayUserUpdateForm(@PathVariable("id") int id, Model model) {
+	    User user = userService.getUser(id);
+		
+	    model.addAttribute("user", user);
+	    
+	    return "user/update";
 	}
 	
 	@PostMapping("/user/update/{id}")
-	public String updateUser(@PathVariable("id") int id, @Valid User user, 
-	  BindingResult result, Model model) {
+	public String updateUser(@PathVariable("id") int id, @Valid User user, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
 	       // user.setId(id);
 	        return "user/update";
 	    }
 	         
-	    model.addAttribute("user", user);
-	    return "user/profile";
+	    userService.add(user);
+	    return "redirect:/les-utilisateurs";
 	}
 	     
 	@GetMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable("id") int id, Model model) {
 		userService.deleteUser(id);
-	    return "compte/inscription";
+		return "redirect:/les-utilisateurs";
 	}
 	
-	@GetMapping("/admin")
-	public String displayAdminBo() {
-	    return "user/administration";
-	}
+	
 	
 }

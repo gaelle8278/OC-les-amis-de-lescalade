@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Les amis de l'escalade</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicons -->
+<link th:href="@{/img/favicon.png}" rel="icon">
+<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS File -->
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+
+<!-- Main Stylesheet File -->
+<link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+	<!--==========================
+ 	 Header
+  	============================-->
+	<header th:replace="commons/header :: header"></header>
+
+	<main id="main">
+		<section id="adduser" class="section-bg">
+		    <div class="container">
+		    	<header class="section-header">
+	          		<h3 class="section-title" >Fiche utilisateur</h3>
+	        	</header>
+				<div class="row my-2">
+		        	<div class="col col-md-6">
+		        		<p><span class="font-weight-bold">Prénom : </span><th:block th:text="${user.firstName}"></th:block></p>
+		        	</div>
+		        	<div class="col col-md-6">
+		        		<p><span class="font-weight-bold">Nom : </span><th:block th:text="${user.lastName}"></th:block></p>
+		        	</div>
+		        </div>
+		        <div class="row my-2">
+		        	<div class="col">
+		        		<p><span class="font-weight-bold">Email : </span><th:block th:text="${user.email}"></th:block></p>
+		        	</div>
+		       	</div>
+		       	<div class="row my-2">
+		       		<div class="col">
+		        		<p><span class="font-weight-bold">Pseudo : </span><th:block th:text="${user.pseudo}"></th:block></p>
+		        	</div>
+		        </div>
+		        <div class="row my-2">
+		       		<div class="col">
+		        		<p><span class="font-weight-bold">Téléphone : </span><th:block th:text="${user.phone}"></th:block></p>
+		        	</div>
+		        </div>
+		        <div class="row my-2">
+		        	<div class="col col-md-6">
+		        		<p><span class="font-weight-bold">Ville : </span><th:block th:text="${user.city}"></th:block></p>
+		        	</div>
+		        	<div class="col col-md-6">
+		        		<p><span class="font-weight-bold">Code postal : </span><th:block th:text="${user.postalCode}"></th:block></p>
+		        	</div>
+		        </div>
+				<div class="row my-2">
+		    		<div class="col">
+		    			<a class="btn btn-primary" th:href="@{/les-utilisateurs}">Retour à la liste des utilisateurs</a>
+		    		</div>
+		    	</div>
+		  	</div>
+		</section>
+	</main>
+	
+	<!--==========================
+    Footer
+  	============================-->
+	<footer th:replace="commons/footer :: footer"></footer>
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	<!-- Uncomment below i you want to use a preloader -->
+	<!-- <div id="preloader"></div> -->
+
+	<!-- JavaScript Libraries -->
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
+
+	<!-- Template Main Javascript File -->
+	<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

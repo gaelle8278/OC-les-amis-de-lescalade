@@ -2,6 +2,8 @@ package dev.gaellerauffet.lesamisdelescalade.services;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,14 +16,15 @@ public interface UserService {
 	
 	List<User> getAllUsers();
 	
-	void addUser(User user);
-	
+	void add(User user);
 	
 	void updateUser(User user);
 
 	void deleteUser(int id);
 
 	Page<User> findAllPaginated(Pageable pageable);
+
+	
 	
 	//obtenir les sites d'un user
 	//obtenir les topos d'un User

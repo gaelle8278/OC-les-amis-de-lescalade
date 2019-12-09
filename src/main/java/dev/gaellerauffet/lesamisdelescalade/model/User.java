@@ -1,5 +1,7 @@
 package dev.gaellerauffet.lesamisdelescalade.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -17,13 +20,14 @@ public class User {
 	private Integer id;
 
 	@Column(name = "first_name")
-	@NotBlank(message = "Name is mandatory")
+	@NotBlank(message = "Veuillez saisir un prénom")
 	private String firstName;
 
+	@NotBlank(message = "Veuillez saisir un nom")
 	@Column(name = "last_name")
 	private String lastName;
 
-	@NotBlank(message = "L'adresse e-mail est obligatoire")
+	@NotBlank(message = "L''adresse e-mail est obligatoire")
 	private String email;
 	
 	private String pseudo;
@@ -40,9 +44,12 @@ public class User {
 	@Column(columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean active = true;
+	
+	@Column(name = "created_at")
+	@CreationTimestamp
+	private LocalDateTime createdDate;
 
-	public User() {
-	}
+	public User() {}
 
 	
 

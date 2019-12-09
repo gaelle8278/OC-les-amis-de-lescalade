@@ -10,17 +10,22 @@ public class AccountController {
 	
 	@GetMapping("/acces-compte")
 	public String displayAccess() {
-		return "compte/acces-compte";
+		return "account/access";
 	}
 	
 	@GetMapping("/inscription")
-	public String displayMemberForm(User user) {
-		return "compte/inscription";
+	public String displaySignUpForm(User user) {
+		return "account/signup";
 	}
 	
 	@GetMapping("/connexion")
-	public String displayConnexionForm() {
-		return "compte/connexion";
+	public String displayConnectionForm() {
+		return "account/connection";
+	}
+	
+	@GetMapping("/admin")
+	public String displayAdminHomePage() {
+	    return "account/administration";
 	}
 
 }

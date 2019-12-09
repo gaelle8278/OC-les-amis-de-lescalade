@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void addUser(User user) {
+	public void add(User user) {
 		userRepository.save(user);
 	}
 
@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
 		Page<User> page = userRepository.findAll(pageable);
 		return page;
 	}
+
 	
 	
 }

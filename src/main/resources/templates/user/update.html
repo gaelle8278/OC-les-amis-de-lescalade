@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Les amis de l'escalade</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicons -->
+<link th:href="@{/img/favicon.png}" rel="icon">
+<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS File -->
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+
+<!-- Main Stylesheet File -->
+<link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+	<!--==========================
+ 	 Header
+  	============================-->
+	<header th:replace="commons/header :: header"></header>
+
+	<main id="main">
+		<section id="adduser" class="section-bg">
+		    <div class="container">
+		    	<header class="section-header">
+	          		<h3 class="section-title" th:text="${'Modification de l''utilisateur'} + ' ' + ${user.firstName} + ' ' + ${user.lastName}" ></h3>
+	        	</header>
+				<div class="row">
+		        	<form action="#" th:action="@{/user/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+		        		<input type="hidden" th:field="*{id}">
+		        	 	<div class="form-group">
+						    <label for="firstName">Prénom</label>
+						    <input type="text" th:field="*{firstName}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('firstName')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+						</div>
+						<div class="form-group">
+						    <label for="lastName">Nom</label>
+						    <input type="text" th:field="*{lastName}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('lastName')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+		    			</div>
+		    			<div class="form-group">
+						    <label for="email">Adresse e-mail</label>
+						    <input type="text" th:field="*{email}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('email')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		    			</div>
+		    			<div class="form-group">
+						    <label for="pseudo">Pseudo</label>
+						    <input type="text" th:field="*{pseudo}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('pseudo')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></div>
+		    			</div>
+		    			
+		    			<div class="form-group">
+						    <label for="password">Mot de passe</label>
+						    <input type="text" th:field="*{password}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('password')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		    			</div>
+		    			<div class="form-group">
+						    <label for="phone">Téléphone</label>
+						    <input type="text" th:field="*{phone}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('phone')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+		    			</div>
+		    			<div class="form-group">
+						    <label for="city">Ville</label>
+						    <input type="text" th:field="*{city}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('city')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+		    			</div>
+		    			<div class="form-group">
+						    <label for="postalCode">Code postal</label>
+						    <input type="text" th:field="*{postalCode}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('postalCode')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
+		    			</div>
+		    			<div>
+		    				<input type="submit" value="Mettre à jour" class="btn btn-primary"> 
+		    				<a class="btn btn-secondary" th:href="@{/les-utilisateurs}">Retour à la liste des utilisateurs</a>
+		    			</div>
+					</form>
+				
+		  		</div>
+		  	</div>
+		</section>
+	</main>
+	
+	<!--==========================
+    Footer
+  	============================-->
+	<footer th:replace="commons/footer :: footer"></footer>
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	<!-- Uncomment below i you want to use a preloader -->
+	<!-- <div id="preloader"></div> -->
+
+	<!-- JavaScript Libraries -->
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
+
+	<!-- Template Main Javascript File -->
+	<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
