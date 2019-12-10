@@ -1,11 +1,18 @@
 package dev.gaellerauffet.lesamisdelescalade.model;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Spot {
@@ -13,6 +20,7 @@ public class Spot {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	
 	@NotBlank(message = "Le nom est obligatoire")
 	private String name;
@@ -23,22 +31,28 @@ public class Spot {
 	private String region;
 	private String orientation;
 	@Column(name = "min_height")
-	private String minHeight;
+	private Integer minHeight;
 	@Column(name = "max_height")
-	private String maxHeight;
+	private Integer maxHeight;
 	@Column(name = "min_grade")
 	private String minGrade;
 	@Column(name = "max_grade")
 	private String maxGrade;
 	@Column(name = "nb_routes")
-	private String nbRoutes;
+	private Integer nbRoutes;
 	
 	private String country = "France";
-	//@TODO enforce default value to test saving of spot entity 
+	//@TODO enforce default value to test saving of spot entity : replace when there is authentification
 	@Column(name = "user_id")
 	private int userId = 1;
 	
-
+	@OneToMany(mappedBy="spot")
+    private List<Area> listArea;
+	
+	@Column(name = "created_at")
+	@CreationTimestamp
+	private LocalDateTime createdDate;
+	
 	public Spot() {}
 
 
@@ -84,16 +98,16 @@ public class Spot {
 	public void setOrientation(String orientation) {
 		this.orientation = orientation;
 	}
-	public String getMinHeight() {
+	public Integer getMinHeight() {
 		return minHeight;
 	}
-	public void setMinHeight(String minHeight) {
+	public void setMinHeight(Integer minHeight) {
 		this.minHeight = minHeight;
 	}
-	public String getMaxHeight() {
+	public Integer getMaxHeight() {
 		return maxHeight;
 	}
-	public void setMaxHeight(String maxHeight) {
+	public void setMaxHeight(Integer maxHeight) {
 		this.maxHeight = maxHeight;
 	}
 	public String getMinGrade() {
@@ -108,10 +122,10 @@ public class Spot {
 	public void setMaxGrade(String maxGrade) {
 		this.maxGrade = maxGrade;
 	}
-	public String getNbRoutes() {
+	public Integer getNbRoutes() {
 		return nbRoutes;
 	}
-	public void setNbRoutes(String nbRoutes) {
+	public void setNbRoutes(Integer nbRoutes) {
 		this.nbRoutes = nbRoutes;
 	}
 	public String getCountry() {
@@ -126,7 +140,20 @@ public class Spot {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	public List<Area> getListArea() {
+		return listArea;
+	}
+
+
+	public void setListArea(List<Area> listArea) {
+		this.listArea = listArea;
+	}
 	
 	
 	

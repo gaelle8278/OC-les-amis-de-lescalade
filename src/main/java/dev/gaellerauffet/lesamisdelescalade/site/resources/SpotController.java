@@ -1,5 +1,6 @@
 package dev.gaellerauffet.lesamisdelescalade.site.resources;
 
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,9 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
+import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 
@@ -79,8 +79,8 @@ public class SpotController {
         }
         
         //save spot and redirect
-        spotService.add(spot);
-        return "redirect:/les-sites";
+        int id = spotService.add(spot);
+        return "redirect:/spot/edit/" + id;
     }
 	
 	
@@ -88,9 +88,10 @@ public class SpotController {
 	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
 	    Spot spot = spotService.getSpot(id);
 	    List<String> listTypes =  spotService.getListTypesForForm();
-		
+		List<Area> listAreas = spotService.getListAreas(id);
 	    model.addAttribute("listTypes", listTypes);
 	    model.addAttribute("spot", spot);
+	    model.addAttribute("listAreas", listAreas);
 	    
 	    return "spot/edit";
 	}

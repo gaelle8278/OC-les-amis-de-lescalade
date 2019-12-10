@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
@@ -92,9 +93,10 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public void add(Spot spot) {
+	public int add(Spot spot) {
 		//@TODO before save get id of connected user
-		spotRepository.save(spot);
+		Spot savedSpot = spotRepository.save(spot);
+		return savedSpot.getId();
 	}
 
 	@Override
@@ -109,5 +111,13 @@ public class SpotServiceImpl implements SpotService {
 	@Override
 	public void deleteSpot(int id) {
 		spotRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Area> getListAreas(int id) {
+		Spot spot = spotRepository.findById(id);
+		List<Area> listAreas = spot.getListArea();
+		
+		return listAreas;
 	}
 }
