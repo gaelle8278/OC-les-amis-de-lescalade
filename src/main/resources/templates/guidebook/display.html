@@ -40,59 +40,46 @@
 		<section id="spot-add" class="section-bg">
 	      	<div class="container">
 	        	<header class="section-header">
-	          		<h3 class="section-title" th:text="${spot.name}"></h3>
+	          		<h3 class="section-title">Topo</h3>
 	        	</header>
 	        	<div class="row my-2">
-	        		<div class="col" th:text="${spot.region}"></div>
-	        	</div>
-	        	<div class="row my-2">
-	        		<div class="col col-md-4">
-	        			<span class="font-weight-bold">Type : </span><th:block th:text="${spot.type}"></th:block>
-	        		</div>
-	        		<div class="col col-md-4">
-	        			<span class="font-weight-bold">Orientation : </span><th:block th:text="${spot.orientation}"></th:block>
-	        		</div>
-	        		<div class="col col-md-4">
-	        			<span class="font-weight-bold">Nombre de voies : </span><th:block th:text="${spot.nbRoutes}"></th:block>
-	        		</div>
-	        	</div>
-	        	<div class="row my-2">
-	        		<div class="col col-md-6" >
-	        			<span class="font-weight-bold">Hauteur minimale : </span><th:block th:text="${spot.minHeight} + 'm'"></th:block>
-	        		</div>
-	        		<div class="col col-md-6" >
-	        			<span class="font-weight-bold">Hauteur maximale : </span><th:block th:text="${spot.maxHeight} + 'm'"></th:block>
-	        		</div>
-	        	</div>
-	        	<div class="row my-2">
-	        		<div class="col col-md-6" >
-	        			<span class="font-weight-bold">Cotation minimale : </span><th:block th:text="${spot.minGrade}"></th:block>
-	        		</div>
-	        		<div class="col col-md-6" >
-	        			<span class="font-weight-bold">Cotation maximale : </span><th:block th:text="${spot.maxGrade}"></th:block>
-	        		</div>
-	        	</div>
-	        	<div class="row my-2">
-	        		<div class="col col-md-2"><span class="font-weight-bold">Remarques</span></div>
-	        		<div class="col col-md-10" th:text="${spot.notice}"></div>
-	        	</div>
+		        	<div class="col">
+		        		<span class="font-weight-bold">Nom: </span><th:block th:text="${guidebook.name}"></th:block>
+		        	</div>
+		        </div>
+		        <div class="row">
+		        	<div class="col">
+		        		<span class="font-weight-bold">Description :</span>
+		        		<div>
+		        			<th:block th:text="${guidebook.description}"></th:block>
+		        		</div>
+		        	</div>
+		        </div>
+		        <div class="row my-2">
+		        	<div class="col">
+		        		<span class="font-weight-bold">Lieu : </span><th:block th:text="${guidebook.place}"></th:block>
+		        	</div>
+		       	</div>
+		       	
+		       	<div class="row my-2">
+		        	<div class="col">
+		       			<span class="font-weight-bold">Nom: </span><th:block th:text="${#temporals.format(guidebook.releaseDate, 'dd/MM/yyyy')}"></th:block>
+		       		</div>
+		       	</div>
 				<div class="row my-2">
-					<div class="col"  th:text="${spot.description}"></div>
-		    	</div>
-		    	<div class="row my-2">
 		    		<div class="col">
-		    			<a class="btn btn-primary" th:href="@{/les-sites}">Retour à la liste des sites</a>
+		    			<a class="btn btn-primary" th:href="@{/les-topos}">Retour à la liste des topos</a>
 		    		</div>
 		    	</div>
 	       </div>
 	     </section>
+		
 	</main>
 
 	<!--==========================
     Footer
   	============================-->
 	<footer th:replace="commons/footer :: footer"></footer>
-	<!-- #footer -->
 
 	<!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>-->
 	<!-- Uncomment below i you want to use a preloader -->

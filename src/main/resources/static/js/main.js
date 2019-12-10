@@ -1,15 +1,6 @@
 (function ($) {
   "use strict";
 
-  // Preloader (if the #preloader div exists)
-  $(window).on('load', function () {
-    if ($('#preloader').length) {
-      $('#preloader').delay(100).fadeOut('slow', function () {
-        $(this).remove();
-      });
-    }
-  });
-
   // Back to top button
   $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {
@@ -23,21 +14,8 @@
     return false;
   });
 
-  // Initiate the wowjs animation library
-  new WOW().init();
-
-  // Header scroll class
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 100) {
-      $('#header').addClass('header-scrolled');
-    } else {
-      $('#header').removeClass('header-scrolled');
-    }
-  });
-
-  if ($(window).scrollTop() > 100) {
-    $('#header').addClass('header-scrolled');
-  }
+  
+ 
 
   // Smooth scroll for the navigation and links with .scrollto classes
   $('.main-nav a, .mobile-nav a, .scrollto').on('click', function() {
@@ -92,41 +70,25 @@
     });
   });
 
-  // jQuery counterUp (used in Whu Us section)
-  $('[data-toggle="counter-up"]').counterUp({
-    delay: 10,
-    time: 1000
-  });
-
-  // Porfolio isotope and filter
-  $(window).on('load', function () {
-    var portfolioIsotope = $('.portfolio-container').isotope({
-      itemSelector: '.portfolio-item'
-    });
-    $('#portfolio-flters li').on( 'click', function() {
-      $("#portfolio-flters li").removeClass('filter-active');
-      $(this).addClass('filter-active');
   
-      portfolioIsotope.isotope({ filter: $(this).data('filter') });
-    });
-  });
 
-  // Testimonials carousel (uses the Owl Carousel library)
-  $(".testimonials-carousel").owlCarousel({
-    autoplay: true,
-    dots: true,
-    loop: true,
-    items: 1
-  });
-
-  // Clients carousel (uses the Owl Carousel library)
-  $(".clients-carousel").owlCarousel({
-    autoplay: true,
-    dots: true,
-    loop: true,
-    responsive: { 0: { items: 2 }, 768: { items: 4 }, 900: { items: 6 }
-    }
-  });
+  // Modal to confirm deletion element in list : modal is managed by Bootstrap
+  $('#deletionModal').on('show.bs.modal', function (event) {
+	  // element deletion link that triggered the modal
+	  var elDelLink = $(event.relatedTarget) 
+	  // Extract info from data-link attributes
+	  var url = elDelLink.data('link') 
+	  var name = elDelLink.data('name') 
+	  var label = elDelLink.data('label') 
+	  // confirmation button of modal is set with link value extract from element deletion link
+	  $(this).find("#melementLabel").html(label)
+	  $(this).find("#melementName").html(name)
+	  $(this).find("#mdeletionLink").attr("href", url)
+	});
+  
+ 
+  
+  
 
 })(jQuery);
 

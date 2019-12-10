@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
-	<meta charset="utf-8">
-	<title>Les amis de l'escalade</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<meta content="" name="keywords">
-	<meta content="" name="description">
-	
-	<!-- Favicons -->
-	<link th:href="@{/img/favicon.png}" rel="icon">
-	<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
-	
-	<!-- Google Fonts -->
-	<link
-		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
-		rel="stylesheet">
-	
-	<!-- Bootstrap CSS File -->
-	<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
-		rel="stylesheet">
-	
-	<!-- Libraries CSS Files -->
-	<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-	
-	
-	<!-- Main Stylesheet File -->
-	<link th:href="@{/css/style.css}" rel="stylesheet">
+<meta charset="utf-8">
+<title>Les amis de l'escalade</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicons -->
+<link th:href="@{/img/favicon.png}" rel="icon">
+<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+	rel="stylesheet">
+
+<!-- Bootstrap CSS File -->
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<!-- Libraries CSS Files -->
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+
+<!-- Main Stylesheet File -->
+<link th:href="@{/css/style.css}" rel="stylesheet">
 
 
 </head>
 
 <body>
 	<!--==========================
-  	Header
-  	============================-->
+  Header
+  ============================-->
 	<header th:replace="commons/header :: header"></header>
 
 
@@ -41,7 +40,7 @@
 	     <section id="spot-list" class="section-bg">
 	      	<div class="container">
 	        	<header class="section-header">
-	          		<h3 class="section-title">Les utilisateurs</h3>
+	          		<h3 class="section-title">Les commentaires</h3>
 	        	</header>
 	        	
 	        	
@@ -50,29 +49,28 @@
 	        		<thead>
 					    <tr>
 					      	<th scope="col" class="text-center">ID</th>
-					      	<th scope="col" class="text-center">Prénom</th>
-					      	<th scope="col" class="text-center">Nom</th>
-					      	<th scope="col" class="text-center">E-mail</th>
+					      	<th scope="col" class="text-center">Titre</th>
+					      	<th scope="col" class="text-center">Contenu</th>
+					      	<th scope="col" class="text-center">Actions</th>
 					    </tr>
 				 	 </thead>
-				   	<th:block th:each="user : ${page.content}">
+				   	<th:block th:each="comment : ${page.content}">
 				   		<tr>
-				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/user/'+ ${user.id}}" th:text="${user.id}"></a></td>
-					    	<td class="text-center" th:text="${user.firstName}"></td>
-					    	<td class="text-center" th:text="${user.lastName}"></td>
-					    	<td class="text-center" th:text="${user.email}"></td>
+				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/comment/'+ ${comment.id}}" th:text="${comment.id}"></a></td>
+					    	<td class="text-center" th:text="${comment.title}"></td>
+					    	<td class="text-center" th:text="${comment.content}"></td>
 					    	<td class="text-center">
-					    		<a class="btn btn-link" th:href="@{'/user/'+ ${user.id}}">Voir</a>
-					    		 | <a class="btn btn-link" th:href="@{'/user/edit/' + ${user.id}}">Modifier</a>
+					    		 <a class="btn btn-link" th:href="@{'/comment/'+ ${comment.id}}">Voir</a>
+					    		 | <a class="btn btn-link" th:href="@{'/comment/edit/' + ${comment.id}}">Modifier</a>
 					    		 | <button class="btn btn-link"   data-toggle="modal" data-target="#deletionModal" 
-					    		 	th:attr="data-link=@{'/user/delete/'+ ${user.id}},data-label=${'l''utilisateur'},data-name=@{${user.firstName} + ' ' + ${user.lastName}}" >Supprimer</button>
+					    		 	th:attr="data-link=@{'/comment/delete/'+ ${comment.id}},data-label=${'le commentaire'},data-name=${comment.title}">Supprimer</button>
 					    	</td>
 					    </tr>
 				   </th:block>
 				</table>
 				
 				<!-- pagination -->
-				<nav aria-label="Pages listant les utilisateurs">
+				<nav aria-label="Pages listant les sites d'escalade">
 					<ul class="pagination">
 					    <li th:if="${page.hasPrevious()}" class="page-item">
 					        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
@@ -99,7 +97,7 @@
 				
 				<div class="row">
 					<div class="col py-2">
-				  		<a th:href="@{/adduser}" class="btn btn-primary ">Ajouter un utilisateur</a>
+				  		<a th:href="@{/addcomment}" class="btn btn-primary ">Ajouter un commentaire</a>
 				  	</div>
 				 </div>
 	        </div>
@@ -111,7 +109,6 @@
     Footer
   	============================-->
 	<footer th:replace="commons/footer :: footer"></footer>
-
 
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 	<!-- Uncomment below i you want to use a preloader -->

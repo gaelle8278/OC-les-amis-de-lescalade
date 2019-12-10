@@ -75,11 +75,35 @@
 						    <input type="text" th:field="*{orientation}" placeholder="Orientation" class="form-control" th:classappend="${#fields.hasErrors('orientation')} ? is-invalid : ''">
 						    <div class="invalid-feedback" th:if="${#fields.hasErrors('orientation')}" th:errors="*{orientation}"></div>
 		    			</div>
-		    			<div class="form-group">
-						    <label for="height">Hauteur</label>
-						    <input type="text" th:field="*{height}" placeholder="Hauteur" class="form-control" th:classappend="${#fields.hasErrors('height')} ? is-invalid : ''">
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+		    			<div class="form-row">
+			    			<div class="form-group col-md-6">
+							    <label for="minHeight">Hauteur minimale</label>
+							    <input type="text" th:field="*{minHeight}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('minHeight')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('minHeight')}" th:errors="*{minHeight}"></div>
+			    			</div>
+			    			<div class="form-group col-md-6">
+							    <label for="maxHeight">Hauteur maximale</label>
+							    <input type="text" th:field="*{maxHeight}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('maxHeight')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('maxHeight')}" th:errors="*{maxHeight}"></div>
+			    			</div>
+			    		</div>
+			    		<div class="form-group">
+						    <label for="nbRoutes">Nombre de voies</label>
+						    <input type="text" th:field="*{nbRoutes}" placeholder="Orientation" class="form-control" th:classappend="${#fields.hasErrors('nbRoutes')} ? is-invalid : ''">
+						    <div class="invalid-feedback" th:if="${#fields.hasErrors('nbRoutes')}" th:errors="*{nbRoutes}"></div>
 		    			</div>
+			    		<div class="form-row">
+			    			<div class="form-group col-md-6">
+							    <label for="minGrade">Cotation minimale</label>
+							    <input type="text" th:field="*{minGrade}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('minGrade')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('minGrade')}" th:errors="*{minGrade}"></div>
+			    			</div>
+			    			<div class="form-group col-md-6">
+							    <label for="maxGrade">Cotation maximale</label>
+							    <input type="text" th:field="*{maxGrade}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('maxGrade')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('maxGrade')}" th:errors="*{maxGrade}"></div>
+			    			</div>
+			    		</div>
 		    			<div class="form-group">
 						    <label for="notice">Remarques</label>
 						    <textarea class="form-control" th:field="*{notice}" rows="3" th:classappend="${#fields.hasErrors('notice')} ? is-invalid : ''"></textarea>

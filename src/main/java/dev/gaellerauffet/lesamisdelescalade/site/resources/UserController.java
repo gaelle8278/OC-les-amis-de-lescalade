@@ -64,14 +64,14 @@ public class UserController {
 		
 	    model.addAttribute("user", user);
 	    
-	    return "user/update";
+	    return "user/edit";
 	}
 	
 	@PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") int id, @Valid User user, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
 	       // user.setId(id);
-	        return "user/update";
+	        return "user/edit";
 	    }
 	         
 	    userService.add(user);

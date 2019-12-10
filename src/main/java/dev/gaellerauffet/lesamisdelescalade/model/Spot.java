@@ -22,7 +22,17 @@ public class Spot {
 	private String type;
 	private String region;
 	private String orientation;
-	private String height;
+	@Column(name = "min_height")
+	private String minHeight;
+	@Column(name = "max_height")
+	private String maxHeight;
+	@Column(name = "min_grade")
+	private String minGrade;
+	@Column(name = "max_grade")
+	private String maxGrade;
+	@Column(name = "nb_routes")
+	private String nbRoutes;
+	
 	private String country = "France";
 	//@TODO enforce default value to test saving of spot entity 
 	@Column(name = "user_id")
@@ -74,11 +84,35 @@ public class Spot {
 	public void setOrientation(String orientation) {
 		this.orientation = orientation;
 	}
-	public String getHeight() {
-		return height;
+	public String getMinHeight() {
+		return minHeight;
 	}
-	public void setHeight(String height) {
-		this.height = height;
+	public void setMinHeight(String minHeight) {
+		this.minHeight = minHeight;
+	}
+	public String getMaxHeight() {
+		return maxHeight;
+	}
+	public void setMaxHeight(String maxHeight) {
+		this.maxHeight = maxHeight;
+	}
+	public String getMinGrade() {
+		return minGrade;
+	}
+	public void setMinGrade(String minGrade) {
+		this.minGrade = minGrade;
+	}
+	public String getMaxGrade() {
+		return maxGrade;
+	}
+	public void setMaxGrade(String maxGrade) {
+		this.maxGrade = maxGrade;
+	}
+	public String getNbRoutes() {
+		return nbRoutes;
+	}
+	public void setNbRoutes(String nbRoutes) {
+		this.nbRoutes = nbRoutes;
 	}
 	public String getCountry() {
 		return country;
@@ -86,14 +120,14 @@ public class Spot {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
 	public int getUserId() {
 		return userId;
 	}
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	
+	
 	
 	
 }

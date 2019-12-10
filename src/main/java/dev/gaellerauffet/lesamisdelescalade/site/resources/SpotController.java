@@ -92,14 +92,14 @@ public class SpotController {
 	    model.addAttribute("listTypes", listTypes);
 	    model.addAttribute("spot", spot);
 	    
-	    return "spot/update";
+	    return "spot/edit";
 	}
 	
 	@PostMapping("/spot/update/{id}")
 	public String updateSpot(@PathVariable("id") int id, @Valid Spot spot, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
 	        //spot.setId(id);
-	        return "spot/update";
+	        return "spot/edit";
 	    }
 	         
 	    spotService.add(spot);

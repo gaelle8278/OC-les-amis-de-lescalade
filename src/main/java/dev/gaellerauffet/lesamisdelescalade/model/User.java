@@ -52,7 +52,6 @@ public class User {
 	public User() {}
 
 	
-
 	@Override
 	public String toString() {
 		return String.format("Utilisateur[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
@@ -138,14 +137,20 @@ public class User {
 		this.id = id;
 	}
 
-
 	public String getPostalCode() {
 		return postalCode;
 	}
 
-
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
 	}
 	
 	

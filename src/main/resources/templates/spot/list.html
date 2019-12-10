@@ -48,7 +48,7 @@
 	        	<table class="table">
 	        		<thead>
 					    <tr>
-					      	<th scope="col" class="text-center">#</th>
+					      	<th scope="col" class="text-center">Id</th>
 					      	<th scope="col" class="text-center">Nom</th>
 					      	<th scope="col" class="text-center">Région</th>
 					      	<th scope="col" class="text-center">Type</th>
@@ -58,19 +58,20 @@
 				 	 </thead>
 				   	<th:block th:each="spot : ${page.content}">
 				   		<tr>
-				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}">Voir</a></td>
+				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}" th:text=${spot.id}></a></td>
 					    	<td class="text-center" th:text="${spot.name}"></td>
 					    	<td class="text-center" th:text="${spot.region}"></td>
 					    	<td class="text-center" th:text="${spot.type}"></td>
 					    	<td class="text-center" th:text="${spot.orientation}"></td>
 					    	<td class="text-center">
-					    		<a class="btn btn-link" th:href="@{'/spot/edit/' + ${spot.id}}">Modifier</a>
-					    		 | <a class="btn btn-link" th:href="@{'/spot/delete/'+ ${spot.id}}">Supprimer</a>
+					    		<a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}">Voir</a>
+					    		 | <a class="btn btn-link" th:href="@{'/spot/edit/' + ${spot.id}}">Modifier</a>
+					    		 | <button class="btn btn-link"   data-toggle="modal" data-target="#deletionModal" 
+					    		 	th:attr="data-link=@{'/spot/delete/'+ ${spot.id}},data-label=${'le site'},data-name=${spot.name}" >Supprimer</button>
 					    	</td>
 					    </tr>
 				   </th:block>
 				</table>
-				
 				<!-- pagination -->
 				<nav aria-label="Pages listant les sites d'escalade">
 					<ul class="pagination">
@@ -89,7 +90,7 @@
 					        </li>
 					    </th:block>
 				    	<li th:if="${page.hasNext()}" class="page-item">
-				        	<a th:href="@{/''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
+				        	<a th:href="@{''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
 				        		<span aria-hidden="true">&raquo;</span>
         						<span class="sr-only">Suivant</span>
 				        	</a>
@@ -104,6 +105,7 @@
 				 </div>
 	        </div>
 		</section>
+		<div th:replace="commons/modals :: deletion"></div>
 	</main>
 
 	<!--==========================
@@ -116,8 +118,7 @@
 	<!-- <div id="preloader"></div> -->
 
 	<!-- JavaScript Libraries -->
-	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
+	<script th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
 

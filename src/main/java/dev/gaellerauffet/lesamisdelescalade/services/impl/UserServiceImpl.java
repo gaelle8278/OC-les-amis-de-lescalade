@@ -32,6 +32,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(int id) {
+		//@Todo before check foreign key constraint to delete manually depenencies 
+		//or add delete dependencies on foreign key in database 
 		userRepository.deleteById(id);
 	}
 
