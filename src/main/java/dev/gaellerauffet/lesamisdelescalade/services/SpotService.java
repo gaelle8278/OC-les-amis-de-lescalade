@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
+import dev.gaellerauffet.lesamisdelescalade.model.Comment;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 
@@ -37,5 +38,7 @@ public interface SpotService {
 	List<Area> getListAreas(int id);
 
 	void update(int id, @Valid Spot spot);
+
+	List<Comment> getListComment(Spot spot);
 	
 }

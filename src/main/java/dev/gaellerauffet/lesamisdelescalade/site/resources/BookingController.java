@@ -37,13 +37,15 @@ public class BookingController {
 	}
 	
 	
-	@GetMapping("/addbooking")
-    public String displayAddForm(Booking booking, Model model) {
-        return "booking/add";
+	@GetMapping("/guidebooks/{gbId}/bookings")
+    public String displayAddForm(@PathVariable("gbId") int gbId,Booking booking, Model model) {
+		//traitement pour ajouter la réservation
+		bookingService.add(gbId, booking);
+		 return "redirect:/guidebook/"+ gbId;
     }
 	
-	@PostMapping("/booking/add")
-    public String addBooking(@Valid Booking booking, BindingResult result, Model model) {
+	/*@PostMapping("/guidebooks/{gbId}/bookings")
+    public String addBooking(@PathVariable("areaId") int areaId, @Valid Booking booking, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "booking/add";
         }
@@ -51,10 +53,10 @@ public class BookingController {
         //save spot and redirect
         bookingService.add(booking);
         return "redirect:/les-reservations";
-    }
+    }*/
 	
 	
-	@GetMapping("/booking/edit/{id}")
+	/*@GetMapping("/booking/edit/{id}")
 	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
 	    Booking booking = bookingService.getBooking(id);
 	    model.addAttribute("booking", booking);
@@ -70,7 +72,7 @@ public class BookingController {
 	         
 	    bookingService.add(booking);
 	    return "redirect:/les-reservations";
-	}
+	}*/
 	
 	@GetMapping("/booking/delete/{id}")
 	public String deleteBooking(@PathVariable("id") int id, Model model) {

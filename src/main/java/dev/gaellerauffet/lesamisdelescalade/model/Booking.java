@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,12 +29,14 @@ public class Booking {
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
-	@Column(name = "guidebook_id")
-	private int guidebookId;
 	
-	//@TODO enforce default value to test saving of spot entity : replace when there is authentification
-	@Column(name = "user_id")
-	private int userId = 1;
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+    private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "guidebook_id", nullable = true)
+    private Guidebook guidebook;
 
 	public int getId() {
 		return id;
@@ -66,21 +70,22 @@ public class Booking {
 		this.createdDate = createdDate;
 	}
 
-	public int getGuidebookId() {
-		return guidebookId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setGuidebookId(int guidebookId) {
-		this.guidebookId = guidebookId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public int getUserId() {
-		return userId;
+	public Guidebook getGuidebook() {
+		return guidebook;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setGuidebook(Guidebook guidebook) {
+		this.guidebook = guidebook;
 	}
+
 	
 	
 

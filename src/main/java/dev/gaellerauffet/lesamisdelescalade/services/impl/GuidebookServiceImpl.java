@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
 import dev.gaellerauffet.lesamisdelescalade.model.Route;
+import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.persistance.GuidebookRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.GuidebookService;
 
@@ -36,7 +37,9 @@ public class GuidebookServiceImpl implements GuidebookService {
 
 	@Override
 	public void add(Guidebook gb) {
-		
+		//@TODO before save get id of connected user
+		User user = em.getReference(User.class, 1);
+		gb.setUser(user);
 		guidebookRepository.save(gb);
 		
 	}
@@ -51,8 +54,9 @@ public class GuidebookServiceImpl implements GuidebookService {
 	public void update(int idGb, Guidebook guidebookForm) {
 		Guidebook gb = em.getReference(Guidebook.class,idGb);
 		//on update of a guidebook information available status doesn't change
-		//it change only during booking management
+		//it change only change during booking management ith asetStatus
 		guidebookForm.setAvailable(gb.isAvailable());
+		guidebookForm.setUser(gb.getUser());
 		
 		guidebookRepository.save(guidebookForm);
 		

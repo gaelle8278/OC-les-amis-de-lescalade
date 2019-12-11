@@ -1,12 +1,15 @@
 package dev.gaellerauffet.lesamisdelescalade.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -50,6 +53,18 @@ public class User {
 	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
+	
+	@OneToMany(mappedBy="user")
+    private List<Comment> listComment;
+	
+	@OneToMany(mappedBy="user")
+    private List<Spot> listSpots;
+	
+	@OneToMany(mappedBy="user")
+    private List<Booking> listBookings;
+	
+	@OneToMany(mappedBy="user")
+    private List<Guidebook> listGuidebooks;
 
 	public User() {}
 
@@ -153,6 +168,36 @@ public class User {
 
 	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
+	}
+
+
+	public List<Comment> getListComment() {
+		return listComment;
+	}
+
+
+	public void setListComment(List<Comment> listComment) {
+		this.listComment = listComment;
+	}
+
+
+	public List<Spot> getListSpots() {
+		return listSpots;
+	}
+
+
+	public void setListSpots(List<Spot> listSpots) {
+		this.listSpots = listSpots;
+	}
+
+
+	public List<Booking> getListBookings() {
+		return listBookings;
+	}
+
+
+	public void setListBookings(List<Booking> listBookings) {
+		this.listBookings = listBookings;
 	}
 	
 	

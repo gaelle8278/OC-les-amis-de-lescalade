@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.Comment;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
+import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.persistance.CommentRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.CommentService;
 
@@ -48,12 +49,16 @@ public class CommentServiceImpl implements CommentService {
 	public void update(int idComment, Comment commentForm) {
 		Comment comment = em.getReference(Comment.class, idComment);
 		commentForm.setSpot(comment.getSpot());
+		commentForm.setUser(comment.getUser());
 		commentRepository.save(commentForm);
 		
 	}
 
 	@Override
 	public void add(int spotId,Comment comment) {
+		//@TODO before save get id of connected user
+		User user = em.getReference(User.class, 1);
+		comment.setUser(user);
 		//set foreign dependency : fetch spot thanks to spotId parameter
 		Spot spot = em.getReference(Spot.class,spotId);
 		comment.setSpot(spot);

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
+import dev.gaellerauffet.lesamisdelescalade.model.Comment;
+import dev.gaellerauffet.lesamisdelescalade.model.Route;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
@@ -24,6 +27,9 @@ import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 public class SpotServiceImpl implements SpotService {
 	@Autowired
     SpotRepository spotRepository;
+	
+	@Autowired
+	EntityManager em;
 	
 	@Override
 	public Spot getSpot(int id) {
@@ -95,6 +101,9 @@ public class SpotServiceImpl implements SpotService {
 	@Override
 	public int add(Spot spot) {
 		//@TODO before save get id of connected user
+		User user = em.getReference(User.class, 1);
+		spot.setUser(user);
+		
 		Spot savedSpot = spotRepository.save(spot);
 		return savedSpot.getId();
 	}
@@ -123,8 +132,16 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public void update(int id, Spot spotForm) {
+	public void update(int spotId, Spot spotForm) {
+		Spot spot = em.getReference(Spot.class, spotId);
+		spotForm.setUser(spot.getUser());
 		spotRepository.save(spotForm);
 		
+	}
+
+	@Override
+	public List<Comment> getListComment(Spot spot) {
+		List<Comment>listComments = spot.getListComment();
+		return listComments;
 	}
 }

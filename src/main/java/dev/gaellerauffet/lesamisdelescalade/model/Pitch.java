@@ -26,8 +26,6 @@ public class Pitch {
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
-	/*@Column(name = "route_id")
-	private int routeId;*/
 	
 	@ManyToOne
 	@JoinColumn(name = "route_id", nullable = true)

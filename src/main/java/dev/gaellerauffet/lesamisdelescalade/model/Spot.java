@@ -1,7 +1,6 @@
 package dev.gaellerauffet.lesamisdelescalade.model;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -42,19 +44,27 @@ public class Spot {
 	private Integer nbRoutes;
 	
 	private String country = "France";
-	//@TODO enforce default value to test saving of spot entity : replace when there is authentification
-	@Column(name = "user_id")
-	private int userId = 1;
-	
-	@OneToMany(mappedBy="spot")
-    private List<Area> listArea;
-	
-	@OneToMany(mappedBy="spot")
-    private List<Comment> listComment;
 	
 	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
+	
+	
+	//@TODO enforce default value to test saving of spot entity : replace when there is authentification
+	/*@Column(name = "user_id")
+	private int userId = 1;*/
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+    private User user;
+	
+	@OneToMany(mappedBy="spot")
+    private List<Area> listArea;
+	
+	@OrderBy("created_at DESC")
+	@OneToMany(mappedBy="spot")
+    private List<Comment> listComment;
+	
+	
 	
 	public Spot() {}
 
@@ -137,12 +147,7 @@ public class Spot {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+
 	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -167,6 +172,18 @@ public class Spot {
 	public void setListComment(List<Comment> listComment) {
 		this.listComment = listComment;
 	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 	
 	
 	

@@ -15,4 +15,6 @@ public interface BookingService {
 
 	void deleteBooking(int id);
 
+	void add(int gbId, Booking booking);
+
 }

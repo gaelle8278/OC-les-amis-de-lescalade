@@ -26,16 +26,17 @@ public class Comment {
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
-	//@TODO enforce default value to test saving of comment entity (must be replace when there will be session/authentification)
-	@Column(name = "user_id")
-	private int userID = 1;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+    private User user;
 	
-	//@TODO enforce default value to test saving of comment entity (must be replace when there will associated to spot page)
-	/*@Column(name = "spot_id")
-	private int spotId = 1;*/
+
 	@ManyToOne
 	@JoinColumn(name = "spot_id", nullable = true)
     private Spot spot;
+	
+	
 	
 	public Comment() {};
 
@@ -71,12 +72,14 @@ public class Comment {
 		this.createdDate = createdDate;
 	}
 
-	public int getUserID() {
-		return userID;
+	
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Spot getSpot() {

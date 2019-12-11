@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
+import dev.gaellerauffet.lesamisdelescalade.model.Comment;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 
@@ -28,10 +29,13 @@ public class SpotController {
 
 	
 	@GetMapping("/spot/{id}")
-	public String displaySpot(@PathVariable("id") int id, Model model) {
+	public String displaySpot(@PathVariable("id") int id, Comment comment, Model model) {
 		Spot spot = spotService.getSpot(id);
 		//@TODO récupérer les commentaires
+		List<Comment> listComments = spotService.getListComment(spot);
 		model.addAttribute("spot", spot);
+		model.addAttribute("listComments", listComments);
+		model.addAttribute("comment", comment);
         return "spot/display";
 	}
 	

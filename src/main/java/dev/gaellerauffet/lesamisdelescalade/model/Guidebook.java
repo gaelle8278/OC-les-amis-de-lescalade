@@ -2,11 +2,16 @@ package dev.gaellerauffet.lesamisdelescalade.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -46,8 +51,15 @@ public class Guidebook {
 	private LocalDateTime createdDate;
 
 	//@TODO enforce default value to test saving of spot entity (must be replace when there will be session/authentification)
-	@Column(name = "user_id")
-	private int userID = 1;
+	/*@Column(name = "user_id")
+	private int userID = 1;*/
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+    private User user;
+	
+	@OneToMany(mappedBy="guidebook")
+    private List<Booking> listBookings;
 	
 	public Guidebook() {}
 
@@ -115,13 +127,22 @@ public class Guidebook {
 		this.createdDate = createdDate;
 	}
 
-	public int getUserID() {
-		return userID;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
-	};
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Booking> getListBookings() {
+		return listBookings;
+	}
+
+	public void setListBookings(List<Booking> listBookings) {
+		this.listBookings = listBookings;
+	}
+
 	
 	
 }
