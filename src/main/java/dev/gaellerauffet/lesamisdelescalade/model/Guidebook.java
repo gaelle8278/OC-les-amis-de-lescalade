@@ -11,10 +11,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@DynamicUpdate
 public class Guidebook {
 	
 	@Id
@@ -39,7 +41,7 @@ public class Guidebook {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate releaseDate;
 	
-	@Column(name = "created_at")
+	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 

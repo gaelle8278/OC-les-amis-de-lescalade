@@ -1,13 +1,17 @@
 package dev.gaellerauffet.lesamisdelescalade.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -24,15 +28,27 @@ public class Area {
 	/*@Column(name = "spot_id")
 	private int spotId;*/
 	
-	@Column(name = "created_at")
+	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "spot_id", nullable = true)
     private Spot spot;
 
+	@OneToMany(mappedBy="area")
+    private List<Route> listRoutes;
 	
 
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -57,13 +73,7 @@ public class Area {
 		this.createdDate = createdDate;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 	public Spot getSpot() {
 		return spot;
@@ -73,6 +83,13 @@ public class Area {
 		this.spot = spot;
 	}
 	
+	public List<Route> getListRoutes() {
+		return listRoutes;
+	}
+
+	public void setListRoutes(List<Route> listRoutes) {
+		this.listRoutes = listRoutes;
+	}
 	
 	
 

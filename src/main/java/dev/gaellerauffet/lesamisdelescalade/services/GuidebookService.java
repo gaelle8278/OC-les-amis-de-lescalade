@@ -1,5 +1,7 @@
 package dev.gaellerauffet.lesamisdelescalade.services;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +16,7 @@ public interface GuidebookService {
 	void add(Guidebook gb);
 
 	void deleteGuidebook(int id);
+
+	void update(int idGb, @Valid Guidebook guidebook);
 
 }

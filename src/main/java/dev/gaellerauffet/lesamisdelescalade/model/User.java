@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 
 @Entity
+@DynamicUpdate
 public class User {
 
 	@Id
@@ -45,7 +47,7 @@ public class User {
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean active = true;
 	
-	@Column(name = "created_at")
+	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 

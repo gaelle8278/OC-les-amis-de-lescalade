@@ -49,7 +49,10 @@ public class Spot {
 	@OneToMany(mappedBy="spot")
     private List<Area> listArea;
 	
-	@Column(name = "created_at")
+	@OneToMany(mappedBy="spot")
+    private List<Comment> listComment;
+	
+	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
@@ -153,6 +156,16 @@ public class Spot {
 
 	public void setListArea(List<Area> listArea) {
 		this.listArea = listArea;
+	}
+
+
+	public List<Comment> getListComment() {
+		return listComment;
+	}
+
+
+	public void setListComment(List<Comment> listComment) {
+		this.listComment = listComment;
 	}
 	
 	

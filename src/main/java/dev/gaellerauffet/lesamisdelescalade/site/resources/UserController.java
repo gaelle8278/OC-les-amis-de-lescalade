@@ -70,11 +70,11 @@ public class UserController {
 	@PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") int id, @Valid User user, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	       // user.setId(id);
+	    	user.setId(id);
 	        return "user/edit";
 	    }
 	         
-	    userService.add(user);
+	    userService.update(id, user);
 	    return "redirect:/les-utilisateurs";
 	}
 	     

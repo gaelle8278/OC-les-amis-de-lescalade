@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Pitch;
+import dev.gaellerauffet.lesamisdelescalade.model.Route;
 
 public interface PitchService {
 
@@ -16,5 +17,11 @@ public interface PitchService {
 	void add(@Valid Pitch pitch);
 
 	void deletePitch(int id);
+
+	void add(int pitchId, Pitch pitch);
+
+	void update(int pitchId, Pitch pitch);
+
+	Route getParentRoute(int pitchId);
 
 }

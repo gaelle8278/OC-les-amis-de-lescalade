@@ -23,7 +23,7 @@ public class Booking {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime statusDate;
 	
-	@Column(name = "created_at")
+	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	

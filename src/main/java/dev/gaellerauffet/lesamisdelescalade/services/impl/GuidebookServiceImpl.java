@@ -1,11 +1,6 @@
 package dev.gaellerauffet.lesamisdelescalade.services.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
+import dev.gaellerauffet.lesamisdelescalade.model.Route;
 import dev.gaellerauffet.lesamisdelescalade.persistance.GuidebookRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.GuidebookService;
 
@@ -21,6 +17,9 @@ import dev.gaellerauffet.lesamisdelescalade.services.GuidebookService;
 public class GuidebookServiceImpl implements GuidebookService {
 	@Autowired
     GuidebookRepository guidebookRepository;
+	
+	@Autowired
+	EntityManager em;
 	
 	@Override
 	public Guidebook getGuidebook(int id) {
@@ -37,16 +36,6 @@ public class GuidebookServiceImpl implements GuidebookService {
 
 	@Override
 	public void add(Guidebook gb) {
-		 /*SimpleDateFormat formaDate = new SimpleDateFormat("dd/MM/yyyy");
-         String releaseDate = formaDate.format(gb.getReleaseDate());
-
-         try {
-			gb.setReleaseDate(formaDate.parse(releaseDate));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
 		
 		guidebookRepository.save(gb);
 		
@@ -55,6 +44,18 @@ public class GuidebookServiceImpl implements GuidebookService {
 	@Override
 	public void deleteGuidebook(int id) {
 		guidebookRepository.deleteById(id);
+		
+	}
+
+	@Override
+	public void update(int idGb, Guidebook guidebookForm) {
+		Guidebook gb = em.getReference(Guidebook.class,idGb);
+		//on update of a guidebook information available status doesn't change
+		//it change only during booking management
+		guidebookForm.setAvailable(gb.isAvailable());
+		
+		guidebookRepository.save(guidebookForm);
+		
 		
 	}
 

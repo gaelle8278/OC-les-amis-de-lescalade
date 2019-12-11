@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,7 +22,7 @@ public class Comment {
 	private String title;
 	private String content;
 	
-	@Column(name = "created_at")
+	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
@@ -28,8 +31,11 @@ public class Comment {
 	private int userID = 1;
 	
 	//@TODO enforce default value to test saving of comment entity (must be replace when there will associated to spot page)
-	@Column(name = "spot_id")
-	private int spotId = 1;
+	/*@Column(name = "spot_id")
+	private int spotId = 1;*/
+	@ManyToOne
+	@JoinColumn(name = "spot_id", nullable = true)
+    private Spot spot;
 	
 	public Comment() {};
 
@@ -73,13 +79,15 @@ public class Comment {
 		this.userID = userID;
 	}
 
-	public int getSpotId() {
-		return spotId;
+	public Spot getSpot() {
+		return spot;
 	}
 
-	public void setSpotId(int spotId) {
-		this.spotId = spotId;
+	public void setSpot(Spot spot) {
+		this.spot = spot;
 	}
+
+
 	
 	
 	

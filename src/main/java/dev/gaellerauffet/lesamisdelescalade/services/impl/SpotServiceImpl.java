@@ -110,6 +110,7 @@ public class SpotServiceImpl implements SpotService {
 
 	@Override
 	public void deleteSpot(int id) {
+		//@TODO supprimmer les secteurs fils avant de supprimer le site
 		spotRepository.deleteById(id);
 	}
 
@@ -119,5 +120,11 @@ public class SpotServiceImpl implements SpotService {
 		List<Area> listAreas = spot.getListArea();
 		
 		return listAreas;
+	}
+
+	@Override
+	public void update(int id, Spot spotForm) {
+		spotRepository.save(spotForm);
+		
 	}
 }

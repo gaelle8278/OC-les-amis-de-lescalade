@@ -1,5 +1,7 @@
 package dev.gaellerauffet.lesamisdelescalade.site.resources;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
+import dev.gaellerauffet.lesamisdelescalade.model.Pitch;
 import dev.gaellerauffet.lesamisdelescalade.model.Route;
+import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.services.AreaService;
 import dev.gaellerauffet.lesamisdelescalade.services.RouteService;
 
@@ -39,46 +43,59 @@ public class RouteController {
 	}
 	
 	
-	@GetMapping("/addroute")
-    public String displayAddForm(Route route, Model model) {
+	@GetMapping("/areas/{areaId}/routes")
+    public String displayAddForm(@PathVariable("areaId") int areaId, Route route, Model model) {
+		model.addAttribute("areaId", areaId);
+		model.addAttribute("route",route);
         return "route/add";
     }
 	
-	@PostMapping("/route/add")
-    public String addRoute(@Valid Route route, BindingResult result, Model model) {
+	@PostMapping("/areas/{areaId}/routes")
+    public String addRoute(@PathVariable("areaId") int areaId, @Valid Route route, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "route/add";
         }
         
         //save spot and redirect
-        routeService.add(route);
-        return "redirect:/les-voies";
+        int routeId = routeService.add(areaId, route);
+        return "redirect:/routes/edit/"+ routeId;
     }
 	
 	
-	@GetMapping("/route/edit/{id}")
-	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
-		Route route = routeService.getRoute(id);
+	@GetMapping("/routes/edit/{routeId}")
+	public String displayUpdateForm(@PathVariable("routeId") int routeId, Model model) {
+		Route route = routeService.getRoute(routeId);
 	    model.addAttribute("route", route);
+	    List<Pitch> listPitches = routeService.getListPitches(routeId);
+	    model.addAttribute("listPitches", listPitches);
+	    model.addAttribute("areaId", route.getArea().getId());
 	    
 	    return "route/edit";
 	}
 	
-	@PostMapping("/route/update/{id}")
-	public String updateRpute(@PathVariable("id") int id, @Valid Route route, BindingResult result, Model model) {
+	@PostMapping("/routes/update/{routeId}")
+	public String updateRoute(@PathVariable("routeId") int routeId, @Valid Route route, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
+	    	route.setId(routeId);
 	        return "route/edit";
 	    }
 	         
-	    routeService.add(route);
-	    return "redirect:/les-voies";
+	    routeService.update(routeId, route);
+	    
+	    Area area = routeService.getParentArea(routeId);
+	    
+	 
+	    //after update it return to area parent edition
+	    return "redirect:/areas/edit/" + area.getId();
 	}
 	
-	@GetMapping("/route/delete/{id}")
-	public String deleteRoute(@PathVariable("id") int id, Model model) {
-		routeService.deleteRoute(id);
+	@GetMapping("/routes/delete/{routeId}")
+	public String deleteRoute(@PathVariable("routeId") int routeId, Model model) {
+		Area area = routeService.getParentArea(routeId);
+		routeService.deleteRoute(routeId);
 		
-		return "redirect:/les-voies";
+		//after deletion its returns to it area parent edition
+	    return "redirect:/areas/edit/" + area.getId();
 	}
 
 }

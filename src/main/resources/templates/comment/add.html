@@ -43,7 +43,7 @@
 	          		<h3 class="section-title">Ajouter un commentaire</h3>
 	        	</header>
 	        	<div>
-		        	<form action="#" th:action="@{/comment/add}" th:object="${comment}" method="post">
+		        	<form action="#" th:action="@{'/spots/'+ ${spotId} + '/comments'}" th:object="${comment}" method="post">
 		        	 	<div class="form-group">
 						    <label for="title">Titre</label>
 						    <input type="text" th:field="*{title}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('title')} ? is-invalid : ''">
@@ -56,7 +56,7 @@
 		    			</div>
 		    			<div>
 		    				<input type="submit" value="Ajouter un commentaire" class="btn btn-primary"> 
-		    				<a class="btn btn-secondary" th:href="@{/les-commentaires}">Retour à la liste des commentaires</a>
+		    				<a class="btn btn-secondary" th:href="@{'/spot/edit/' + ${spotId}}">Retour au site</a>
 		    			</div>
 					</form>
 				</div>

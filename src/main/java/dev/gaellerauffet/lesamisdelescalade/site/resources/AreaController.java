@@ -1,5 +1,7 @@
 package dev.gaellerauffet.lesamisdelescalade.site.resources;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
+import dev.gaellerauffet.lesamisdelescalade.model.Route;
+import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.services.AreaService;
 
 @Controller
@@ -36,7 +40,7 @@ public class AreaController {
         return "area/list";
 	}
 	
-	
+	// display add an area form
 	@GetMapping("/spots/{spotId}/areas")
     public String displayAddForm(@PathVariable("spotId") int spotId, Area area, Model model) {
 		model.addAttribute("spotId", spotId);
@@ -44,40 +48,56 @@ public class AreaController {
         return "area/add";
     }
 	
+	//save a new area
 	@PostMapping("/spots/{spotId}/areas")
     public String addArea(@PathVariable("spotId") int spotId, @Valid Area area, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "area/add";
         }
         
-        //save spot and redirect
-        areaService.add(spotId, area);
-        return "redirect:/spot/edit/" + spotId;
+        //save spot and redirect to area edition
+        int areaId = areaService.add(spotId, area);
+        return "redirect:/areas/edit/" + areaId;
     }
 	
-	
-	@GetMapping("/area/edit/{id}")
-	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
-	    Area area = areaService.getArea(id);
+	// display an update area form
+	@GetMapping("/areas/edit/{areaId}")
+	public String displayUpdateForm(@PathVariable("areaId") int areaId, Model model) {
+	    Area area = areaService.getArea(areaId);
+	    List<Route> listRoutes = areaService.getListRoutes(areaId);
+	    //Spot spot = areaService.getParentSpot(areaId);
 	    model.addAttribute("area", area);
+	    model.addAttribute("listRoutes", listRoutes);
+	    //model.addAttribute("spot", spot);
+	    
+	    model.addAttribute("spotId", area.getSpot().getId());
 	    
 	    return "area/edit";
 	}
 	
-	@PostMapping("/area/update/{id}")
-	public String updateArea(@PathVariable("id") int id, @Valid Area area, BindingResult result, Model model) {
+	//save updates
+	@PostMapping("/areas/update/{areaId}")
+	public String updateArea(@PathVariable("areaId") int areaId, @Valid Area area, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
+	    	area.setId(areaId);
 	        return "area/edit";
 	    }
 	         
-	    areaService.add(area);
-	    return "redirect:/les-secteurs";
+	    areaService.update(areaId, area);
+	    
+	    Spot spot = areaService.getParentSpot(areaId);
+	    model.addAttribute("spotId", spot.getId());
+	 
+	    //after update it return to spot parent edition
+	    return "redirect:/spot/edit/" + spot.getId();
 	}
 	
-	@GetMapping("/area/delete/{id}")
-	public String deleteArea(@PathVariable("id") int id, Model model) {
-		areaService.deleteArea(id);
-	    
-	    return "redirect:/les-secteurs";
+	@GetMapping("/areas/delete/{areaId}")
+	public String deleteArea(@PathVariable("areaId") int areaId) {
+		Spot spot = areaService.getParentSpot(areaId);
+		areaService.deleteArea(areaId);
+		
+		//after deletion its returns to it spot parent edition
+	    return "redirect:/spot/edit/" + spot.getId();
 	}
 }

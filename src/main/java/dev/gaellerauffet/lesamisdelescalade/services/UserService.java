@@ -24,6 +24,8 @@ public interface UserService {
 
 	Page<User> findAllPaginated(Pageable pageable);
 
+	void update(int id, @Valid User user);
+
 	
 	
 	//obtenir les sites d'un user

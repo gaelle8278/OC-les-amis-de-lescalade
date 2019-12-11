@@ -42,7 +42,6 @@
 	        	</header>
 				<div class="row">
 		        	<form action="#" th:action="@{/user/update/{id}(id=${user.id})}" th:object="${user}" method="post">
-		        		<input type="hidden" th:field="*{id}">
 		        	 	<div class="form-group">
 						    <label for="firstName">Prénom</label>
 						    <input type="text" th:field="*{firstName}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('firstName')} ? is-invalid : ''">

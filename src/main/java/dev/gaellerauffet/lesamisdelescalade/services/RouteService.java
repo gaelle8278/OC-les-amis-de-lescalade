@@ -1,10 +1,14 @@
 package dev.gaellerauffet.lesamisdelescalade.services;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import dev.gaellerauffet.lesamisdelescalade.model.Area;
+import dev.gaellerauffet.lesamisdelescalade.model.Pitch;
 import dev.gaellerauffet.lesamisdelescalade.model.Route;
 
 public interface RouteService {
@@ -15,6 +19,12 @@ public interface RouteService {
 
 	void deleteRoute(int id);
 
-	void add(@Valid Route route);
+	int add(int areaId, Route route);
+
+	List<Pitch> getListPitches(int routeId);
+
+	void update(int routeId, @Valid Route route);
+
+	Area getParentArea(int routeId);
 
 }

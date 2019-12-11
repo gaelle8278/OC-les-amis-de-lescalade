@@ -3,6 +3,8 @@ package dev.gaellerauffet.lesamisdelescalade.services;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -33,5 +35,7 @@ public interface SpotService {
 	void deleteSpot(int id);
 
 	List<Area> getListAreas(int id);
+
+	void update(int id, @Valid Spot spot);
 	
 }

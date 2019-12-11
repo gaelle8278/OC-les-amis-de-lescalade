@@ -40,20 +40,22 @@ public class CommentController {
         return "comment/list";
 	}
 	
-	@GetMapping("/addcomment")
-    public String displayAddForm(Comment comment) {
+	@GetMapping("/spots/{spotId}/comments")
+    public String displayAddForm(@PathVariable("spotId") int spotId, Comment comment, Model model) {
+		model.addAttribute("spotId", spotId);
+		model.addAttribute("comment",comment);
         return "comment/add";
     }
 	
-	@PostMapping("/comment/add")
-    public String addComment(@Valid Comment comment, BindingResult result, Model model) {
+	@PostMapping("/spots/{spotId}/comments")
+    public String addComment(@PathVariable("spotId") int spotId, @Valid Comment comment, BindingResult result, Model model) {
         if (result.hasErrors()) {
         	return "comment/add";
         }
         
-        //save spot and redirect
-        commentService.add(comment);
-        return "redirect:/les-commentaires";
+        //save comment and redirect to spot page
+        commentService.add(spotId, comment);
+        return "redirect:/spot/" + spotId;
     }
 	
 	
@@ -69,10 +71,11 @@ public class CommentController {
 	@PostMapping("/comment/update/{id}")
 	public String updateComment(@PathVariable("id") int id, @Valid Comment comment, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
+	    	comment.setId(id);
 	        return "comment/edit";
 	    }
 	         
-	    commentService.add(comment);
+	    commentService.update(id,comment);
 	    return "redirect:/les-commentaires";
 	}
 	

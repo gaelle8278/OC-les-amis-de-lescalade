@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,12 +22,16 @@ public class Pitch {
 	private String number;
 	private String grade;
 	
-	@Column(name = "created_at")
+	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
-	@Column(name = "route_id")
-	private int routeId;
+	/*@Column(name = "route_id")
+	private int routeId;*/
+	
+	@ManyToOne
+	@JoinColumn(name = "route_id", nullable = true)
+    private Route route;
 
 	public int getId() {
 		return id;
@@ -67,14 +73,14 @@ public class Pitch {
 		this.createdDate = createdDate;
 	}
 
-	public int getRouteId() {
-		return routeId;
+	public Route getRoute() {
+		return route;
 	}
 
-	public void setRouteId(int routeId) {
-		this.routeId = routeId;
+	public void setRoute(Route route) {
+		this.route = route;
 	}
-	
+
 	
 	
 	

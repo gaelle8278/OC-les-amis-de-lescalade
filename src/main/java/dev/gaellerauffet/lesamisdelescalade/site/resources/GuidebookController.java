@@ -66,11 +66,11 @@ public class GuidebookController {
 	@PostMapping("/guidebook/update/{id}")
 	public String updateGuidebook(@PathVariable("id") int id, @Valid Guidebook guidebook, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	        //spot.setId(id);
+	    	guidebook.setId(id);
 	        return "guidebook/edit";
 	    }
 	         
-	    guidebookService.add(guidebook);
+	    guidebookService.update(id, guidebook);
 	    return "redirect:/les-topos";
 	}
 	

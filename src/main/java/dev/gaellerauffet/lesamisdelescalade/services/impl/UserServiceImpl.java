@@ -3,11 +3,15 @@ package dev.gaellerauffet.lesamisdelescalade.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.persistance.UserRepository;
@@ -18,6 +22,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
     UserRepository userRepository;
+	
+	@Autowired
+	EntityManager em;
 	
 	@Override
 	public User getUser(int id) {
@@ -52,6 +59,18 @@ public class UserServiceImpl implements UserService {
 	public Page<User> findAllPaginated(Pageable pageable) {
 		Page<User> page = userRepository.findAll(pageable);
 		return page;
+	}
+
+	@Override
+	public void update(int idUser, User userForm) {
+		User user = em.getReference(User.class,idUser);
+		//on update of a user information checkCGU status doesn't change
+		//active state doesn't change, it change only during user activation process
+		userForm.setCheckedCGU(user.isCheckedCGU());
+		userForm.setActive(user.isActive());
+		
+		userRepository.save(userForm);
+		
 	}
 
 	

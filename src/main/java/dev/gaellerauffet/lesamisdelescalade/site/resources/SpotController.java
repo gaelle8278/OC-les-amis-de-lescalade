@@ -30,6 +30,7 @@ public class SpotController {
 	@GetMapping("/spot/{id}")
 	public String displaySpot(@PathVariable("id") int id, Model model) {
 		Spot spot = spotService.getSpot(id);
+		//@TODO récupérer les commentaires
 		model.addAttribute("spot", spot);
         return "spot/display";
 	}
@@ -78,7 +79,7 @@ public class SpotController {
             return "spot/add";
         }
         
-        //save spot and redirect
+        //save spot and redirect to spot edition
         int id = spotService.add(spot);
         return "redirect:/spot/edit/" + id;
     }
@@ -99,11 +100,11 @@ public class SpotController {
 	@PostMapping("/spot/update/{id}")
 	public String updateSpot(@PathVariable("id") int id, @Valid Spot spot, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	        //spot.setId(id);
+	        spot.setId(id);
 	        return "spot/edit";
 	    }
 	         
-	    spotService.add(spot);
+	    spotService.update(id,spot);
 	    return "redirect:/les-sites";
 	}
 	

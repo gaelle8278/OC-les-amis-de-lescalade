@@ -1,12 +1,16 @@
 package dev.gaellerauffet.lesamisdelescalade.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,14 +24,23 @@ public class Route {
 	private String number;
 	private String notice;
 	@Column(name = "nb_spits")
-	private String nbSpits;
+	private Integer nbSpits;
+	private String grade;
 	
-	@Column(name = "area_id")
-	private int areaId;
-	
-	@Column(name = "created_at")
+	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
+	
+	/*@Column(name = "area_id")
+	private int areaId;*/
+	@ManyToOne
+	@JoinColumn(name = "area_id", nullable = true)
+    private Area area;
+	
+	@OneToMany(mappedBy="route")
+    private List<Pitch> listPitchs;
+	
+	
 
 	
 
@@ -55,21 +68,14 @@ public class Route {
 		this.notice = notice;
 	}
 
-	public String getNbSpits() {
+	public Integer getNbSpits() {
 		return nbSpits;
 	}
 
-	public void setNbSpits(String nbSpits) {
+	public void setNbSpits(Integer nbSpits) {
 		this.nbSpits = nbSpits;
 	}
 
-	public int getAreaId() {
-		return areaId;
-	}
-
-	public void setAreaId(int areaId) {
-		this.areaId = areaId;
-	}
 	
 	public LocalDateTime getCreatedDate() {
 		return createdDate;
@@ -78,5 +84,33 @@ public class Route {
 	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
+	public List<Pitch> getListPitchs() {
+		return listPitchs;
+	}
+
+	public void setListPitchs(List<Pitch> listPitchs) {
+		this.listPitchs = listPitchs;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	
+	
+	
+	
 
 }
