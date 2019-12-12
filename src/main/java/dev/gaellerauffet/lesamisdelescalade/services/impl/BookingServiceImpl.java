@@ -1,5 +1,7 @@
 package dev.gaellerauffet.lesamisdelescalade.services.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,21 +10,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Booking;
-import dev.gaellerauffet.lesamisdelescalade.model.Comment;
 import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
-import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.persistance.BookingRepository;
+import dev.gaellerauffet.lesamisdelescalade.persistance.GuidebookRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.BookingService;
+import dev.gaellerauffet.lesamisdelescalade.services.UserService;
+import dev.gaellerauffet.lesamisdelescalade.utils.Constants;
 
 @Service
 public class BookingServiceImpl implements BookingService{
-	//@Todo à mettre dans une classe dédié
-	public final static String STATUS_EN_ATTENTE = "en_attente";
 	
 	@Autowired
 	BookingRepository bookingRepository;
-	
+
 	@Autowired
 	EntityManager em;
 
@@ -59,10 +60,30 @@ public class BookingServiceImpl implements BookingService{
 		booking.setGuidebook(guidebook);
 		
 		//set status
-		booking.setStatus(STATUS_EN_ATTENTE);
+		booking.setStatus(Constants.BOOKING_DB_PENDING_STATUS);
 		//save booking
 		bookingRepository.save(booking);
 		
+		//guidebook.setAvailable(false);
+		//guidebookRepository.save(guidebook);
+		
+	}
+
+	@Override
+	public Page<Booking> findUserBookings(int userId, Pageable pageable) {
+		User user = em.getReference(User.class, userId);
+		//User user = userService.getUser(userId);
+		Page<Booking> listBookings = bookingRepository.findAllByUser(user, pageable);
+		return listBookings;
+	}
+
+	@Override
+	public Page<Booking> findUserBookingsToManage(int userId, Pageable pageable) {
+		User user = em.getReference(User.class, userId);
+		List<Guidebook> listGuidebook = user.getListGuidebooks();
+		
+		Page<Booking> listBookings = bookingRepository.findAllByGuidebookIn(listGuidebook, pageable);
+		return listBookings;
 	}
 
 }

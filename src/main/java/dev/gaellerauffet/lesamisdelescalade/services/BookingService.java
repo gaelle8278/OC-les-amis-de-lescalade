@@ -17,4 +17,8 @@ public interface BookingService {
 
 	void add(int gbId, Booking booking);
 
+	Page<Booking> findUserBookings(int i, Pageable pageable);
+
+	Page<Booking> findUserBookingsToManage(int i, Pageable pageable);
+
 }

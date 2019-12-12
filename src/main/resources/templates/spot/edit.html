@@ -21,28 +21,27 @@
 	rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link th:href="@{/css/style.css}" rel="stylesheet">
-
+<link th:href="@{/css/member-account.css}" rel="stylesheet">
 
 </head>
 
 <body>
-	<!--==========================
- 	 Header
-  	============================-->
-	<header th:replace="commons/header :: header"></header>
+	<div class="d-flex" id="wrapper">
 
+		<div th:replace="commons/user-account/menu :: main-menu"></div>
 
-	<main id="main">
-		<section id="spot-add" class="section-bg">
-	      	<div class="container">
-	        	<header class="section-header">
-	          		<h3 class="section-title" th:text="'Modification du site ' + ${spot.name}" ></h3>
-	        	</header>
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+			<nav th:replace="commons/user-account/menu :: navbar"></nav>
+
+			<div class="container-fluid">
+	          	<h1 class="" th:text="'Modification du site ' + ${spot.name}" ></h1>
+	       
 	        	<div class="row">
 	        		<div class="col">
 			        	<form action="#" th:action="@{/spot/update/{id}(id=${spot.id})}" th:object="${spot}" method="post">
@@ -111,9 +110,9 @@
 			    			</div> 
 			    			
 			    			<div>
-			    				<input type="submit" value="Metre à jour" class="btn btn-primary"> 
+			    				<input type="submit" value="Mettre à jour" class="btn btn-primary"> 
 			    				<a class="btn btn-primary" th:href="@{'/spots/'+${spot.id}+'/areas'}">Ajouter un secteur</a>
-			    				<a class="btn btn-secondary" th:href="@{/les-sites}">Retour à la liste des sites</a>
+			    				<a class="btn btn-secondary" th:href="@{/mes-sites}">Retour à la liste des sites</a>
 			    			</div>
 						</form>
 					</div>
@@ -122,8 +121,8 @@
 					<div class="col">
 						<div class="card">
 							<div class="card-header" id="headerAreas">
-								<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAreas" aria-expanded="false" aria-controls="collapseAreas">
-			    					Voir les secteurs
+								<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseAreas" aria-expanded="false" aria-controls="collapseAreas">
+			    					Listes secteurs
 			  					</button>
 			  				</div>
 		  					<div class="collapse" id="collapseAreas">
@@ -146,27 +145,20 @@
 					</div>
 				</div>
 	       </div>
-	     </section>
-		
-	</main>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /#page-content-wrapper -->
 
-	<!--==========================
-    Footer
-  	============================-->
-	<footer th:replace="commons/footer :: footer"></footer>
+	</div>
+	<!-- /#wrapper -->
 
-	<!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>-->
-	<!-- Uncomment below i you want to use a preloader -->
-	<!-- <div id="preloader"></div> -->
 
 	<!-- JavaScript Libraries -->
 	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
 
 	<!-- Template Main Javascript File -->
-	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/member-account.js}"></script>
 
 </body>
 </html>

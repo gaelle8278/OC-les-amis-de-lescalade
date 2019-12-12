@@ -55,7 +55,9 @@
 			        	
 			        	<p><span class="font-weight-bold">Lieu : </span><th:block th:text="${guidebook.place}"></th:block></p>
 			        	
-			     		<p><span class="font-weight-bold">Nom: </span><th:block th:text="${#temporals.format(guidebook.releaseDate, 'dd/MM/yyyy')}"></th:block></p>
+			     		<p><span class="font-weight-bold">Date de parution: </span>
+			     			<th:block th:text="${#temporals.format(guidebook.releaseDate, 'dd/MM/yyyy')}"></th:block>
+			     		</p>
 			        	
 		        	</div>
 		        	

@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import dev.gaellerauffet.lesamisdelescalade.utils.Constants;
+
 @Entity
 public class Booking {
 	@Id
@@ -47,7 +49,28 @@ public class Booking {
 	}
 
 	public String getStatus() {
-		return status;
+		String displayedStatus = status;
+		
+		switch(status) {
+			case Constants.BOOKING_DB_PENDING_STATUS :
+				displayedStatus = Constants.BOOKING_APP_PENDING_STATUS;
+				break;
+			case Constants.BOOKING_DB_CANCELLED_STATUS :
+				displayedStatus = Constants.BOOKING_APP_CANCELLED_STATUS;
+				break;
+			case Constants.BOOKING_DB_REJECTED_STATUS :
+				displayedStatus = Constants.BOOKING_APP_REJECTED_STATUS;
+				break;
+			case Constants.BOOKING_DB_APPROVED_STATUS :
+				displayedStatus = Constants.BOOKING_APP_APPROVED_STATUS;
+				break;
+			case Constants.BOOKING_DB_FINISHED_STATUS :
+				displayedStatus = Constants.BOOKING_APP_FINISHED_STATUS;
+				break;
+				
+		}
+		
+		return displayedStatus;
 	}
 
 	public void setStatus(String status) {

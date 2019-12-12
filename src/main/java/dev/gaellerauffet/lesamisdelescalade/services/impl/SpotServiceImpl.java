@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.Comment;
+import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
 import dev.gaellerauffet.lesamisdelescalade.model.Route;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
@@ -99,9 +100,8 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public int add(Spot spot) {
-		//@TODO before save get id of connected user
-		User user = em.getReference(User.class, 1);
+	public int add(int userId, Spot spot) {
+		User user = em.getReference(User.class, userId);
 		spot.setUser(user);
 		
 		Spot savedSpot = spotRepository.save(spot);
@@ -143,5 +143,13 @@ public class SpotServiceImpl implements SpotService {
 	public List<Comment> getListComment(Spot spot) {
 		List<Comment>listComments = spot.getListComment();
 		return listComments;
+	}
+
+	@Override
+	public Page<Spot> getUserSpots(int userId, Pageable pageable) {
+		User user = em.getReference(User.class, userId);
+		//User user = userService.getUser(userId);
+		Page<Spot> listSpots = spotRepository.findAllByUser(user, pageable);
+		return listSpots;
 	}
 }

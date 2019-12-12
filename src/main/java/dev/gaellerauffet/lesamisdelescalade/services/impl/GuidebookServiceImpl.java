@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import dev.gaellerauffet.lesamisdelescalade.model.Booking;
 import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
 import dev.gaellerauffet.lesamisdelescalade.model.Route;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
@@ -61,6 +62,14 @@ public class GuidebookServiceImpl implements GuidebookService {
 		guidebookRepository.save(guidebookForm);
 		
 		
+	}
+
+	@Override
+	public Page<Guidebook> getUserGuidebooks(int userId, Pageable pageable) {
+		User user = em.getReference(User.class, userId);
+		//User user = userService.getUser(userId);
+		Page<Guidebook> listGuidebooks = guidebookRepository.findAllByUser(user, pageable);
+		return listGuidebooks;
 	}
 
 }

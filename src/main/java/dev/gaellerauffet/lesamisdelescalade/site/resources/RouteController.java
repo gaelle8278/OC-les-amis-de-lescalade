@@ -51,7 +51,7 @@ public class RouteController {
     }
 	
 	@PostMapping("/areas/{areaId}/routes")
-    public String addRoute(@PathVariable("areaId") int areaId, @Valid Route route, BindingResult result, Model model) {
+    public String addRoute(@PathVariable("areaId") int areaId, @Valid Route route, BindingResult result) {
         if (result.hasErrors()) {
             return "route/add";
         }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import dev.gaellerauffet.lesamisdelescalade.model.Booking;
 import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
 import dev.gaellerauffet.lesamisdelescalade.services.GuidebookService;
 
@@ -34,14 +35,16 @@ public class GuidebookController {
 	public String listGuidebooks(@PageableDefault(size = 10) Pageable pageable, Model model) {
 		Page<Guidebook> page = guidebookService.findAllPaginated(pageable);
 		model.addAttribute("page", page);
-        return "guidebook/view-list";
+        return "guidebook/list";
 	}
 	
 	@GetMapping("/mes-topos")
 	public String listUserGuidebooks(@PageableDefault(size = 10) Pageable pageable, Model model) {
-		Page<Guidebook> page = guidebookService.findAllPaginated(pageable);
+		//@TODO user id est forcé pour les tests
+		Page<Guidebook> page = guidebookService.getUserGuidebooks(1, pageable);
+		//Page<Guidebook> page = guidebookService.findAllPaginated(pageable);
 		model.addAttribute("page", page);
-        return "guidebook/list";
+        return "guidebook/user-list";
 	}
 	
 	@GetMapping("/addguidebook")

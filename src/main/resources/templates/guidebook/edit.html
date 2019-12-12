@@ -21,27 +21,26 @@
 	rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link th:href="@{/css/style.css}" rel="stylesheet">
-
+<link th:href="@{/css/member-account.css}" rel="stylesheet">
 
 </head>
 
 <body>
-	<!--==========================
-  	Header
-  	============================-->
-	<header th:replace="commons/header :: header"></header>
+	<div class="d-flex" id="wrapper">
 
+		<div th:replace="commons/user-account/menu :: main-menu"></div>
 
-	<main id="main">
-		<section id="spot-add" class="section-bg">
-	      	<div class="container">
-	        	<header class="section-header">
-	          		<h3 class="section-title">Modifier un topo</h3>
-	        	</header>
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+			<nav th:replace="commons/user-account/menu :: navbar"></nav>
+
+			<div class="container-fluid">
+	          		<h1 class="mt-4">Modifier un topo</h1>
 	        	<div>
 	        		
 		        	<form action="#" th:action="@{/guidebook/update/{id}(id=${guidebook.id})}" th:object="${guidebook}" method="post">
@@ -80,28 +79,21 @@
 		    			</div>
 					</form>
 				</div>
-	       </div>
-	     </section>
-		
-	</main>
+	    </div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /#page-content-wrapper -->
 
-	<!--==========================
-    Footer
-  	============================-->
-	<footer th:replace="commons/footer :: footer"></footer>
+	</div>
+	<!-- /#wrapper -->
 
-	<!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>-->
-	<!-- Uncomment below i you want to use a preloader -->
-	<!-- <div id="preloader"></div> -->
 
 	<!-- JavaScript Libraries -->
 	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
 
 	<!-- Template Main Javascript File -->
-	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/member-account.js}"></script>
 
 </body>
 </html>

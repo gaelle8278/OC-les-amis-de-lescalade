@@ -27,7 +27,7 @@ public interface SpotService {
 
 	List<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform);
 
-	int add(Spot spot);
+	int add(int userId, Spot spot);
 
 	List<String> getListTypesForForm();
 
@@ -40,5 +40,7 @@ public interface SpotService {
 	void update(int id, @Valid Spot spot);
 
 	List<Comment> getListComment(Spot spot);
+
+	Page<Spot> getUserSpots(int i, Pageable pageable);
 	
 }

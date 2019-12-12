@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.Comment;
+import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 
@@ -41,10 +42,17 @@ public class SpotController {
 	
 	@GetMapping("/les-sites")
 	public String listSpots(@PageableDefault(size = 10) Pageable pageable, Model model) {
-		//model.addAttribute("spots", spotService.getAllSpots());
 		Page<Spot> page = spotService.findAllPaginated(pageable);
 		model.addAttribute("page", page);
         return "spot/list";
+	}
+	
+	@GetMapping("/mes-sites")
+	public String listUserSpots(@PageableDefault(size = 10) Pageable pageable, Model model) {
+		//@TODO user id est forcé pour les tests
+		Page<Spot> page = spotService.getUserSpots(1, pageable);
+		model.addAttribute("page", page);
+        return "spot/user-list";
 	}
 	
 	@GetMapping("/recherche-site")
@@ -84,7 +92,8 @@ public class SpotController {
         }
         
         //save spot and redirect to spot edition
-        int id = spotService.add(spot);
+        //@TODO user id forcé à 1 => session
+        int id = spotService.add(1, spot);
         return "redirect:/spot/edit/" + id;
     }
 	
@@ -102,21 +111,21 @@ public class SpotController {
 	}
 	
 	@PostMapping("/spot/update/{id}")
-	public String updateSpot(@PathVariable("id") int id, @Valid Spot spot, BindingResult result, Model model) {
+	public String updateSpot(@PathVariable("id") int id, @Valid Spot spot, BindingResult result) {
 	    if (result.hasErrors()) {
 	        spot.setId(id);
 	        return "spot/edit";
 	    }
 	         
 	    spotService.update(id,spot);
-	    return "redirect:/les-sites";
+	    return "redirect:/mes-sites";
 	}
 	
 	@GetMapping("/spot/delete/{id}")
 	public String deleteSpot(@PathVariable("id") int id, Model model) {
 	    spotService.deleteSpot(id);
 	    
-	    return "redirect:/les-sites";
+	    return "redirect:/mes-sites";
 	}
 	
 	 

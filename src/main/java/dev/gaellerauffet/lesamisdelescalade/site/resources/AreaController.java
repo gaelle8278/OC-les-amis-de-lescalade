@@ -77,7 +77,7 @@ public class AreaController {
 	
 	//save updates
 	@PostMapping("/areas/update/{areaId}")
-	public String updateArea(@PathVariable("areaId") int areaId, @Valid Area area, BindingResult result, Model model) {
+	public String updateArea(@PathVariable("areaId") int areaId, @Valid Area area, BindingResult result) {
 	    if (result.hasErrors()) {
 	    	area.setId(areaId);
 	        return "area/edit";
@@ -86,7 +86,7 @@ public class AreaController {
 	    areaService.update(areaId, area);
 	    
 	    Spot spot = areaService.getParentSpot(areaId);
-	    model.addAttribute("spotId", spot.getId());
+	    //model.addAttribute("spotId", spot.getId());
 	 
 	    //after update it return to spot parent edition
 	    return "redirect:/spot/edit/" + spot.getId();

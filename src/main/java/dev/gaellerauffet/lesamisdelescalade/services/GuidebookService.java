@@ -19,4 +19,6 @@ public interface GuidebookService {
 
 	void update(int idGb, @Valid Guidebook guidebook);
 
+	Page<Guidebook> getUserGuidebooks(int i, Pageable pageable);
+
 }

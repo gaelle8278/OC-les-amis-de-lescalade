@@ -21,31 +21,29 @@
 	rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link th:href="@{/css/style.css}" rel="stylesheet">
-
+<link th:href="@{/css/member-account.css}" rel="stylesheet">
 
 </head>
 
 <body>
-	<!--==========================
-  Header
-  ============================-->
-	<header th:replace="commons/header :: header"></header>
+	<div class="d-flex" id="wrapper">
 
+		<div th:replace="commons/user-account/menu :: main-menu"></div>
 
-	<main id="main">
-	     <section id="spot-list" class="section-bg">
-	      	<div class="container">
-	        	<header class="section-header">
-	          		<h3 class="section-title">Les sites</h3>
-	        	</header>
-	        	
-	        	
-	        	<!--  table contenant la liste des sites-->
-	        	<table class="table">
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+			<nav th:replace="commons/user-account/menu :: navbar"></nav>
+
+			<div class="container-fluid">
+				<h1 class="mt-4">Mes sites</h1>
+
+				<!--  table contenant la liste des sites-->
+				<table class="table">
 	        		<thead>
 					    <tr>
 					      	<th scope="col" class="text-center">Id</th>
@@ -58,17 +56,20 @@
 				 	 </thead>
 				   	<th:block th:each="spot : ${page.content}">
 				   		<tr>
-				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}" th:text=${spot.id}></a></td>
+				        	<td class="text-center" th:text="${spot.id}"></td>
 					    	<td class="text-center" th:text="${spot.name}"></td>
 					    	<td class="text-center" th:text="${spot.region}"></td>
 					    	<td class="text-center" th:text="${spot.type}"></td>
 					    	<td class="text-center" th:text="${spot.orientation}"></td>
 					    	<td class="text-center">
-					    		<a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}">Voir</a>
-					    		</td>
+					    		 <a class="btn btn-link" th:href="@{'/spot/edit/' + ${spot.id}}">Modifier</a>
+					    		 | <button class="btn btn-link"   data-toggle="modal" data-target="#deletionModal" 
+					    		 	th:attr="data-link=@{'/spot/delete/'+ ${spot.id}},data-label=${'le site'},data-name=${spot.name}" >Supprimer</button>
+					    	</td>
 					    </tr>
 				   </th:block>
 				</table>
+
 				<!-- pagination -->
 				<nav aria-label="Pages listant les sites d'escalade">
 					<ul class="pagination">
@@ -94,29 +95,29 @@
 				    	</li>
 				    </ul>
 				</nav>
-				
-				
-	        </div>
-		</section>
-		<div th:replace="commons/modals :: deletion"></div>
-	</main>
 
-	<!--==========================
-    Footer
-  	============================-->
-	<footer th:replace="commons/footer :: footer"></footer>
+				<div class="row">
+					<div class="col py-2">
+				  		<a th:href="@{/addspot}" class="btn btn-primary ">Ajouter un site</a>
+				  	</div>
+				 </div>
+				 
+				 <div th:replace="commons/modals :: deletion"></div>
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /#page-content-wrapper -->
 
-	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-	<!-- Uncomment below i you want to use a preloader -->
-	<!-- <div id="preloader"></div> -->
+	</div>
+	<!-- /#wrapper -->
+
 
 	<!-- JavaScript Libraries -->
-	<script th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
 
 	<!-- Template Main Javascript File -->
-	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/member-account.js}"></script>
 
 </body>
 </html>

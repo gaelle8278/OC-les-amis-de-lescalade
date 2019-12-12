@@ -199,6 +199,16 @@ public class User {
 	public void setListBookings(List<Booking> listBookings) {
 		this.listBookings = listBookings;
 	}
+
+
+	public List<Guidebook> getListGuidebooks() {
+		return listGuidebooks;
+	}
+
+
+	public void setListGuidebooks(List<Guidebook> listGuidebooks) {
+		this.listGuidebooks = listGuidebooks;
+	}
 	
 	
 	
