@@ -30,7 +30,7 @@ public class UserController {
 	public String displayUser(@PathVariable("id") int id, Model model) {
 		User user = userService.getUser(id);
 		model.addAttribute("user", user);
-        return "user/profile";
+        return "user/display";
 	}
 	
 	@GetMapping("/les-utilisateurs")

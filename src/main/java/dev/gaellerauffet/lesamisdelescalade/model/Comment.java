@@ -21,6 +21,8 @@ public class Comment {
 	private int id;
 	private String title;
 	private String content;
+	@Column(name = "moderator_notice")
+	private String moderatorNotice;
 	
 	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
