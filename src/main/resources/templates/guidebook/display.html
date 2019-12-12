@@ -43,32 +43,38 @@
 	          		<h3 class="section-title">Topo</h3>
 	        	</header>
 	        	<div class="row my-2">
-		        	<div class="col">
-		        		<span class="font-weight-bold">Nom: </span><th:block th:text="${guidebook.name}"></th:block>
+		        	<div class="col col-md-6">
+		        	 	<p><span class="font-weight-bold">Nom: </span><th:block th:text="${guidebook.name}"></th:block></p>
+		        	 	
+		        	 	<div>
+			        	 	<span class="font-weight-bold">Description :</span>
+			        		<div>
+			        			<th:block th:text="${guidebook.description}"></th:block>
+			        		</div>
+			        	</div>
+			        	
+			        	<p><span class="font-weight-bold">Lieu : </span><th:block th:text="${guidebook.place}"></th:block></p>
+			        	
+			     		<p><span class="font-weight-bold">Nom: </span><th:block th:text="${#temporals.format(guidebook.releaseDate, 'dd/MM/yyyy')}"></th:block></p>
+			        	
 		        	</div>
+		        	
+		        	<div class="col col-md-6">
+		        	<!--  autre condition : le topo n'appartient pas à l'utilisateur connecté et il n'a pas déjà fait une demande en cours
+		    		faire le calcul dans le service et le récuperer dans le controleur -->
+		        		<a class="btn btn-primary" th:if="${guidebook.bookable} and ${guidebook.available}" 
+		        		th:href="@{'/guidebooks/' + ${guidebook.id} + '/bookings'}">Demander une réservation</a>
+		        	</div>
+		        	
+		        	
 		        </div>
-		        <div class="row">
-		        	<div class="col">
-		        		<span class="font-weight-bold">Description :</span>
-		        		<div>
-		        			<th:block th:text="${guidebook.description}"></th:block>
-		        		</div>
-		        	</div>
-		        </div>
-		        <div class="row my-2">
-		        	<div class="col">
-		        		<span class="font-weight-bold">Lieu : </span><th:block th:text="${guidebook.place}"></th:block>
-		        	</div>
-		       	</div>
+		        
+		       
 		       	
-		       	<div class="row my-2">
-		        	<div class="col">
-		       			<span class="font-weight-bold">Nom: </span><th:block th:text="${#temporals.format(guidebook.releaseDate, 'dd/MM/yyyy')}"></th:block>
-		       		</div>
-		       	</div>
+		       	
 				<div class="row my-2">
 		    		<div class="col">
-		    			<a class="btn btn-primary" th:href="@{/les-topos}">Retour à la liste des topos</a>
+		    			<a class="btn btn-secondary" th:href="@{/les-topos}">Retour à la liste des topos</a>
 		    		</div>
 		    	</div>
 	       </div>

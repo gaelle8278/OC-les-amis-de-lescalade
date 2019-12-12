@@ -24,13 +24,21 @@ public class GuidebookController {
 	@GetMapping("/guidebook/{id}")
 	public String displayGuidebook(@PathVariable("id") int id, Model model) {
 		Guidebook guidebook = guidebookService.getGuidebook(id);
-		
+		// calculer l'affichage du bouton de réservation et ajouter une variable dans le modèle indiquant le résutat du calcul 
+		// pour afficher le bouton dans le modème
 		model.addAttribute("guidebook", guidebook);
         return "guidebook/display";
 	}
 	
 	@GetMapping("/les-topos")
 	public String listGuidebooks(@PageableDefault(size = 10) Pageable pageable, Model model) {
+		Page<Guidebook> page = guidebookService.findAllPaginated(pageable);
+		model.addAttribute("page", page);
+        return "guidebook/view-list";
+	}
+	
+	@GetMapping("/mes-topos")
+	public String listUserGuidebooks(@PageableDefault(size = 10) Pageable pageable, Model model) {
 		Page<Guidebook> page = guidebookService.findAllPaginated(pageable);
 		model.addAttribute("page", page);
         return "guidebook/list";

@@ -27,5 +27,10 @@ public class AccountController {
 	public String displayAdminHomePage() {
 	    return "account/administration";
 	}
+	
+	@GetMapping("/mon-compte")
+	public String displayMemberAccountHomePage() {
+	    return "account/member_account_homepage";
+	}
 
 }

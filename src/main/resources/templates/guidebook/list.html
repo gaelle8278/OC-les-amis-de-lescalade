@@ -21,107 +21,145 @@
 	rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link th:href="@{/css/style.css}" rel="stylesheet">
+<link th:href="@{/css/member-account.css}" rel="stylesheet">
 
 
 </head>
 
 <body>
 	<!--==========================
-  Header
-  ============================-->
-	<header th:replace="commons/header :: header"></header>
+  	Header
+  	============================-->
 
 
-	<main id="main">
-	     <section id="spot-list" class="section-bg">
-	      	<div class="container">
-	        	<header class="section-header">
-	          		<h3 class="section-title">Les topos</h3>
-	        	</header>
-	        	
-	        	
-	        	<!--  table contenant la liste des sites-->
-	        	<table class="table">
-	        		<thead>
-					    <tr>
-					      	<th scope="col" class="text-center">ID</th>
-					      	<th scope="col" class="text-center">Nom</th>
-					      	<th scope="col" class="text-center">Lieu</th>
-					      	<th scope="col" class="text-center">Actions</th>
-					    </tr>
-				 	 </thead>
-				   	<th:block th:each="gb : ${page.content}">
-				   		<tr>
-				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/guidebook/'+ ${gb.id}}" th:text=${gb.id}></a></td>
-					    	<td class="text-center" th:text="${gb.name}"></td>
-					    	<td class="text-center" th:text="${gb.place}"></td>
-					    	<td class="text-center">
-					    			<a class="btn btn-link" th:href="@{'/guidebook/'+ ${gb.id}}">Voir</a>
-					    		 | <a class="btn btn-link" th:href="@{'/guidebook/edit/' + ${gb.id}}">Modifier</a>
-					    		 | <button class="btn btn-link"   data-toggle="modal" data-target="#deletionModal" 
-					    		 	th:attr="data-link=@{'/guidebook/delete/'+ ${gb.id}},data-label=${'le topo'},data-name=${gb.name}" >Supprimer</button>
-					    	</td>
-					    </tr>
-				   </th:block>
+
+	<div class="d-flex" id="wrapper">
+
+		<!-- Sidebar -->
+		<div class="bg-light border-right" id="sidebar-wrapper">
+			<div class="sidebar-heading">
+				<a class="" th:href="@{/}">Les amis de l'escalade</a>
+			</div>
+			<div class="list-group list-group-flush">
+				<a th:href="@{/mon-compte}"
+					class="list-group-item list-group-item-action bg-light">Tableau de bord</a> <a href="#"
+					class="list-group-item list-group-item-action bg-light">Mes sites</a> <a href="#"
+					class="list-group-item list-group-item-action bg-light">Mes topos</a> <a href="#"
+					class="list-group-item list-group-item-action bg-light">Mes demandes de réservations</a> <a href="#"
+					class="list-group-item list-group-item-action bg-light">Gestion des demandes de réservations</a>
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+				<button class="btn btn-primary" id="menu-toggle">Menu</button>
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+						<li class="nav-item"><a class="nav-link" th:href="@{/}">Les amis de l'escalade</a></li>
+					</ul>
+				</div>
+			</nav>
+
+			<div class="container-fluid">
+				<h1 class="mt-4">Mes topos</h1>
+
+				<!--  table contenant la liste des sites-->
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col" class="text-center">ID</th>
+							<th scope="col" class="text-center">Nom</th>
+							<th scope="col" class="text-center">Lieu</th>
+							<th scope="col" class="text-center">Actions</th>
+						</tr>
+					</thead>
+					<th:block th:each="gb : ${page.content}">
+						<tr>
+							<td class="text-center"><a class="btn btn-link"
+								th:href="@{'/guidebook/'+ ${gb.id}}" th:text=${gb.id}></a></td>
+							<td class="text-center" th:text="${gb.name}"></td>
+							<td class="text-center" th:text="${gb.place}"></td>
+							<td class="text-center"><a class="btn btn-link"
+								th:href="@{'/guidebook/'+ ${gb.id}}">Voir</a> | <a
+								class="btn btn-link" th:href="@{'/guidebook/edit/' + ${gb.id}}">Modifier</a>
+								|
+								<button class="btn btn-link" data-toggle="modal"
+									data-target="#deletionModal"
+									th:attr="data-link=@{'/guidebook/delete/'+ ${gb.id}},data-label=${'le topo'},data-name=${gb.name}">Supprimer</button>
+							</td>
+						</tr>
+					</th:block>
 				</table>
-				
+
 				<!-- pagination -->
 				<nav aria-label="Pages listant les topos">
 					<ul class="pagination">
-					    <li th:if="${page.hasPrevious()}" class="page-item">
-					        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
-					        	<span aria-hidden="true">&laquo;</span>
-        						<span class="sr-only">Précédent</span>
-					       	</a>
-					    </li>
-					    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-					        <li th:if="${page.number == i}" class="active page-item">
-					       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
-					       	</li>
-					        <li th:unless="${page.number == i}" class="page-item">
-					             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
-					        </li>
-					    </th:block>
-				    	<li th:if="${page.hasNext()}" class="page-item">
-				        	<a th:href="@{/''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
-				        		<span aria-hidden="true">&raquo;</span>
-        						<span class="sr-only">Suivant</span>
-				        	</a>
-				    	</li>
-				    </ul>
+						<li th:if="${page.hasPrevious()}" class="page-item"><a
+							th:href="@{''(page=${page.number-1},size=${page.size})}"
+							class="page-link" aria-label="Précédent"> <span
+								aria-hidden="true">&laquo;</span> <span class="sr-only">Précédent</span>
+						</a></li>
+						<th:block
+							th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+							<li th:if="${page.number == i}" class="active page-item"><span
+								class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
+							</li>
+							<li th:unless="${page.number == i}" class="page-item"><a
+								th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
+							</li>
+						</th:block>
+						<li th:if="${page.hasNext()}" class="page-item"><a
+							th:href="@{/''(page=${page.number+1},size=${page.size})}"
+							class="page-link" aria-lable="Suivant"> <span
+								aria-hidden="true">&raquo;</span> <span class="sr-only">Suivant</span>
+						</a></li>
+					</ul>
 				</nav>
-				
+
 				<div class="row">
 					<div class="col py-2">
-				  		<a th:href="@{/addguidebook}" class="btn btn-primary ">Ajouter un topo</a>
-				  	</div>
-				 </div>
-	        </div>
-		</section>
-		<div th:replace="commons/modals :: deletion"></div>
-	</main>
+						<a th:href="@{/addguidebook}" class="btn btn-primary ">Ajouter un topo</a>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /#page-content-wrapper -->
+
+	</div>
+	<!-- /#wrapper -->
 
 	<!--==========================
     Footer
   	============================-->
-	<footer th:replace="commons/footer :: footer"></footer>
 
-	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+	<!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>-->
 	<!-- Uncomment below i you want to use a preloader -->
 	<!-- <div id="preloader"></div> -->
 
 	<!-- JavaScript Libraries -->
 	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
 
 	<!-- Template Main Javascript File -->
-	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/member-account.js}"></script>
 
 </body>
 </html>
