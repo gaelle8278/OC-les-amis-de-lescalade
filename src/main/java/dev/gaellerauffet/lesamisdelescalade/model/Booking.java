@@ -11,11 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import dev.gaellerauffet.lesamisdelescalade.utils.Constants;
 
 @Entity
+@DynamicUpdate
 public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

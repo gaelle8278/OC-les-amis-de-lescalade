@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
+import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.Comment;
 import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
@@ -47,10 +49,10 @@ public class SpotController {
         return "spot/list";
 	}
 	
-	@GetMapping("/mes-sites")
+	@Secured("ROLE_USER")
+	@GetMapping("/membre/mes-sites")
 	public String listUserSpots(@PageableDefault(size = 10) Pageable pageable, Model model) {
-		//@TODO user id est forcé pour les tests
-		Page<Spot> page = spotService.getUserSpots(1, pageable);
+		Page<Spot> page = spotService.getUserSpots(pageable);
 		model.addAttribute("page", page);
         return "spot/user-list";
 	}
@@ -76,6 +78,7 @@ public class SpotController {
         return "spot/search";
     }
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/addspot")
     public String displayAddForm(Spot spot, Model model) {
 		List<String> listTypes =  spotService.getListTypesForForm();
@@ -83,6 +86,7 @@ public class SpotController {
         return "spot/add";
     }
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/spot/add")
     public String addSpot(@Valid Spot spot, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -92,12 +96,12 @@ public class SpotController {
         }
         
         //save spot and redirect to spot edition
-        //@TODO user id forcé à 1 => session
-        int id = spotService.add(1, spot);
+        int id = spotService.add(spot);
         return "redirect:/spot/edit/" + id;
     }
 	
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/spot/edit/{id}")
 	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
 	    Spot spot = spotService.getSpot(id);
@@ -110,6 +114,7 @@ public class SpotController {
 	    return "spot/edit";
 	}
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/spot/update/{id}")
 	public String updateSpot(@PathVariable("id") int id, @Valid Spot spot, BindingResult result) {
 	    if (result.hasErrors()) {
@@ -118,14 +123,15 @@ public class SpotController {
 	    }
 	         
 	    spotService.update(id,spot);
-	    return "redirect:/mes-sites";
+	    return "redirect:/membre/mes-sites";
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/spot/delete/{id}")
 	public String deleteSpot(@PathVariable("id") int id, Model model) {
 	    spotService.deleteSpot(id);
 	    
-	    return "redirect:/mes-sites";
+	    return "redirect:/membre/mes-sites";
 	}
 	
 	 

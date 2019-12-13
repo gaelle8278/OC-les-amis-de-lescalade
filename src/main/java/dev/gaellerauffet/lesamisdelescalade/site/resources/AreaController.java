@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,7 @@ public class AreaController {
 	}
 	
 	// display add an area form
+	@Secured("ROLE_USER")
 	@GetMapping("/spots/{spotId}/areas")
     public String displayAddForm(@PathVariable("spotId") int spotId, Area area, Model model) {
 		model.addAttribute("spotId", spotId);
@@ -49,6 +51,7 @@ public class AreaController {
     }
 	
 	//save a new area
+	@Secured("ROLE_USER")
 	@PostMapping("/spots/{spotId}/areas")
     public String addArea(@PathVariable("spotId") int spotId, @Valid Area area, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -61,6 +64,7 @@ public class AreaController {
     }
 	
 	// display an update area form
+	@Secured("ROLE_USER")
 	@GetMapping("/areas/edit/{areaId}")
 	public String displayUpdateForm(@PathVariable("areaId") int areaId, Model model) {
 	    Area area = areaService.getArea(areaId);
@@ -76,6 +80,7 @@ public class AreaController {
 	}
 	
 	//save updates
+	@Secured("ROLE_USER")
 	@PostMapping("/areas/update/{areaId}")
 	public String updateArea(@PathVariable("areaId") int areaId, @Valid Area area, BindingResult result) {
 	    if (result.hasErrors()) {
@@ -92,6 +97,7 @@ public class AreaController {
 	    return "redirect:/spot/edit/" + spot.getId();
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/areas/delete/{areaId}")
 	public String deleteArea(@PathVariable("areaId") int areaId) {
 		Spot spot = areaService.getParentSpot(areaId);

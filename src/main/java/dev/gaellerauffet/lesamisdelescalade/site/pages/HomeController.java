@@ -17,8 +17,8 @@ public class HomeController {
 	
 	@GetMapping("/")
     public String index(Model model) {
-		User user = userService.getUser(1);
-		model.addAttribute("user", user);
+		//User user = userService.getUser(1);
+		//model.addAttribute("user", user);
         return "index";
     }
    

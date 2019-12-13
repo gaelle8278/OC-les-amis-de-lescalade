@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
@@ -14,12 +16,16 @@ import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.persistance.CommentRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.CommentService;
+import dev.gaellerauffet.lesamisdelescalade.services.UserService;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired
 	private CommentRepository commentRepository;
+	
+	@Autowired
+    UserService userService;
 	
 	@Autowired
 	EntityManager em;
@@ -56,8 +62,8 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public void add(int spotId,Comment comment) {
-		//@TODO before save get id of connected user
-		User user = em.getReference(User.class, 1);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
 		comment.setUser(user);
 		//set foreign dependency : fetch spot thanks to spotId parameter
 		Spot spot = em.getReference(Spot.class,spotId);

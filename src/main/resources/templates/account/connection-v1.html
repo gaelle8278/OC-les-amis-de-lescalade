@@ -26,7 +26,6 @@
 <!-- Main Stylesheet File -->
 <link th:href="@{/css/style.css}" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -35,35 +34,48 @@
   	============================-->
 	<header th:replace="commons/header :: header"></header>
 
-
 	<main id="main">
-	     <section id="acces-compte">
-	      	<div class="container">
-	        	<header class="section-header">
-	          		<h1 class="section-title text-center">Accéder à mon compte</h1>
-	        	</header>
-	        	<hr>
-	        	<div class="row">
-					<div class="col-md-5">							
-						<h2 class="text-center"> Inscription </h2>	
-	 					<form th:replace="commons/forms :: signup-form"></form>
-							
-					</div>
-					
-					<div class="col-md-2">
-						<!-------null------>
-					</div>
-					
-					<div class="col-md-5">							
-						<h2 class="text-center"> Connexion </h2>	
-	 					<form th:replace="commons/forms :: login-form"></form>			
-								
-					</div>
-	        	</div>
-	        </div>
-		</section>
+		<section id="connexion" class="section-bg">
+		    <div class="container">
+				<div class="row ">
+					<div class="col-md-8 mx-auto">
+						<form th:action="@{/connexion}" method="post">
+			                <fieldset>
+			                    <h1>Connectez-vous</h1>
+			
+			                    <div th:if="${param.error}">
+			                        <div class="alert alert-danger">
+			                            Identifiants incorrects
+			                        </div>
+			                    </div>
+			                    <div th:if="${param.logout}">
+			                        <div class="alert alert-info">
+			                            Vous avez été déconnecté
+			                        </div>
+			                    </div>
+			
+			                    <div class="form-group">
+			                        <input type="text" name="username" id="username" class="form-control input-lg"
+			                               placeholder="UserName" required="true" autofocus="true"/>
+			                    </div>
+			                    <div class="form-group">
+			                        <input type="password" name="password" id="password" class="form-control input-lg"
+			                               placeholder="Password" required="true"/>
+			                    </div>
+			
+			                    <div>
+			                       <input type="submit" class="btn btn-lg btn-primary" value="Connexion"/>
+			                    </div>
+			                      
+			                </fieldset>
+		           		</form>
+		           		
+					</div>	
+		  		</div>
+		  	</div>
+	  	</section>
 	</main>
-
+	
 	<!--==========================
     Footer
   	============================-->

@@ -1,15 +1,11 @@
 package dev.gaellerauffet.lesamisdelescalade.model;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -65,6 +61,10 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
     private List<Guidebook> listGuidebooks;
+	
+	@ManyToMany
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private  Collection<Role> roles;
 
 	public User() {}
 
@@ -208,6 +208,16 @@ public class User {
 
 	public void setListGuidebooks(List<Guidebook> listGuidebooks) {
 		this.listGuidebooks = listGuidebooks;
+	}
+
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 	
 	

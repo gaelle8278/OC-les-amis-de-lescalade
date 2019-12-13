@@ -46,7 +46,7 @@
 	      	<div class="container-fluid">
 	          		<h1 class="">Modifier un commentaire</h1>
 	        	<div>
-		        	<form action="#" th:action="@{/comment/add}" th:object="${comment}" method="post">
+		        	<form action="#" th:action="@{/comment/update/{id}(id=${comment.id})}" th:object="${comment}" method="post">
 		        	 	<div class="form-group">
 						    <label for="title">Titre</label>
 						    <input type="text" th:field="*{title}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('title')} ? is-invalid : ''">
@@ -59,7 +59,7 @@
 		    			</div>
 		    			<div>
 		    				<input type="submit" value="Mettre à jour" class="btn btn-primary"> 
-		    				<a class="btn btn-secondary" th:href="@{/les-commentaires}">Retour à la liste des commentaires</a>
+		    				<a class="btn btn-secondary" th:href="@{/admin/les-commentaires}">Retour à la liste des commentaires</a>
 		    			</div>
 					</form>
 				</div>

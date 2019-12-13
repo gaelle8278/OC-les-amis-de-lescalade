@@ -26,6 +26,8 @@ public interface UserService {
 
 	void update(int id, @Valid User user);
 
+	User findUserByEmail(String name);
+
 	
 	
 	//obtenir les sites d'un user

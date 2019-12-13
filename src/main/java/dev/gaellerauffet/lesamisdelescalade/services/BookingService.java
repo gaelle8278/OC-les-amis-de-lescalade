@@ -1,9 +1,13 @@
 package dev.gaellerauffet.lesamisdelescalade.services;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Booking;
+import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
+import dev.gaellerauffet.lesamisdelescalade.model.User;
 
 public interface BookingService {
 
@@ -17,8 +21,10 @@ public interface BookingService {
 
 	void add(int gbId, Booking booking);
 
-	Page<Booking> findUserBookings(int i, Pageable pageable);
+	Page<Booking> findUserBookings(Pageable pageable);
 
-	Page<Booking> findUserBookingsToManage(int i, Pageable pageable);
+	Page<Booking> findUserBookingsToManage(Pageable pageable);
+
+	List<Booking> getBoookingByUserAndGb(User user, Guidebook gb);
 
 }

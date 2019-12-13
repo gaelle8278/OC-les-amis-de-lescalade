@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ public class BookingController {
 	@Autowired
     BookingService bookingService;
 
-	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@GetMapping("/booking/{id}")
 	public String displayBooking(@PathVariable("id") int id, Model model) {
 		Booking booking = bookingService.getBooking(id);
@@ -24,6 +25,7 @@ public class BookingController {
         return "booking/display";
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/les-reservations")
 	public String listBookings(@PageableDefault(size = 10) Pageable pageable, Model model) {
 		Page<Booking> page = bookingService.findAllPaginated(pageable);
@@ -31,7 +33,7 @@ public class BookingController {
         return "booking/admin-list";
 	}
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/guidebooks/{gbId}/bookings")
     public String addBooking(@PathVariable("gbId") int gbId,Booking booking, Model model) {
 		//traitement pour ajouter la réservation
@@ -39,24 +41,25 @@ public class BookingController {
 		return "redirect:/guidebook/"+ gbId;
     }
 	
-	@GetMapping("/mes-reservations")
+	@Secured("ROLE_USER")
+	@GetMapping("/membre/mes-reservations")
 	public String listUserBookings(@PageableDefault(size = 10) Pageable pageable, Model model) {
-		//@TODO user id est forcé à 1 pour les tests : récupéré les user id en session
-		Page<Booking> page = bookingService.findUserBookings(1, pageable);
+		Page<Booking> page = bookingService.findUserBookings(pageable);
 		model.addAttribute("page", page);
         return "booking/user-list";
 	}
 	
-	@GetMapping("/gestion-reservations")
+	@Secured("ROLE_USER")
+	@GetMapping("/membre/gestion-reservations")
 	public String listUserBookingsToManage(@PageableDefault(size = 10) Pageable pageable, Model model) {
-		//@TODO user id est forcé à 1 pour les tests : récupéré les user id en session
-		Page<Booking> page = bookingService.findUserBookingsToManage(1, pageable);
+		Page<Booking> page = bookingService.findUserBookingsToManage(pageable);
 		model.addAttribute("page", page);
         return "booking/management-user-list";
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/bookings/bookingId/manage-status/{status}")
-	public void manageBookingSattus(@PathVariable("bookingId") int bookingId, @PathVariable("status") int status, Model model) {
+	public void manageBookingStatus(@PathVariable("bookingId") int bookingId, @PathVariable("status") int status, Model model) {
 		
 	}
 	
@@ -90,6 +93,7 @@ public class BookingController {
 	    return "redirect:/les-reservations";
 	}*/
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/booking/delete/{id}")
 	public String deleteBooking(@PathVariable("id") int id, Model model) {
 		bookingService.deleteBooking(id);

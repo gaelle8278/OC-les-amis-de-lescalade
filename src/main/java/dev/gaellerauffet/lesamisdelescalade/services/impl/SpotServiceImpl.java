@@ -12,6 +12,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
@@ -23,11 +25,15 @@ import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 import dev.gaellerauffet.lesamisdelescalade.persistance.SpotRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
+import dev.gaellerauffet.lesamisdelescalade.services.UserService;
 
 @Service
 public class SpotServiceImpl implements SpotService {
 	@Autowired
     SpotRepository spotRepository;
+	
+	@Autowired
+    UserService userService;
 	
 	@Autowired
 	EntityManager em;
@@ -100,8 +106,9 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public int add(int userId, Spot spot) {
-		User user = em.getReference(User.class, userId);
+	public int add(Spot spot) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
 		spot.setUser(user);
 		
 		Spot savedSpot = spotRepository.save(spot);
@@ -146,9 +153,10 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public Page<Spot> getUserSpots(int userId, Pageable pageable) {
-		User user = em.getReference(User.class, userId);
-		//User user = userService.getUser(userId);
+	public Page<Spot> getUserSpots( Pageable pageable) {
+		//User user = em.getReference(User.class, userId);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
 		Page<Spot> listSpots = spotRepository.findAllByUser(user, pageable);
 		return listSpots;
 	}

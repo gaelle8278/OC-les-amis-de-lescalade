@@ -26,7 +26,6 @@
 <!-- Main Stylesheet File -->
 <link th:href="@{/css/style.css}" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -35,35 +34,19 @@
   	============================-->
 	<header th:replace="commons/header :: header"></header>
 
-
 	<main id="main">
-	     <section id="acces-compte">
-	      	<div class="container">
-	        	<header class="section-header">
-	          		<h1 class="section-title text-center">Accéder à mon compte</h1>
-	        	</header>
-	        	<hr>
-	        	<div class="row">
-					<div class="col-md-5">							
-						<h2 class="text-center"> Inscription </h2>	
-	 					<form th:replace="commons/forms :: signup-form"></form>
-							
-					</div>
-					
-					<div class="col-md-2">
-						<!-------null------>
-					</div>
-					
-					<div class="col-md-5">							
-						<h2 class="text-center"> Connexion </h2>	
-	 					<form th:replace="commons/forms :: login-form"></form>			
-								
-					</div>
-	        	</div>
-	        </div>
-		</section>
+		<section id="connexion" class="section-bg">
+		    <div class="container">
+				<div class="row">
+        <h1>403 - Access is denied</h1>
+        <div th:inline="text">Hello '[[${#httpServletRequest.remoteUser}]]', 
+                you do not have permission to access this page.</div>
+    </div>
+			    	
+		  	</div>
+	  	</section>
 	</main>
-
+	
 	<!--==========================
     Footer
   	============================-->

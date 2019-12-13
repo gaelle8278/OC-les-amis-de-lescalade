@@ -10,8 +10,10 @@
 				<div class="row">
 					<div class="col">
 						<!--  session dependant : link adapt if user connected and member -->
-						<a class="btn btn-primary float-md-right"
-							th:href="@{/acces-compte}">Accéder à mon compte</a>
+						<a sec:authorize="hasAuthority('ROLE_USER')" th:href="@{/membre/mon-compte}" class="btn btn-primary float-md-right">Mon compte</a>
+						<a sec:authorize="isAnonymous()" th:href="@{/acces-compte}" class="btn btn-primary float-md-right">Accéder à mon compte</a>
+						<a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{/admin/dashboard}" class="btn btn-primary float-md-right">Accès back-office</a>
+						
 					</div>
 				</div>
 			</div>
@@ -28,12 +30,15 @@
 					<li class="active"><a th:href="@{/}">Home</a></li>
 					<li><a th:href="@{/les-sites}">Les sites</a></li>
 					<li><a th:href="@{/recherche-site}">Trouver un site</a></li>
-					<li><a th:href="@{/les-topos}">Les topos</a></li>
+					<li sec:authorize="hasAuthority('ROLE_USER')">
+						<a th:href="@{/les-topos}">Les topos</a>
+					</li>
 					<!--  <li><a th:href="@{/les-commentaires}">Les commentaires</a></li> -->
 					<!--  <li><a th:href="@{/les-utilisateurs}">Les utilisateurs</a></li> -->
 					
 				</ul>
 			</nav>
+			
 			<!-- .main-nav -->
 		</div>
 	</header>

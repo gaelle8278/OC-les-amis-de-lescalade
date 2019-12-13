@@ -27,7 +27,7 @@ public interface SpotService {
 
 	List<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform);
 
-	int add(int userId, Spot spot);
+	int add(Spot spot);
 
 	List<String> getListTypesForForm();
 
@@ -41,6 +41,6 @@ public interface SpotService {
 
 	List<Comment> getListComment(Spot spot);
 
-	Page<Spot> getUserSpots(int i, Pageable pageable);
+	Page<Spot> getUserSpots(Pageable pageable);
 	
 }

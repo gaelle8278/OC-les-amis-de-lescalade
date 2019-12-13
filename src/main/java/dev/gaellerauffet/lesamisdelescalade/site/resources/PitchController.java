@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +41,7 @@ public class PitchController {
         return "pitch/list";
 	}
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/routes/{routeId}/pitches")
     public String displayAddForm(@PathVariable("routeId") int routeId, Pitch pitch, Model model) {
 		model.addAttribute("routeId", routeId);
@@ -48,6 +49,7 @@ public class PitchController {
         return "pitch/add";
     }
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/routes/{routeId}/pitches")
     public String addPitch(@PathVariable("routeId") int routeId, @Valid Pitch pitch, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -59,7 +61,7 @@ public class PitchController {
         return "redirect:/routes/edit/"+pitch.getRoute().getId();
     }
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/pitches/edit/{pitchId}")
 	public String displayUpdateForm(@PathVariable("pitchId") int pitchId, Model model) {
 	    Pitch pitch = pitchService.getPitch(pitchId);
@@ -70,6 +72,7 @@ public class PitchController {
 	    return "pitch/edit";
 	}
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/pitches/update/{pitchId}")
 	public String updatePitch(@PathVariable("pitchId") int pitchId, @Valid Pitch pitch, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
@@ -82,6 +85,7 @@ public class PitchController {
 	    return "redirect:/routes/edit/"+pitchService.getParentRoute(pitchId).getId();
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/pitches/delete/{pitchId}")
 	public String deletePitch(@PathVariable("pitchId") int pitchId, Model model) {
 		Route route = pitchService.getParentRoute(pitchId);

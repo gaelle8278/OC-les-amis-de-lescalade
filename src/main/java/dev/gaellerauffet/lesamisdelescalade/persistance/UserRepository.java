@@ -11,4 +11,5 @@ import dev.gaellerauffet.lesamisdelescalade.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	List<User> findByLastName(String lastName);
 	User findById(int id);
+	User findByEmail(String email);
 }

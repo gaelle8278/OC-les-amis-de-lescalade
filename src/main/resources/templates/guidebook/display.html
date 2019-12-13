@@ -61,10 +61,10 @@
 			        	
 		        	</div>
 		        	
-		        	<div class="col col-md-6">
+		        	<div sec:authorize="hasAuthority('ROLE_USER')" class="col col-md-6">
 		        	<!--  autre condition : le topo n'appartient pas à l'utilisateur connecté et il n'a pas déjà fait une demande en cours
 		    		faire le calcul dans le service et le récuperer dans le controleur -->
-		        		<a class="btn btn-primary" th:if="${guidebook.bookable} and ${guidebook.available}" 
+		        		<a th:if="${displayBooking}" class="btn btn-primary" 
 		        		th:href="@{'/guidebooks/' + ${guidebook.id} + '/bookings'}">Demander une réservation</a>
 		        	</div>
 		        	

@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Booking;
@@ -23,9 +25,14 @@ public class BookingServiceImpl implements BookingService{
 	
 	@Autowired
 	BookingRepository bookingRepository;
+	
+	@Autowired
+    UserService userService;
 
 	@Autowired
 	EntityManager em;
+	
+	
 
 	@Override
 	public Booking getBooking(int id) {
@@ -53,8 +60,9 @@ public class BookingServiceImpl implements BookingService{
 	}
 	@Override
 	public void add(int guidebookId,Booking booking) {
-		//@TODO before save get id of connected user
-		User user = em.getReference(User.class, 1);
+		//User user = em.getReference(User.class, 1);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
 		booking.setUser(user);
 		Guidebook guidebook = em.getReference(Guidebook.class,guidebookId);
 		booking.setGuidebook(guidebook);
@@ -64,26 +72,31 @@ public class BookingServiceImpl implements BookingService{
 		//save booking
 		bookingRepository.save(booking);
 		
-		//guidebook.setAvailable(false);
-		//guidebookRepository.save(guidebook);
 		
 	}
 
 	@Override
-	public Page<Booking> findUserBookings(int userId, Pageable pageable) {
-		User user = em.getReference(User.class, userId);
-		//User user = userService.getUser(userId);
+	public Page<Booking> findUserBookings(Pageable pageable) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		
 		Page<Booking> listBookings = bookingRepository.findAllByUser(user, pageable);
 		return listBookings;
 	}
 
 	@Override
-	public Page<Booking> findUserBookingsToManage(int userId, Pageable pageable) {
-		User user = em.getReference(User.class, userId);
+	public Page<Booking> findUserBookingsToManage(Pageable pageable) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
 		List<Guidebook> listGuidebook = user.getListGuidebooks();
 		
 		Page<Booking> listBookings = bookingRepository.findAllByGuidebookIn(listGuidebook, pageable);
 		return listBookings;
 	}
+	
+	@Override
+	 public List<Booking> getBoookingByUserAndGb(User user, Guidebook gb) {
+		 return bookingRepository.findAllByUserAndGuidebook(user, gb);
+	 }
 
 }

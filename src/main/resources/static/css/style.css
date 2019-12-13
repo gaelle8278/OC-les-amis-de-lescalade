@@ -471,7 +471,7 @@ h6 {
 /* Sections Header
 --------------------------------*/
 
-.section-header h3 {
+.section-header .section-title {
   font-size: 36px;
   color: #413e66;
   text-align: center;

@@ -15,8 +15,10 @@ import javax.persistence.OrderBy;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
+@DynamicUpdate
 public class Spot {
 
 	@Id

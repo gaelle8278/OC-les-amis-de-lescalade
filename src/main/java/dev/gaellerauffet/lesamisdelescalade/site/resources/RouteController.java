@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +43,7 @@ public class RouteController {
         return "route/list";
 	}
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/areas/{areaId}/routes")
     public String displayAddForm(@PathVariable("areaId") int areaId, Route route, Model model) {
 		model.addAttribute("areaId", areaId);
@@ -50,6 +51,7 @@ public class RouteController {
         return "route/add";
     }
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/areas/{areaId}/routes")
     public String addRoute(@PathVariable("areaId") int areaId, @Valid Route route, BindingResult result) {
         if (result.hasErrors()) {
@@ -61,7 +63,7 @@ public class RouteController {
         return "redirect:/routes/edit/"+ routeId;
     }
 	
-	
+	@Secured("ROLE_USER")
 	@GetMapping("/routes/edit/{routeId}")
 	public String displayUpdateForm(@PathVariable("routeId") int routeId, Model model) {
 		Route route = routeService.getRoute(routeId);
@@ -73,6 +75,7 @@ public class RouteController {
 	    return "route/edit";
 	}
 	
+	@Secured("ROLE_USER")
 	@PostMapping("/routes/update/{routeId}")
 	public String updateRoute(@PathVariable("routeId") int routeId, @Valid Route route, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
@@ -89,6 +92,7 @@ public class RouteController {
 	    return "redirect:/areas/edit/" + area.getId();
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/routes/delete/{routeId}")
 	public String deleteRoute(@PathVariable("routeId") int routeId, Model model) {
 		Area area = routeService.getParentArea(routeId);
