@@ -42,6 +42,26 @@
 	        	<header class="section-header">
 	          		<h3 class="section-title">Les sites</h3>
 	        	</header>
+	        	<p th:text="toto + ${param.region}"></p>
+	        	<section id="spot-search-form">
+						<form action="#" th:action="@{/les-sites}" th:object="${spotsearchform}"  method="post">
+							<div class="form-row">
+								<div class="form-group col-md-6 col-lg-3">
+				    				<label for="name">Nom</label> 
+				    				<input type="text" th:field="*{name}" class="form-control" >
+				    			</div>
+				    			<div class="form-group col-md-6 col-lg-3">
+				    				<label for="region">Région</label> 
+					    			<select th:field="*{region}" class="form-control" placeholder="Sélectionnez une région" > 
+		       							<option th:each="region : ${listRegions}" 
+		           								th:value="${region}" 
+		           								th:text="${region}" /> 
+		      						</select> 
+				    			</div>
+			    			</div>
+			    			<input type="submit" value="Rechercher" class="btn btn-primary">
+			    		</form>
+				</section>
 	        	
 	        	
 	        	<!--  table contenant la liste des sites-->
@@ -65,15 +85,15 @@
 					    	<td class="text-center" th:text="${spot.orientation}"></td>
 					    	<td class="text-center">
 					    		<a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}">Voir</a>
-					    		</td>
+					    	</td>
 					    </tr>
 				   </th:block>
 				</table>
 				<!-- pagination -->
-				<nav aria-label="Pages listant les sites d'escalade">
+				<nav aria-label="Pages listant les topos">
 					<ul class="pagination">
 					    <li th:if="${page.hasPrevious()}" class="page-item">
-					        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
+					        <a th:href="@{''(page=${page.number-1},size=${page.size},region=${param.region})}" class="page-link" aria-label="Précédent">
 					        	<span aria-hidden="true">&laquo;</span>
         						<span class="sr-only">Précédent</span>
 					       	</a>
@@ -83,11 +103,11 @@
 					       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
 					       	</li>
 					        <li th:unless="${page.number == i}" class="page-item">
-					             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
+					             <a th:href="@{''(page=${i},size=${page.size},region=${param.region})}" class="page-link">[[${i}+1]]</a>
 					        </li>
 					    </th:block>
 				    	<li th:if="${page.hasNext()}" class="page-item">
-				        	<a th:href="@{''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
+				        	<a th:href="@{/''(page=${page.number+1},size=${page.size},region=${param.region})}" class="page-link" aria-lable="Suivant">
 				        		<span aria-hidden="true">&raquo;</span>
         						<span class="sr-only">Suivant</span>
 				        	</a>

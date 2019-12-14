@@ -49,6 +49,7 @@
 								<th scope="col">Topo</th>
 								<th scope="col">Date de la demande</th>
 								<th scope="col">Statut</th>
+								<th scope="col">Coordonnées</th>
 								<th scope="col">Actions</th>
 							</tr>
 						</thead>
@@ -57,8 +58,26 @@
 								<td th:text="${booking.guidebook.name}"></td>
 								<td th:text="${#temporals.format(booking.createdDate, 'dd/MM/yyyy')}"></td>
 								<td th:text="${booking.status}"></td>
-								<td> <a class="btn btn-primary" th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_PENDING_STATUS }" 
-			        					th:href="@{'/bookings/' + ${booking.id} + '/manage-status/approve'}">Accepter la demande</a></td>
+								<td>
+									<th:block th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_APPROVED_STATUS }">
+										<span th:text="${booking.user.email}"></span>
+									</th:block>
+								</td>
+								<td> 
+									<a class="btn btn-primary" th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_PENDING_STATUS }" 
+			        					th:href="@{'/bookings/' + ${booking.id} + '/manage-status/' + ${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_DB_APPROVED_STATUS}}">
+			        					Accepter la demande</a>
+			        				<a class="btn btn-primary" th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_PENDING_STATUS }" 
+			        					th:href="@{'/bookings/' + ${booking.id} + '/manage-status/' + ${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_DB_REJECTED_STATUS}}">
+			        					Rejeter la demande</a>
+			        					
+			        				<a class="btn btn-primary" th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_APPROVED_STATUS }" 
+			        					th:href="@{'/bookings/' + ${booking.id} + '/manage-status/' + ${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_DB_FINISHED_STATUS}}">
+			        					Terminer la réservation</a>
+			        				
+			        					
+			        					
+			        			</td>
 							</tr>
 						</th:block>
 					</table>

@@ -1,7 +1,8 @@
 package dev.gaellerauffet.lesamisdelescalade.model.form;
 
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class SpotSearchForm {
 
 	private String name;

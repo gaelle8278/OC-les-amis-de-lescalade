@@ -27,7 +27,7 @@ public class GuidebookController {
 	@GetMapping("/guidebook/{id}")
 	public String displayGuidebook(@PathVariable("id") int id, Model model) {
 		Guidebook guidebook = guidebookService.getGuidebook(id);
-		boolean displayBooking = guidebookService.displayBookingButton(guidebook);
+		boolean displayBooking = guidebookService.isBookingAvalaible(guidebook);
 		// calculer l'affichage du bouton de réservation et ajouter une variable dans le modèle indiquant le résutat du calcul 
 		// pour afficher le bouton dans le modème
 		model.addAttribute("guidebook", guidebook);

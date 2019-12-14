@@ -43,11 +43,33 @@ public class SpotController {
 	}
 	
 	@GetMapping("/les-sites")
-	public String listSpots(@PageableDefault(size = 10) Pageable pageable, Model model) {
+	public String listSpots(@ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, @PageableDefault(size = 5) Pageable pageable, Model model) {
+		//formulaire de recherche
+		System.out.println("Toto1 " + spotsearchform.getRegion());
+		model.addAttribute("spotsearchform", spotsearchform);
+		List<String> listRegions =  spotService.getListRegionsForForm();
+		model.addAttribute("listRegions", listRegions);
+		
 		Page<Spot> page = spotService.findAllPaginated(pageable);
 		model.addAttribute("page", page);
         return "spot/list";
 	}
+	@PostMapping("/les-sites")
+    public String listSpotsFiltered( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 5) Pageable pageable, Model model) {
+		//recherche des sites selon les critères de recherche
+		Page<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform, pageable);
+		
+			System.out.println("Toto11 " + spotsearchform.getRegion());
+		
+		model.addAttribute("page", foundedSpots);
+		//liste des régions
+		List<String> listRegions =  spotService.getListRegionsForForm();
+		model.addAttribute("listRegions", listRegions);
+		
+        return "spot/list";
+    }
+	
+	
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/membre/mes-sites")
@@ -67,10 +89,16 @@ public class SpotController {
     }
 	
 	@PostMapping("/recherche-site")
-    public String search( @Valid @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, Model model) {
+    public String search( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 10) Pageable pageable, Model model) {
 		//recherche des sites selon les critères de recherche
-		List<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform);
-		model.addAttribute("foundedSpots", foundedSpots);
+		Page<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform, pageable);
+		//List<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform);
+		
+		/*for(int i=0; i < foundedSpots.size(); i++ ) {
+			Spot spotS = foundedSpots.get(i);
+			System.out.println("Toto11 " + spotS.getName());
+		}*/
+		model.addAttribute("page", foundedSpots);
 		//liste des régions
 		List<String> listRegions =  spotService.getListRegionsForForm();
 		model.addAttribute("listRegions", listRegions);

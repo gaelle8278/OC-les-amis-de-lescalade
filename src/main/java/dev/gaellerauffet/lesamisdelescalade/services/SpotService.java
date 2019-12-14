@@ -42,5 +42,7 @@ public interface SpotService {
 	List<Comment> getListComment(Spot spot);
 
 	Page<Spot> getUserSpots(Pageable pageable);
+
+	Page<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform, Pageable pageable);
 	
 }

@@ -58,8 +58,22 @@ public class BookingController {
 	}
 	
 	@Secured("ROLE_USER")
-	@GetMapping("/bookings/bookingId/manage-status/{status}")
-	public void manageBookingStatus(@PathVariable("bookingId") int bookingId, @PathVariable("status") int status, Model model) {
+	@GetMapping("/mybookings/{bookingId}/manage-status/{status}")
+	public String manageMyBookingStatus(@PathVariable("bookingId") int bookingId, @PathVariable("status") String status, Model model) {
+		bookingService.manageStatus(bookingId, status);
+		
+		//String referer = request.getHeader("Referer");
+	    //return "redirect:"+ referer;
+		return "redirect:/membre/mes-reservations";
+		
+	}
+	
+	@Secured("ROLE_USER")
+	@GetMapping("/bookings/{bookingId}/manage-status/{status}")
+	public String manageBookingStatus(@PathVariable("bookingId") int bookingId, @PathVariable("status") String status, Model model) {
+		bookingService.manageStatus(bookingId, status);
+		
+		return "redirect:/membre/gestion-reservations";
 		
 	}
 	

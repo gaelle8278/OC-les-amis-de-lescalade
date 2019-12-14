@@ -27,4 +27,6 @@ public interface BookingService {
 
 	List<Booking> getBoookingByUserAndGb(User user, Guidebook gb);
 
+	void manageStatus(int bookingId, String status);
+
 }

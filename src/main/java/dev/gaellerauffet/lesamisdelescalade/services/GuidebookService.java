@@ -21,6 +21,6 @@ public interface GuidebookService {
 
 	Page<Guidebook> getUserGuidebooks(Pageable pageable);
 
-	boolean displayBookingButton(Guidebook guidebook);
+	boolean isBookingAvalaible(Guidebook guidebook);
 
 }

@@ -28,6 +28,9 @@ public class BookingServiceImpl implements BookingService{
 	
 	@Autowired
     UserService userService;
+	
+	@Autowired
+	GuidebookRepository guidebookRepository;
 
 	@Autowired
 	EntityManager em;
@@ -98,5 +101,27 @@ public class BookingServiceImpl implements BookingService{
 	 public List<Booking> getBoookingByUserAndGb(User user, Guidebook gb) {
 		 return bookingRepository.findAllByUserAndGuidebook(user, gb);
 	 }
+
+	@Override
+	public void manageStatus(int bookingId, String status) {
+		Booking booking = em.getReference(Booking.class, bookingId);
+		booking.setStatus(status);
+		
+		Guidebook gb = em.getReference(Guidebook.class, booking.getGuidebook().getId());
+		System.out.println("toto " + gb.isAvailable());
+		System.out.println(gb.getId());
+		if(status.equals(Constants.BOOKING_DB_APPROVED_STATUS)) {
+			gb.setAvailable(false);
+			System.out.println("toto " + gb.isAvailable());
+			guidebookRepository.save(gb);
+			
+		} 
+		if (status.equals(Constants.BOOKING_DB_FINISHED_STATUS) || status.equals(Constants.BOOKING_DB_REJECTED_STATUS)) {
+			gb.setAvailable(true);
+			guidebookRepository.save(gb);
+		}
+		
+		bookingRepository.save(booking);
+	}
 
 }

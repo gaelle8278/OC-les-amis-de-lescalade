@@ -87,7 +87,7 @@ public class GuidebookServiceImpl implements GuidebookService {
 	}
 
 	@Override
-	public boolean displayBookingButton(Guidebook guidebook) {
+	public boolean isBookingAvalaible(Guidebook guidebook) {
 		boolean display = false;
 		if(guidebook.isAvailable() && guidebook.isBookable() ) {
 			//check if connected user own guidebook

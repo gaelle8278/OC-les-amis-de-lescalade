@@ -69,10 +69,10 @@ public class SpotServiceImpl implements SpotService {
 	public List<String> getListRegionsForForm() {
 		List<Spot> spots = spotRepository.findAll();
 		List<String> regions = new ArrayList<String>();
-		regions.add("- Choississez une région -");
+		regions.add(" ");
 		if(! spots.isEmpty()) {
 			for(Spot spot : spots) {
-				if(spot.getRegion() != null && ! regions.contains(spot.getRegion())) {
+				if(spot.getRegion() != null && ! spot.getRegion().isEmpty() && ! regions.contains(spot.getRegion())) {
 					regions.add(spot.getRegion());
 				}
 				
@@ -94,14 +94,45 @@ public class SpotServiceImpl implements SpotService {
 
 	@Override
 	public List<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform) {
+		System.out.print("Recherche");
 		List<Spot> foundedSpots = new ArrayList<Spot>();
-		if(! spotsearchform.getRegion().contentEquals("- Choississez une région -") && ! spotsearchform.getName().contentEquals("")) {
-			foundedSpots = spotRepository.findByRegionContainsAndNameContains(spotsearchform.getRegion(), spotsearchform.getName());
-		} else if (! spotsearchform.getRegion().contentEquals("- Choississez une région -") ) {
-			foundedSpots = spotRepository.findByRegionContains(spotsearchform.getRegion());
-		} else if ( ! spotsearchform.getName().contentEquals("") ) {
-			foundedSpots = spotRepository.findByNameContains(spotsearchform.getName());
+		String sname = spotsearchform.getName();
+		System.out.println("Toto4 " + sname);
+		List<Spot> listspot = spotRepository.findByNameContains(sname);
+		System.out.println("Toto6 " + listspot.size());
+		//Spot tspot = listspot.get(0);
+		//System.out.println("Toto " + tspot.getName());
+		for(int i=0; i < listspot.size(); i++ ) {
+			Spot spotS = listspot.get(i);
+			System.out.println("Toto8 " + spotS.getName());
 		}
+		//foundedSpots.forEach(System.out::println);
+		//System.out.println("Toto6 " + spot);
+		if(! spotsearchform.getRegion().isEmpty() && ! spotsearchform.getName().isEmpty()) {
+			
+			foundedSpots = spotRepository.findByRegionContainsAndNameContains(spotsearchform.getRegion(), spotsearchform.getName());
+		} else if (! spotsearchform.getRegion().isEmpty()) {
+			foundedSpots = spotRepository.findByRegionContains(spotsearchform.getRegion());
+		}
+		if ( ! spotsearchform.getName().isEmpty() ) {
+			System.out.println("Toto3 " + spotsearchform.getName());
+			foundedSpots = spotRepository.findByNameContains(spotsearchform.getName());
+			for(int i=0; i < foundedSpots.size(); i++ ) {
+				Spot spotS = foundedSpots.get(i);
+				System.out.println("Toto9 " + spotS.getName());
+			}
+		}
+		return foundedSpots;
+	}
+	
+	@Override
+	public Page<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform, Pageable pageable) {
+		Page<Spot> foundedSpots = null;
+		if ( ! spotsearchform.getName().isEmpty() ) {
+			foundedSpots = spotRepository.findByNameContains(spotsearchform.getName(), pageable);
+		} else if (! spotsearchform.getRegion().isEmpty()) {
+				foundedSpots = spotRepository.findByRegionContains(spotsearchform.getRegion(), pageable);
+		}	
 		return foundedSpots;
 	}
 

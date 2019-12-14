@@ -58,7 +58,7 @@
 								<td th:text="${#temporals.format(booking.createdDate, 'dd/MM/yyyy')}"></td>
 								<td th:text="${booking.status}"></td>
 								<td> <a class="btn btn-primary" th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_PENDING_STATUS }" 
-			        					th:href="@{'/bookings/' + ${booking.id} + '/manage-status/cancel'}">Annuler ma demande</a></td>
+			        					th:href="@{'/mybookings/' + ${booking.id} + '/manage-status/' + ${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_DB_CANCELLED_STATUS} }">Annuler ma demande</a></td>
 							</tr>
 						</th:block>
 					</table>

@@ -13,12 +13,17 @@ public interface SpotRepository extends JpaRepository<Spot, Integer> {
 		Spot findById(int id);
 		
 		List<Spot> findByNameContains(String name);
+		Page<Spot> findByNameContains(String name, Pageable pageable);
 
 		List<Spot> findByRegionContains(String region);
+		Page<Spot> findByRegionContains(String region, Pageable pageable);
 
 		List<Spot> findByRegionContainsAndNameContains(String region, String name);
+		Page<Spot> findByRegionContainsAndNameContains(String region, String name, Pageable pageable);
 
 		Page<Spot> findAllByUser(User user, Pageable pageable);
+
+		List<Spot> findByName(String name);
 
 }
 
