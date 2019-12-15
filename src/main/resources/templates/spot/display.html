@@ -40,10 +40,17 @@
 		<section id="spot-add" class="section-bg">
 	      	<div class="container">
 	        	<header class="section-header">
-	          		<h3 class="section-title" th:text="${spot.name}"></h3>
+	          		<h1 class="section-title" th:text="${spot.name}"></h1>
 	        	</header>
+	        	<div th:if="${spot.tag}" class="row my-2">
+	        		<div class="col">
+	        			<h2 th:text="${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).SPOT_TAG}"></h2>
+	        		</div>
+	        	</div>
 	        	<div class="row my-2">
-	        		<div class="col" th:text="${spot.region}"></div>
+	        		<div class="col col-md-4">
+	        			<span class="font-weight-bold">Région : </span><th:block th:text="${spot.region}"></th:block>
+	        		</div>
 	        	</div>
 	        	<div class="row my-2">
 	        		<div class="col col-md-4">

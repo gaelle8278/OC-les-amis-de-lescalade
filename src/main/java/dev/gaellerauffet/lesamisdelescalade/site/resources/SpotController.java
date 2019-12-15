@@ -43,9 +43,8 @@ public class SpotController {
 	}
 	
 	@GetMapping("/les-sites")
-	public String listSpots(@ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, @PageableDefault(size = 5) Pageable pageable, Model model) {
-		//formulaire de recherche
-		System.out.println("Toto1 " + spotsearchform.getRegion());
+	public String listSpots(SpotSearchForm spotsearchform, @PageableDefault(size = 5) Pageable pageable, Model model) {
+		
 		model.addAttribute("spotsearchform", spotsearchform);
 		List<String> listRegions =  spotService.getListRegionsForForm();
 		model.addAttribute("listRegions", listRegions);
@@ -58,9 +57,6 @@ public class SpotController {
     public String listSpotsFiltered( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 5) Pageable pageable, Model model) {
 		//recherche des sites selon les critères de recherche
 		Page<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform, pageable);
-		
-			System.out.println("Toto11 " + spotsearchform.getRegion());
-		
 		model.addAttribute("page", foundedSpots);
 		//liste des régions
 		List<String> listRegions =  spotService.getListRegionsForForm();
@@ -77,6 +73,14 @@ public class SpotController {
 		Page<Spot> page = spotService.getUserSpots(pageable);
 		model.addAttribute("page", page);
         return "spot/user-list";
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/admin/les-sites")
+	public String listAdminSpots(@PageableDefault(size = 10) Pageable pageable, Model model) {
+		Page<Spot> page = spotService.findAllPaginated(pageable);
+		model.addAttribute("page", page);
+        return "spot/admin-list";
 	}
 	
 	@GetMapping("/recherche-site")
@@ -160,6 +164,22 @@ public class SpotController {
 	    spotService.deleteSpot(id);
 	    
 	    return "redirect:/membre/mes-sites";
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/spot/tag/add/{id}")
+	public String addTagSpot(@PathVariable("id") int id) {
+	    spotService.addTagSpot(id);
+	    
+	    return "redirect:/admin/les-sites";
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/spot/tag/delete/{id}")
+	public String deleteTagSpot(@PathVariable("id") int id) {
+	    spotService.deleteTagSpot(id);
+	    
+	    return "redirect:/admin/les-sites";
 	}
 	
 	 

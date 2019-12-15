@@ -94,33 +94,14 @@ public class SpotServiceImpl implements SpotService {
 
 	@Override
 	public List<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform) {
-		System.out.print("Recherche");
 		List<Spot> foundedSpots = new ArrayList<Spot>();
-		String sname = spotsearchform.getName();
-		System.out.println("Toto4 " + sname);
-		List<Spot> listspot = spotRepository.findByNameContains(sname);
-		System.out.println("Toto6 " + listspot.size());
-		//Spot tspot = listspot.get(0);
-		//System.out.println("Toto " + tspot.getName());
-		for(int i=0; i < listspot.size(); i++ ) {
-			Spot spotS = listspot.get(i);
-			System.out.println("Toto8 " + spotS.getName());
-		}
-		//foundedSpots.forEach(System.out::println);
-		//System.out.println("Toto6 " + spot);
 		if(! spotsearchform.getRegion().isEmpty() && ! spotsearchform.getName().isEmpty()) {
-			
 			foundedSpots = spotRepository.findByRegionContainsAndNameContains(spotsearchform.getRegion(), spotsearchform.getName());
 		} else if (! spotsearchform.getRegion().isEmpty()) {
 			foundedSpots = spotRepository.findByRegionContains(spotsearchform.getRegion());
 		}
 		if ( ! spotsearchform.getName().isEmpty() ) {
-			System.out.println("Toto3 " + spotsearchform.getName());
 			foundedSpots = spotRepository.findByNameContains(spotsearchform.getName());
-			for(int i=0; i < foundedSpots.size(); i++ ) {
-				Spot spotS = foundedSpots.get(i);
-				System.out.println("Toto9 " + spotS.getName());
-			}
 		}
 		return foundedSpots;
 	}
@@ -190,5 +171,23 @@ public class SpotServiceImpl implements SpotService {
 		User user = userService.findUserByEmail(auth.getName());
 		Page<Spot> listSpots = spotRepository.findAllByUser(user, pageable);
 		return listSpots;
+	}
+
+	@Override
+	public void addTagSpot(int spotId) {
+		Spot spot = em.getReference(Spot.class, spotId);
+		spot.setTag(true);
+		
+		spotRepository.save(spot);
+		
+	}
+
+	@Override
+	public void deleteTagSpot(int spotId) {
+		Spot spot = em.getReference(Spot.class, spotId);
+		spot.setTag(false);
+		
+		spotRepository.save(spot);
+		
 	}
 }

@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 @Entity
 @DynamicUpdate
@@ -44,6 +45,10 @@ public class Spot {
 	private String maxGrade;
 	@Column(name = "nb_routes")
 	private Integer nbRoutes;
+	
+	@Column(columnDefinition = "TINYINT")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean tag = false;
 	
 	private String country = "France";
 	
@@ -183,6 +188,16 @@ public class Spot {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	public boolean isTag() {
+		return tag;
+	}
+
+
+	public void setTag(boolean tag) {
+		this.tag = tag;
 	}
 	
 	

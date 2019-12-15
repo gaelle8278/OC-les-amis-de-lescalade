@@ -39,7 +39,7 @@ public class CommentController {
 	public String listComments(@PageableDefault(size = 10) Pageable pageable, Model model) {
 		Page<Comment> page = commentService.findAllPaginated(pageable);
 		model.addAttribute("page", page);
-        return "comment/list";
+        return "comment/admin-list";
 	}
 	
 	/*@Secured("ROLE_USER")

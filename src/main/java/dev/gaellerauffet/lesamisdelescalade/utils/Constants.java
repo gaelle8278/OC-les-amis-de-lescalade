@@ -16,6 +16,8 @@ public class Constants {
 	public final static String BOOKING_APP_FINISHED_STATUS = "terminée";
 	
 	
+	public final static String SPOT_TAG = "Officiel Les amis de l'escalade";
+	
 	
 
 }

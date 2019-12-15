@@ -37,7 +37,7 @@ public class UserController {
 	public String listUsers(@PageableDefault(size = 10) Pageable pageable, Model model) {
 		Page<User> page = userService.findAllPaginated(pageable);
 		model.addAttribute("page", page);
-        return "user/list";
+        return "user/admin-list";
 	}
 	
 	@Secured("ROLE_ADMIN")

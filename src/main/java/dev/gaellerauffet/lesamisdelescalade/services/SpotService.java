@@ -44,5 +44,9 @@ public interface SpotService {
 	Page<Spot> getUserSpots(Pageable pageable);
 
 	Page<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform, Pageable pageable);
+
+	void addTagSpot(int id);
+
+	void deleteTagSpot(int id);
 	
 }

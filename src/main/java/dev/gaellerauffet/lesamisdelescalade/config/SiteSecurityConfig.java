@@ -19,36 +19,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
-	/*@Autowired
-    private AccessDeniedHandler accessDeniedHandler;*/
-	
-	// roles admin allow to access /admin/**
-    // roles user allow to access /user/**
-    // custom 403 access denied handler
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-    	 http.authorizeRequests()
-         .antMatchers("/").permitAll()
-         .antMatchers("/admin/**").access("hasRole('ADMIN')")
-         .antMatchers("/membre/**").access("hasRole('USER')")
-         .and().formLogin().loginPage("/connexion")
-			.permitAll()
-			.and()
-			.logout()
-			.permitAll();
-         http.csrf().disable();
-    }
-
-    // create two users, admin and user
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-    	 auth
-         .inMemoryAuthentication()
-         .withUser("user").password("{noop}password").roles("USER").and()
-         .withUser("admin").password("{noop}password").roles("USER","ADMIN");
-    }*/
 	
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -74,20 +44,6 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-   /*http.
-        authorizeRequests()
-        	.antMatchers("/*").permitAll()
-        	.antMatchers("/membre/**").hasAuthority("USER").anyRequest()
-        .authenticated().and().formLogin()
-        .loginPage("/connexion").failureUrl("/connexion?error=true")
-        .defaultSuccessUrl("/membre/mon-compte", true)
-        .usernameParameter("email")
-        .passwordParameter("password")
-        .and().logout()
-        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-        .logoutSuccessUrl("/").and().exceptionHandling()
-        .accessDeniedPage("/access-denied");*/
     
     	http.
         	authorizeRequests()
@@ -107,7 +63,7 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
         		.logoutSuccessUrl("/")
         		.and()
         	.exceptionHandling()
-        		.accessDeniedPage("/access-denied");
+        		.accessDeniedPage("/error/access-denied");
     	
     	
     }
