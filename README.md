@@ -78,7 +78,7 @@ Cela crée le dossier OC-les-amis-de-lescalade-master, le renommer les-amis-de-l
 ### Méthode recommandée
 Le script mysql_database_schema_and_data.sql présent dans le dossier bdd/ du projet permet la création de la base de données, l'import des données ainsi que la création de l'utilisateur administrateur de la base de données.
 
-Importer ce fichier grâce à mysqldump et à l'utilisateur administrateur de votre base de données.
+Importer ce fichier grâce à mysql et à l'utilisateur administrateur de votre base de données.
 
 Dans une ligne de commande :
 ```
@@ -87,10 +87,10 @@ mysql -u root -p < bdd/mysql_database_schema_and_data.sql
 ```
 
 Eléments crées :
-Base de donnée: lesamisdelescalade
-Utilisateur : 
- - identifiant : dbuser
- - mot de passe : userpwd
+*Base de donnée: lesamisdelescalade
+*Utilisateur : 
+ `* identifiant : dbuser`
+ `* mot de passe : userpwd`
 
 ### Méthode manuelle 
 Il est possible de configurer les éléments de la base de données séparément s'il l'on souhaite utiliser une configuration personnalisée :
@@ -102,9 +102,9 @@ Il est possible de configurer les éléments de la base de données séparément
 4. Ajouter un utilisateur avec les droits SELECT,UPDATE,INSERT,DELETE sur la base de données créée
 
 NB : si le numéro de port de MySQL/MariaDB n'est pas celui par défaut (3306), si les noms de la base de données, de l'utilisateur ou du mot de passe sont différents de ceux indiqués dans la méthode recommandée, il faut les spécifier dans le fichier application.properties se trouvant dans le dossier src/main/resources/ du projet :
-- spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:**[port]**/**[nom de la base de donnée]**
-- spring.datasource.username=**[identifiant utilisateur bdd]**
-- spring.datasource.password=**[mot de passe utilisateur bdd]**
+* spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:**[port]**/**[nom de la base de donnée]**
+* spring.datasource.username=__[identifiant utilisateur bdd]__
+* spring.datasource.password=__[mot de passe utilisateur bdd]__
 
 ## Déployer l'application
 
@@ -133,9 +133,8 @@ cd target
 cp lesamisdelescalade.war /opt/apache-tomcat-9.0.29/webapps
 ```
 
-Démarrer Tomcat s'il n'est pas démarré. 
-S'il est démarré, arretez-le puis démarrez-le.
-Tomcat déploie automatique l'archive war et configure le contexte de l'application lorsqu'il démarre.
+Si Tomcat est démarré le déploiement s'effectue immédiatement automatiquement. 
+S'il est arrété, démarrez-le. Le déploiement s'effectuera alors automatiquement après le démarrage.
 
 
 ## Utilisation de l'application web
@@ -144,12 +143,12 @@ L'adresse de la page d'accueil de l'application est http://localhost:8080/lesami
 *NB :par défaut Tomcat est configuré pour utiliser le port 8080, à adapter si configuration personnalisée.*
 
 Comptes Membres :
-- login : mlaplace@maboite.fr / mdp : test 
-- login : kbauer@test.com / mdp : test
-- login : dpalmer@test.com / mdp : test
+* login : mlaplace@maboite.fr / mdp : test 
+* login : kbauer@test.com / mdp : test
+* login : dpalmer@test.com / mdp : test
 
 Compte Admin :
-- login : jbirc@test.com / mdp : test
+* login : jbirc@test.com / mdp : test
 
 
 
