@@ -76,7 +76,7 @@ Cela crée le dossier OC-les-amis-de-lescalade-master, le renommer les-amis-de-l
 ## Configuration de la base de données 
 
 ### Méthode recommandée
-Le script ==mysql_database_schema_and_data.sql== présent dans le dossier data/ du projet permet la création de la base de données, l'import des données ainsi que la création de l'utilisateur administrateur de la base de données.
+Le script mysql_database_schema_and_data.sql présent dans le dossier data/ du projet permet la création de la base de données, l'import des données ainsi que la création de l'utilisateur administrateur de la base de données.
 
 Importer ce fichier grâce à mysqldump et à l'utilisateur administrateur de votre base de données :
 
