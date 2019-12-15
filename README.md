@@ -83,13 +83,12 @@ Importer ce fichier grâce à mysqldump et à l'utilisateur administrateur de vo
 Dans une ligne de commande :
 ```
 cd les-amis-de-lescalade
-cd bdd
-mysql -u root -p < mysql_database_schema_and_data.sql
+mysql -u root -p < bdd/mysql_database_schema_and_data.sql
 ```
 
 Eléments crées :
-- base de donnée: lesamisdelescalade
-- utilisateur : 
+Base de donnée: lesamisdelescalade
+Utilisateur : 
  - identifiant : dbuser
  - mot de passe : userpwd
 
@@ -111,11 +110,10 @@ NB : si le numéro de port de MySQL/MariaDB n'est pas celui par défaut (3306), 
 
 1.Produire l'archive war à partir des sources.
 
-Pour cela se placer dans le dossier du projet et utiliser la commande maven pour packager l'application.
+Pour cela se placer dans à la racine du projet et utiliser la commande maven pour packager l'application.
 
 Sous Windows, dans l'invite de commande ou dans un terminal sous Linux :
 ```
-cd les-amis-de-lescalade
 mvn package
 ```
 
