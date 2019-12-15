@@ -90,9 +90,9 @@ Eléments crées :
 * Base de donnée: lesamisdelescalade
 * Utilisateur : 
 
- `* identifiant : dbuser`
+ identifiant : dbuser
 
- `* mot de passe : userpwd`
+ mot de passe : userpwd`
 
 
 
