@@ -76,14 +76,14 @@ Cela crée le dossier OC-les-amis-de-lescalade-master, le renommer les-amis-de-l
 ## Configuration de la base de données 
 
 ### Méthode recommandée
-Le script mysql_database_schema_and_data.sql présent dans le dossier data/ du projet permet la création de la base de données, l'import des données ainsi que la création de l'utilisateur administrateur de la base de données.
+Le script mysql_database_schema_and_data.sql présent dans le dossier bdd/ du projet permet la création de la base de données, l'import des données ainsi que la création de l'utilisateur administrateur de la base de données.
 
-Importer ce fichier grâce à mysqldump et à l'utilisateur administrateur de votre base de données :
+Importer ce fichier grâce à mysqldump et à l'utilisateur administrateur de votre base de données.
 
 Dans une ligne de commande :
 ```
 cd les-amis-de-lescalade
-cd data
+cd bdd
 mysql -u root -p < mysql_database_schema_and_data.sql
 ```
 
@@ -98,8 +98,8 @@ Il est possible de configurer les éléments de la base de données séparément
 1. Se connecter à la base de données MySQL/MariaDB
 2. Créer une base de données
 3. Se placer sur la base de données
-2. Importer le fichier data/mysql_database_schema.sql qui permet de créer les tables
-3. Importer le fichier data/mysql_database_data.sql qui permet d'insérer les données
+2. Importer le fichier bdd/mysql_database_schema.sql qui permet de créer les tables
+3. Importer le fichier bdd/mysql_database_data.sql qui permet d'insérer les données
 4. Ajouter un utilisateur avec les droits SELECT,UPDATE,INSERT,DELETE sur la base de données créée
 
 NB : si le numéro de port de MySQL/MariaDB n'est pas celui par défaut (3306), si les noms de la base de données, de l'utilisateur ou du mot de passe sont différents de ceux indiqués dans la méthode recommandée, il faut les spécifier dans le fichier application.properties se trouvant dans le dossier src/main/resources/ du projet :
