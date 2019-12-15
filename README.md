@@ -87,8 +87,8 @@ mysql -u root -p < bdd/mysql_database_schema_and_data.sql
 ```
 
 Eléments crées :
-*Base de donnée: lesamisdelescalade
-*Utilisateur : 
+* Base de donnée: lesamisdelescalade
+* Utilisateur : 
  `* identifiant : dbuser`
  `* mot de passe : userpwd`
 
