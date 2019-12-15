@@ -8,7 +8,7 @@ Principales fonctionnalités :
 - en tant que membre possibilité de laisser des commentaires sur les sites d'escalade
 - en tant que membre possibilité de réserver des topos d'autres membres
 
-# Spécifications techniques
+## Spécifications techniques
 Application web JAVA EE dévéloppée avec le framework Spring à l'aide de Spring Boot. Principaux  starters utilisés :
 - Web
 - Data JPA avec Hibernate
