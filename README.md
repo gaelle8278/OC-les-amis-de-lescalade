@@ -16,7 +16,7 @@ Application web JAVA EE dévéloppée avec le framework Spring à l'aide de Spri
 - Thymeleaf
 - Connecteur Mysql
 
-BDD : MySQL
+BDD : MariaDB
 
 Webjars Bootstrap et JQuery pour le front.
 
@@ -35,21 +35,31 @@ Webjars Bootstrap et JQuery pour le front.
 - Pour télécharger Apache Maven : https://maven.apache.org/download.cgi
 - Pour installer Apache Maven : https://maven.apache.org/install.html
 
+**Apache Tomcat 9**
+
+Installation Apacha Tomcat 9 : http://tomcat.apache.org/tomcat-9.0-doc/setup.html
+
+**MariaDB (ou MySQL)**
+
+Installation MariaDB : https://mariadb.com/kb/en/library/binary-packages/
+
 ## Récupérer le projet 
 
 ### via git clone
-En ligne de commande, se placer dans le répertoire voulu puis exécuter la commande `git clone https://github.com/gaelle8278/OC-les-amis-de-lescalade.git`. 
+En ligne de commande, se placer dans le répertoire voulu puis exécuter la commande `git clone https://github.com/gaelle8278/OC-les-amis-de-lescalade.git`. Une fois le projet récupéré renommer le dossier les-amis-de-lescalade pour plus de simplicité.
 
 - Sous Windows, dans l'invite de commande :
 ```
 cd D:/DevProjets
 git clone https://github.com/gaelle8278/OC-les-amis-de-lescalade.git
+rename OC-les-amis-de-lescalade les-amis-de-lescalade
 ```
 
 - Sous Linux, dans un terminal :
 ```
 cd ~/DevProjets
 git clone https://github.com/gaelle8278/OC-les-amis-de-lescalade.git
+mv OC-les-amis-de-lescalade les-amis-de-lescalade
 ```
 
 ### via l'archive zip
@@ -63,25 +73,86 @@ Se rendre dans le dossier où l'archive a été téléchargée puis la décompre
 Cela crée le dossier OC-les-amis-de-lescalade-master, le renommer les-amis-de-lescalade (soit en faisant clic droit sur le dossier puis renommer soit en ligne de commande).
 
 
-## Configuration
+## Configuration de la base de données 
 
-application.properties
+Méthode recommandée
+Le script ==mysql_database_schema_and_data.sql== présent dans le dossier data/ du projet permet la création de la base de données, l'import des données ainsi que la création de l'utilisateur administrateur de la base de données.
 
-## Compiler l'application avec Apache Maven
+Importer ce fichier grâce à mysqldump et à l'utilisateur administrateur de votre base de données :
 
-produire le war à partir des sources
+Dans une ligne de commande :
+```
+cd les-amis-de-lescalade
+cd data
+mysql -u root -p < mysql_database_schema_and_data.sql
+```
 
-mvn package
+Eléments crées :
+- base de donnée: lesamisdelescalade
+- utilisateur : 
+ - identifiant : dbuser
+ - mot de passe : userpwd
+
+Méthode manuelle : 
+Il est possible de configurer les éléments de la base de données séparément s'il l'on souhaite utiliser une configuration personnalisée :
+1. Se connecter à la base de données MySQL/MariaDB
+2. créer une base de données
+3. Se placer sur la base de données
+2. Importer le fichier data/mysql_database_schema.sql qui permet de créer les tables
+3. Importer le fichier data/mysql_database_data.sql qui permet d'insérer les données
+4. Ajouter un utilisateur avec les droits SELECT,UPDATE,INSERT,DELETE sur la base de données créée
+
+NB : si le numéro de port de MySQL/MariaDB n'est pas celui par défaut (3306), si les noms de la base de données, de l'utilisateur ou du mot de passe sont différents de ceux indiqués dans la méthode recommandée, il faut les spécifier dans le fichier application.properties :
+- spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:**[port]**/**[nom de la base de donnée]**
+- spring.datasource.username=**[identifiant utilisateur bdd]**
+- spring.datasource.password=**[mot de passe utilisateur bdd]**
 
 ## Déployer l'application
 
-Déployer le war sous Tomcat
+1.Produire l'archive war à partir des sources.
 
-Importer la bdd dans Mysql et le jeu de données
+Pour cela se placer dans le dossier du projet et utiliser la commande maven pour packager l'application.
+
+Sous Windows, dans l'invite de commande ou dans un terminal sous Linux :
+```
+cd les-amis-de-lescalade
+mvn package
+```
+
+2.Déployer l'archive war produite sous Tomcat
+
+L'archive war est produite dans le dossier target/ du projet. Placer cette archive war dans le dossier webapps/ de votre installation Tomcat :
+
+- Sous Windows, dans l'invite de commande :
+```
+cd target 
+copy lesamisdelescalade.war D:\DevEnv\apache-tomcat-9.0.29\webapps
+```
+
+- Sous  Linux, dans un terminal :
+```
+cd target 
+cp lesamisdelescalade.war /opt/apache-tomcat-9.0.29/webapps
+```
+
+Démarrer Tomcat s'il n'est pas démarré. 
+S'il est démarré, arretez-le puis démarrez-le.
+Tomcat déploie automatique l'archive war et configure le contexte de l'application lorsqu'il démarre.
 
 
+## Utilisation de l'application web
 
-## Comptes tests
+L'adresse de la page d'accueil de l'application est http://localhost:8080/lesamisdelescalade 
+*NB :par défaut Tomcat est configuré pour utiliser le port 8080, à adapter si configuration personnalisée.*
+
+Comptes Membres :
+- login : mlaplace@maboite.fr / mdp : test 
+- login : kbauer@test.com / mdp : test
+- login : dpalmer@test.com / mdp : test
+
+Compte Admin :
+- login : jbirc@test.com / mdp : test
+
 
 
 
