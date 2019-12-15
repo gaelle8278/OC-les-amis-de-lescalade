@@ -92,9 +92,7 @@ Eléments crées :
 
  identifiant : dbuser
 
- mot de passe : userpwd`
-
-
+ mot de passe : userpwd
 
 ### Méthode manuelle 
 Il est possible de configurer les éléments de la base de données séparément s'il l'on souhaite utiliser une configuration personnalisée :
