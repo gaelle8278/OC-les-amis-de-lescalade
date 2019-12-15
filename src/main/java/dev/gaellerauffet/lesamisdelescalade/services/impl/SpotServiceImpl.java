@@ -4,11 +4,8 @@ package dev.gaellerauffet.lesamisdelescalade.services.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.persistence.EntityManager;
-import javax.validation.Valid;
-
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,16 +13,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.Comment;
-import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
-import dev.gaellerauffet.lesamisdelescalade.model.Route;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 import dev.gaellerauffet.lesamisdelescalade.persistance.SpotRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 import dev.gaellerauffet.lesamisdelescalade.services.UserService;
+
+import dev.gaellerauffet.lesamisdelescalade.utils.Helpers;
 
 @Service
 public class SpotServiceImpl implements SpotService {
@@ -37,6 +35,7 @@ public class SpotServiceImpl implements SpotService {
 	
 	@Autowired
 	EntityManager em;
+	
 	
 	@Override
 	public Spot getSpot(int id) {
@@ -109,13 +108,35 @@ public class SpotServiceImpl implements SpotService {
 	@Override
 	public Page<Spot> getSpotsForSearchCriteria(SpotSearchForm spotsearchform, Pageable pageable) {
 		Page<Spot> foundedSpots = null;
-		if ( ! spotsearchform.getName().isEmpty() ) {
+		
+		
+		if ( ! StringUtils.isBlank(spotsearchform.getName()) ) {
 			foundedSpots = spotRepository.findByNameContains(spotsearchform.getName(), pageable);
-		} else if (! spotsearchform.getRegion().isEmpty()) {
-				foundedSpots = spotRepository.findByRegionContains(spotsearchform.getRegion(), pageable);
-		}	
+		} else if (! StringUtils.isBlank(spotsearchform.getRegion())) {
+			foundedSpots = spotRepository.findByRegionContains(spotsearchform.getRegion(), pageable);
+		} else if ( ! spotsearchform.getGrade().isEmpty() ) {
+			foundedSpots = spotRepository.findByMinGrade(spotsearchform.getGrade(), pageable);
+		} else if ( ! Helpers.isIntEmpty(spotsearchform.getNbAreas() ) ) {
+			foundedSpots = spotRepository.findByNbAreasGreaterThan(spotsearchform.getNbAreas(), pageable);
+			
+		} else if ( ! Helpers.isIntEmpty(spotsearchform.getNbRoutes() ) ) {
+			
+			foundedSpots = spotRepository.findByNbRoutesGreaterThan(spotsearchform.getNbRoutes(), pageable);
+			
+		} else if ( ! Helpers.isIntEmpty(spotsearchform.getNbPitches()) ) {
+			foundedSpots = spotRepository.findByNbPitchesGreaterThan(spotsearchform.getNbPitches(), pageable);
+		} else if ( ! Helpers.isIntEmpty(spotsearchform.getMinHeight()) ) {
+			foundedSpots = spotRepository.findByMinHeightGreaterThan(spotsearchform.getMinHeight(), pageable);
+		}  else if ( ! Helpers.isIntEmpty(spotsearchform.getMaxHeight()) ) {
+			foundedSpots = spotRepository.findByMaxHeightGreaterThan(spotsearchform.getMaxHeight(), pageable);
+		}
+		
+		
+		
+		//@TODO créer des combinaisons => queryDSL , JPA API Criteria ?
 		return foundedSpots;
 	}
+
 
 	@Override
 	public int add(Spot spot) {
@@ -130,6 +151,7 @@ public class SpotServiceImpl implements SpotService {
 	@Override
 	public List<String> getListTypesForForm() {
 		List<String> types = new ArrayList<String>();
+		//@TODO in v2 add management of types in admin back-office
 		types.add("Falaise");
 		types.add("Bloc");
 		types.add("Bloc, Falaise");

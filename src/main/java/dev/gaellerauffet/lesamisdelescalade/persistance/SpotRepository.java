@@ -25,6 +25,18 @@ public interface SpotRepository extends JpaRepository<Spot, Integer> {
 
 		List<Spot> findByName(String name);
 
+		Page<Spot> findByNbAreasGreaterThan(int nbAreas, Pageable pageable);
+
+		Page<Spot> findByNbRoutesGreaterThan(int nbRoutes, Pageable pageable);
+
+		Page<Spot> findByNbPitchesGreaterThan(int nbPitches, Pageable pageable);
+
+		Page<Spot> findByMinHeightGreaterThan(int minHeight, Pageable pageable);
+
+		Page<Spot> findByMaxHeightGreaterThan(int maxHeight, Pageable pageable);
+
+		Page<Spot> findByMinGrade(String grade, Pageable pageable);
+
 }
 
 

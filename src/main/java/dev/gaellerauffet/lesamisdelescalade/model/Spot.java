@@ -45,6 +45,10 @@ public class Spot {
 	private String maxGrade;
 	@Column(name = "nb_routes")
 	private Integer nbRoutes;
+	@Column(name = "nb_areas")
+	private Integer nbAreas;
+	@Column(name = "nb_pitches")
+	private Integer nbPitches;
 	
 	@Column(columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
@@ -198,6 +202,26 @@ public class Spot {
 
 	public void setTag(boolean tag) {
 		this.tag = tag;
+	}
+
+
+	public Integer getNbAreas() {
+		return nbAreas;
+	}
+
+
+	public void setNbAreas(Integer nbAreas) {
+		this.nbAreas = nbAreas;
+	}
+
+
+	public Integer getNbPitches() {
+		return nbPitches;
+	}
+
+
+	public void setNbPitches(Integer nbPitches) {
+		this.nbPitches = nbPitches;
 	}
 	
 	

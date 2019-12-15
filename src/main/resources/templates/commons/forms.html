@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 	</head>
 	<body>
+		<!-- formualaire d'inscription membre -->
 		<form th:fragment="signup-form"  action="#" th:action="@{/inscription}" th:object="${user}" method="post" 
 			    	class="form-horizontal" role="form" autocomplete="off">
 			<div class="form-group">
@@ -34,15 +35,10 @@
 			</div>
 			<div class="form-group text-center">
 					<button type="submit" class="btn btn-lg btn-primary">S'inscrire</button>
-			</div>
-						
-			
-						
+			</div>		
 		</form>
 		
-		
-		
-		
+		<!--  formulaire de connexion -->
 		<form  th:fragment="login-form" th:action="@{/connexion}" method="POST">
 			<div th:if="${param.error}" class="alert alert-danger">
 				Identifiants invalides
@@ -60,5 +56,59 @@
 				<button class="btn btn-lg btn-primary " name="submit" type="submit">Se connecter</button>
 			</div>
 		</form>
+		
+		
+		<!--  formulaire de recherche site -->
+		<form th:fragment="search-form" action="#" th:action="@{/les-sites/filtered}" th:object="${spotsearchform}"  method="POST">
+			<div class="form-row">
+				<div class="form-group col-md-4 col-lg-3">
+					<label for="name">Nom</label> 
+				    <input type="text" th:field="*{name}" class="form-control" >
+				</div>
+				<div class="form-group col-md-4 col-lg-3">
+					<label for="region">Région</label> 
+						<select th:field="*{region}" class="form-control" placeholder="Sélectionnez une région" > 
+		       				<option th:each="region : ${listRegions}" 
+		           					th:value="${region}" 
+		           					th:text="${region}" /> 
+		      				</select> 
+				</div>
+				<div class="form-group col-md-4 col-lg-3">
+					<label for="grade">Cotation</label> 
+					<input type="text" th:field="*{grade}" class="form-control" >	
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4 col-lg-3">
+					<label for="nbAreas">Nombre de secteurs</label> 
+				    <input type="text" th:field="*{nbAreas}" class="form-control" >
+				</div>
+				<div class="form-group col-md-4 col-lg-3">
+					<label for="nbRoutes">Nombre de voies</label> 
+				    <input type="text" th:field="*{nbRoutes}" class="form-control" >
+				</div>
+				<div class="form-group col-md-4 col-lg-3">
+					<label for="nbPitches">Nombre de longueurs</label> 
+				    <input type="text" th:field="*{nbPitches}" class="form-control" >
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4 col-lg-3">
+					<label for="minHeight">Hauteur minimale</label> 
+				    <input type="text" th:field="*{minHeight}" class="form-control" >
+				</div>
+				<div class="form-group col-md-4 col-lg-3">
+					<label for="maxHeight">Hauteur maximale</label> 
+				    <input type="text" th:field="*{maxHeight}" class="form-control" >
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-6">
+					<input type="submit" value="Rechercher" class="btn btn-primary">
+				</div>
+			</div>
+			
+		</form>
+		
 	</body>
 </html>

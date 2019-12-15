@@ -44,23 +44,7 @@
 	          		
 	        	</header>
 	        	<section id="spot-search-form">
-						<form action="#" th:action="@{/recherche-site}" th:object="${spotsearchform}"  method="post">
-							<div class="form-row">
-								<div class="form-group col-md-6 col-lg-3">
-				    				<label for="name">Nom</label> 
-				    				<input type="text" th:field="*{name}" class="form-control" >
-				    			</div>
-				    			<div class="form-group col-md-6 col-lg-3">
-				    				<label for="region">Région</label> 
-					    			<select th:field="*{region}" class="form-control" placeholder="Sélectionnez une région" > 
-		       							<option th:each="region : ${listRegions}" 
-		           								th:value="${region}" 
-		           								th:text="${region}" /> 
-		      						</select> 
-				    			</div>
-			    			</div>
-			    			<input type="submit" value="Rechercher" class="btn btn-primary">
-			    		</form>
+						<form th:replace="commons/forms :: search-form"></form>
 				</section>
 				
 				

@@ -44,80 +44,65 @@
 	        	</header>
 	        	<!--  <p th:text="toto + ${param.region}"></p>-->
 	        	<section id="spot-search-form">
-						<form action="#" th:action="@{/les-sites}" th:object="${spotsearchform}"  method="POST">
-							<div class="form-row">
-								<div class="form-group col-md-6 col-lg-3">
-				    				<label for="name">Nom</label> 
-				    				<input type="text" th:field="*{name}" class="form-control" >
-				    			</div>
-				    			<div class="form-group col-md-6 col-lg-3">
-				    				<label for="region">Région</label> 
-					    			<select th:field="*{region}" class="form-control" placeholder="Sélectionnez une région" > 
-		       							<option th:each="region : ${listRegions}" 
-		           								th:value="${region}" 
-		           								th:text="${region}" /> 
-		      						</select> 
-				    			</div>
-			    			</div>
-			    			<input type="submit" value="Rechercher" class="btn btn-primary">
-			    		</form>
+					<form th:replace="commons/forms :: search-form"></form>
 				</section>
 	        	
-	        	
-	        	<!--  table contenant la liste des sites-->
-	        	<table class="table">
-	        		<thead>
-					    <tr>
-					      	<th scope="col" class="text-center">Id</th>
-					      	<th scope="col" class="text-center">Nom</th>
-					      	<th scope="col" class="text-center">Région</th>
-					      	<th scope="col" class="text-center">Type</th>
-					      	<th scope="col" class="text-center">Tag</th>
-					      	<th scope="col" class="text-center">Actions</th>
-					    </tr>
-				 	 </thead>
-				   	<th:block th:each="spot : ${page.content}">
-				   		<tr>
-				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}" th:text=${spot.id}></a></td>
-					    	<td class="text-center" th:text="${spot.name}"></td>
-					    	<td class="text-center" th:text="${spot.region}"></td>
-					    	<td class="text-center" th:text="${spot.type}"></td>
-					    	<td class="text-center">
-					    		<th:block th:if="${spot.tag}" th:text="${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).SPOT_TAG}"></th:block>
-					    		</td>
-					    	<td class="text-center">
-					    		<a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}">Voir</a>
-					    	</td>
-					    </tr>
-				   </th:block>
-				</table>
-				<!-- pagination -->
-				<nav aria-label="Pages listant les topos">
-					<ul class="pagination">
-					    <li th:if="${page.hasPrevious()}" class="page-item">
-					        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
-					        	<span aria-hidden="true">&laquo;</span>
-        						<span class="sr-only">Précédent</span>
-					       	</a>
-					    </li>
-					    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-					        <li th:if="${page.number == i}" class="active page-item">
-					       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
-					       	</li>
-					        <li th:unless="${page.number == i}" class="page-item">
-					             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
-					        </li>
-					    </th:block>
-				    	<li th:if="${page.hasNext()}" class="page-item">
-				        	<a th:href="@{/''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
-				        		<span aria-hidden="true">&raquo;</span>
-        						<span class="sr-only">Suivant</span>
-				        	</a>
-				    	</li>
-				    </ul>
-				</nav>
-				
-				
+	        	<div th:if="${page}" class="row">
+	        		<div class="col">
+			        	<!--  table contenant la liste des sites-->
+			        	<table class="table mt-5">
+			        		<thead>
+							    <tr>
+							      	<th scope="col" class="text-center">Id</th>
+							      	<th scope="col" class="text-center">Nom</th>
+							      	<th scope="col" class="text-center">Région</th>
+							      	<th scope="col" class="text-center">Type</th>
+							      	<th scope="col" class="text-center">Tag</th>
+							      	<th scope="col" class="text-center">Actions</th>
+							    </tr>
+						 	 </thead>
+						   	<th:block th:each="spot : ${page.content}">
+						   		<tr>
+						        	<td class="text-center"><a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}" th:text=${spot.id}></a></td>
+							    	<td class="text-center" th:text="${spot.name}"></td>
+							    	<td class="text-center" th:text="${spot.region}"></td>
+							    	<td class="text-center" th:text="${spot.type}"></td>
+							    	<td class="text-center">
+							    		<th:block th:if="${spot.tag}" th:text="${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).SPOT_TAG}"></th:block>
+							    		</td>
+							    	<td class="text-center">
+							    		<a class="btn btn-link" th:href="@{'/spot/'+ ${spot.id}}">Voir</a>
+							    	</td>
+							    </tr>
+						   </th:block>
+						</table>
+						<!-- pagination -->
+						<nav aria-label="Pages listant les topos">
+							<ul class="pagination">
+							    <li th:if="${page.hasPrevious()}" class="page-item">
+							        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
+							        	<span aria-hidden="true">&laquo;</span>
+		        						<span class="sr-only">Précédent</span>
+							       	</a>
+							    </li>
+							    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+							        <li th:if="${page.number == i}" class="active page-item">
+							       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
+							       	</li>
+							        <li th:unless="${page.number == i}" class="page-item">
+							             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
+							        </li>
+							    </th:block>
+						    	<li th:if="${page.hasNext()}" class="page-item">
+						        	<a th:href="@{/''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
+						        		<span aria-hidden="true">&raquo;</span>
+		        						<span class="sr-only">Suivant</span>
+						        	</a>
+						    	</li>
+						    </ul>
+						</nav>
+					</div>
+				</div>
 	        </div>
 		</section>
 		

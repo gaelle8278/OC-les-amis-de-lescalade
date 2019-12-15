@@ -17,18 +17,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import dev.gaellerauffet.lesamisdelescalade.model.Spot;
-import dev.gaellerauffet.lesamisdelescalade.model.User;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.Comment;
-import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
+import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 
 @Controller
+@SessionAttributes("spotsearchform")
 public class SpotController {
 	@Autowired
     SpotService spotService;
+	
+	
+	
+	@ModelAttribute("spotsearchform")
+	public SpotSearchForm searchform() {
+	    return new SpotSearchForm();
+	}
 
 	
 	@GetMapping("/spot/{id}")
@@ -43,9 +52,10 @@ public class SpotController {
 	}
 	
 	@GetMapping("/les-sites")
-	public String listSpots(SpotSearchForm spotsearchform, @PageableDefault(size = 5) Pageable pageable, Model model) {
+	public String listSpots(@PageableDefault(size = 5) Pageable pageable, Model model) {
+		model.addAttribute("spotsearchform", new SpotSearchForm());
 		
-		model.addAttribute("spotsearchform", spotsearchform);
+		
 		List<String> listRegions =  spotService.getListRegionsForForm();
 		model.addAttribute("listRegions", listRegions);
 		
@@ -53,17 +63,23 @@ public class SpotController {
 		model.addAttribute("page", page);
         return "spot/list";
 	}
-	@PostMapping("/les-sites")
+	@RequestMapping("/les-sites/filtered")
     public String listSpotsFiltered( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 5) Pageable pageable, Model model) {
 		//recherche des sites selon les critères de recherche
 		Page<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform, pageable);
+		if(foundedSpots == null) {
+			return "redirect:/les-sites";
+		}
 		model.addAttribute("page", foundedSpots);
-		//liste des régions
 		List<String> listRegions =  spotService.getListRegionsForForm();
 		model.addAttribute("listRegions", listRegions);
 		
         return "spot/list";
     }
+	
+	
+	
+	
 	
 	
 	
