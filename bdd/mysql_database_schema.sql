@@ -132,6 +132,7 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(25) NOT NULL DEFAULT '',
+  `label` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -150,7 +151,7 @@ CREATE TABLE `route` (
   `notice` longtext DEFAULT NULL,
   `nb_spits` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `area_id` int(11),
+  `area_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_route_area_idx` (`area_id`),
   CONSTRAINT `fk_route_area` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
@@ -186,7 +187,7 @@ CREATE TABLE `spot` (
   PRIMARY KEY (`id`),
   KEY `fk_Site_User1_idx` (`user_id`),
   CONSTRAINT `fk_spot_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +212,7 @@ CREATE TABLE `user` (
   `postal_code` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,4 +241,4 @@ CREATE TABLE `user_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-15 19:18:38
+-- Dump completed on 2019-12-16 13:22:59
