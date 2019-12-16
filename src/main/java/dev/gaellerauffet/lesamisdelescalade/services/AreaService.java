@@ -25,4 +25,6 @@ public interface AreaService {
 
 	Spot getParentSpot(int areaId);
 
+	Page<Area> getListAreasOfSpot(int spotId, Pageable pageable);
+
 }

@@ -19,12 +19,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import dev.gaellerauffet.lesamisdelescalade.model.Area;
 import dev.gaellerauffet.lesamisdelescalade.model.Route;
 import dev.gaellerauffet.lesamisdelescalade.model.Spot;
+import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 import dev.gaellerauffet.lesamisdelescalade.services.AreaService;
+import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 
 @Controller
 public class AreaController {
 	@Autowired
     AreaService areaService;
+	
+	@Autowired
+    SpotService spotService;
 
 	
 	@GetMapping("/area/{id}")
@@ -34,7 +39,14 @@ public class AreaController {
         return "area/display";
 	}
 	
-	
+	@GetMapping("/spots/{spotId}/areas/list")
+	public String  displaySpotListAreas(@PathVariable("spotId") int spotId, @PageableDefault(size = 10) Pageable pageable, Model model) {
+		Spot spot = spotService.getSpot(spotId);
+		model.addAttribute("spot", spot);
+		Page<Area> page = areaService.getListAreasOfSpot(spotId, pageable);
+		model.addAttribute("page", page);
+    	return "area/list";
+	}
 	
 	// display add an area form
 	@Secured("ROLE_USER")

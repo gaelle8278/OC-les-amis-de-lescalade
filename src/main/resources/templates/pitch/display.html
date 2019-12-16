@@ -31,58 +31,47 @@
 
 <body>
 	<!--==========================
-  	Header
-  	============================-->
+  Header
+  ============================-->
 	<header th:replace="commons/header :: header"></header>
 
 
 	<main id="main">
-	     <section id="spot-search" class="section-bg">
+	     <section id="spot-list" class="section-bg">
 	      	<div class="container">
 	        	<header class="section-header">
-	          		<h3 class="section-title">Votre prochaine grimpe</h3>
-	          		
+	          		<h3 class="section-title">Longueur numéro <span th:text="${pitch.number} + ' de la voie ' + ${pitch.route.number} + ' du secteur ' + ${pitch.route.area.name}"></span></h3>
 	        	</header>
-	        	<section id="spot-search-form">
-						<form action="#" th:action="@{/recherche-site}" th:object="${spotsearchform}"  method="post">
-							<div class="form-row">
-								<div class="form-group col-md-6 col-lg-3">
-				    				<label for="name">Nom</label> 
-				    				<input type="text" th:field="*{name}" class="form-control" >
-				    			</div>
-				    			<div class="form-group col-md-6 col-lg-3">
-				    				<label for="region">Région</label> 
-					    			<select th:field="*{region}" class="form-control"> 
-		       							<option th:each="region : ${listRegions}" 
-		           								th:value="${region}" 
-		           								th:text="${region}" /> 
-		      						</select> 
-				    			</div>
-			    			</div>
-			    			<input type="submit" value="Rechercher" class="btn btn-primary">
-			    		</form>
-				</section>
-				
-				<section th:if="${not #lists.isEmpty(foundedSpots)}">
-					<h6>Sites trouvés</h6>
-        			<table class="table">
-			            <thead>
-						    <tr>
-						      	<th scope="col">#</th>
-						      	<th scope="col">Nom</th>
-						    </tr>
-					 	</thead>
-					   	<th:block th:each="spot : ${foundedSpots}">
-					   		<tr>
-					        	<td><a th:href="@{'/spot/'+ ${spot.id}}">Voir</a></td>
-						    	<td th:text="${spot.name}"></td>
-						    </tr>
-					   </th:block>
-			        </table>
-					
-				</section>
-	       
+	        	
+	        	<div class="row mt-5">
+	        		<div class="col-md-4 col-lg-2">
+	        			<p><span class="font-weight-bold">Numéro :</span><th:block th:text="${pitch.number}"></th:block></p>
+	        		</div>
+	        		<div class="col-md-4 col-lg-2">
+	        			<p><span class="font-weight-bold">Cotation :</span><th:block th:text="${pitch.grade}"></th:block></p>
+	        		</div>
+	        	</div>
+	        	<div class="row mb-5">
+	        		<div class="col">
+	        			<th:block th:text="${pitch.notice}"></th:block>
+	        		</div>
+	        	</div>
+	        	
+	        	
+				<div  class="row">
+					<div class="col-md-4 col-lg-2 my-2">
+						<a class="btn btn-secondary" th:href="@{'/route/' + ${pitch.route.id}}">Retour à la voie</a>
+					</div>
+					<div class="col-md-4 col-lg-2 my-2">
+						<a class="btn btn-secondary" th:href="@{'/area/' + ${pitch.route.area.id}}">Retour au secteur</a>
+					</div>
+					<div class="col-md-4 col-lg-2 my-2">
+						<a class="btn btn-secondary" th:href="@{'/spot/' + ${pitch.route.area.spot.id}}">Retour au site</a>
+					</div>
+				</div>
+	        </div>
 		</section>
+		
 	</main>
 
 	<!--==========================
@@ -95,8 +84,7 @@
 	<!-- <div id="preloader"></div> -->
 
 	<!-- JavaScript Libraries -->
-	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script th:src="@{/assets/jquery/jquery-migrate.min.js}"></script>
+	<script th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 	<script th:src="@{/assets/mobile-nav/mobile-nav.js}"></script>
 

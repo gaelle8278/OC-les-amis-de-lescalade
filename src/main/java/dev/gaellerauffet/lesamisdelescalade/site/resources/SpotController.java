@@ -74,12 +74,6 @@ public class SpotController {
         return "spot/list";
     }
 	
-	
-	
-	
-	
-	
-	
 	@Secured("ROLE_USER")
 	@GetMapping("/membre/mes-sites")
 	public String listUserSpots(@PageableDefault(size = 10) Pageable pageable, Model model) {
@@ -109,12 +103,7 @@ public class SpotController {
     public String search( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 10) Pageable pageable, Model model) {
 		//recherche des sites selon les critères de recherche
 		Page<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform, pageable);
-		//List<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform);
 		
-		/*for(int i=0; i < foundedSpots.size(); i++ ) {
-			Spot spotS = foundedSpots.get(i);
-			System.out.println("Toto11 " + spotS.getName());
-		}*/
 		model.addAttribute("page", foundedSpots);
 		//liste des régions
 		List<String> listRegions =  spotService.getListRegionsForForm();

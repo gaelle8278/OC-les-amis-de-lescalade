@@ -93,4 +93,12 @@ public class AreaServiceImpl implements AreaService {
 		
 	}
 
+
+	@Override
+	public Page<Area> getListAreasOfSpot(int spotId, Pageable pageable) {
+		Spot spot = em.getReference(Spot.class, spotId);
+		Page<Area> page = areaRepository.findBySpot(spot, pageable);
+		return page;
+	}
+
 }

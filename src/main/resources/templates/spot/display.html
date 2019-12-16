@@ -48,69 +48,59 @@
 	        		</div>
 	        	</div>
 	        	<div class="row my-2">
-	        		<div class="col col-md-4">
+	        		<div class="col-md-4">
 	        			<span class="font-weight-bold">Région : </span><th:block th:text="${spot.region}"></th:block>
 	        		</div>
 	        	</div>
 	        	<div class="row my-2">
-	        		<div class="col col-md-4">
+	        		<div class="col-md-4">
 	        			<span class="font-weight-bold">Type : </span><th:block th:text="${spot.type}"></th:block>
 	        		</div>
-	        		<div class="col col-md-4">
+	        		<div class="col-md-4">
 	        			<span class="font-weight-bold">Orientation : </span><th:block th:text="${spot.orientation}"></th:block>
 	        		</div>
-	        		<div class="col col-md-4">
+	        		<div class="col-md-4">
 	        			<span class="font-weight-bold">Nombre de voies : </span><th:block th:text="${spot.nbRoutes}"></th:block>
 	        		</div>
 	        	</div>
 	        	<div class="row my-2">
-	        		<div class="col col-md-6" >
+	        		<div class="col-md-6" >
 	        			<span class="font-weight-bold">Hauteur minimale : </span><th:block th:text="${spot.minHeight} + 'm'"></th:block>
 	        		</div>
-	        		<div class="col col-md-6" >
+	        		<div class="col-md-6" >
 	        			<span class="font-weight-bold">Hauteur maximale : </span><th:block th:text="${spot.maxHeight} + 'm'"></th:block>
 	        		</div>
 	        	</div>
 	        	<div class="row my-2">
-	        		<div class="col col-md-6" >
+	        		<div class="col-md-6" >
 	        			<span class="font-weight-bold">Cotation minimale : </span><th:block th:text="${spot.minGrade}"></th:block>
 	        		</div>
-	        		<div class="col col-md-6" >
+	        		<div class="col-md-6" >
 	        			<span class="font-weight-bold">Cotation maximale : </span><th:block th:text="${spot.maxGrade}"></th:block>
 	        		</div>
 	        	</div>
 	        	<div class="row my-2">
-	        		<div class="col col-md-2"><span class="font-weight-bold">Remarques</span></div>
-	        		<div class="col col-md-10" th:text="${spot.notice}"></div>
+	        		<div class="col-md-2"><span class="font-weight-bold">Remarques</span></div>
+	        		<div class="col-md-10" th:text="${spot.notice}"></div>
 	        	</div>
 				<div class="row my-2">
 					<div class="col"  th:text="${spot.description}"></div>
 		    	</div>
-		    	<div class="row my-2">
+		    
+		    	<div class="row my-2" th:if="${not #lists.isEmpty(spot.listArea)}">
 		    		<div class="col">
-		    			Afficher les commentaires et un bouton d'ajout de commentaire
+		    			<a class="btn btn-success" th:href="@{'/spots/'+${spot.id}+'/areas/list'}">Voir les secteurs</a>
 		    		</div>
 		    	</div>
-		    	<div class="row my-2">
-		    		<div class="col">
-		    			<a class="btn btn-primary" th:href="@{/les-sites}">Retour à la liste des sites</a>
-		    		</div>
-		    	</div>
-		    	
-										
-				
-	       </div>
+	     	</div>
 	     </section>
+	     
 	     <section id="spot-comment" class="section-bg">
 	     	<div class="container">
-		     	<header th:if="${not #lists.isEmpty(listComments)}" class="section-header">
-		          		<h2 class="section-title text-left">Les commentaires</h2>
-		        </header>
+		     	
 		        <div sec:authorize="hasAuthority('ROLE_USER')">
-					<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseAddComment" aria-expanded="false" aria-controls="collapseAddComment">
-					    	Laisser un commentaire
-					</button>	        
-					 <div class="collapse" id="collapseAddComment">
+					<h3>Laisser un commentaire</h3>	        
+					 <div>
 					 	<form action="#" th:action="@{'/spots/'+ ${spot.id} + '/comments'}" th:object="${comment}" method="post">
 				        	 	<div class="form-group">
 								    <label for="title">Titre</label>
@@ -123,12 +113,14 @@
 								    <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
 				    			</div>
 				    			<div>
-				    				<input type="submit" value="Ajouter un commentaire" class="btn btn-primary"> 
+				    				<input type="submit" value="Ajouter un commentaire" class="btn btn-secondary"> 
 				    			</div>
 							</form>
 					 </div>
 				</div>
 				
+		        <h3 th:if="${not #lists.isEmpty(listComments)}" class="section-title text-left">Les commentaires</h3>
+		    
 		        <th:block th:if="${not #lists.isEmpty(listComments)}" th:each="comment : ${listComments}">
 					<div class="row my-2">
 						<div class="col">
@@ -143,7 +135,7 @@
 			
 	     </section>
 	     
-	     
+	    
 	</main>
 
 	<!--==========================

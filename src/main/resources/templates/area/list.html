@@ -40,48 +40,62 @@
 	     <section id="spot-list" class="section-bg">
 	      	<div class="container">
 	        	<header class="section-header">
-	          		<h3 class="section-title">Secteur <span th:text="${area.name}"></span></h3>
+	          		<h3 class="section-title">Les secteurs du site <span th:text="${spot.name}"></span></h3>
 	        	</header>
 	        	
-	        	<div class="row">
-	        		<div class="col my-5">
-	        			<th:block th:text="${area.description}"></th:block>
-	        		</div>
-	        	</div>
-	        	<div th:if="${not #lists.isEmpty(area.listRoutes)}" class="row">
+	        	
+	        	<div th:if="${page}" class="row">
 	        		<div class="col">
-	        			<h5>Voies décrites</h5>
 			        	<!--  table contenant la liste des sites-->
 			        	<table class="table mt-5">
 			        		<thead>
 							    <tr>
-							      	<th scope="col" class="text-center">Numéro</th>
-							      	<th scope="col" class="text-center">Cotation</th>
-							      	<th scope="col" class="text-center">Nombre de spits</th>
+							      	<th scope="col" class="text-center">Id</th>
+							      	<th scope="col" class="text-center">Nom</th>
+							      	<th scope="col" class="text-center">Description</th>
 							    </tr>
 						 	 </thead>
-						   	<th:block th:each="route : ${area.listRoutes}">
+						   	<th:block th:each="area : ${page.content}">
 						   		<tr>
-						        	<td class="text-center"><a class="btn btn-link" th:href="@{'/route/'+ ${route.id}}" th:text=${route.number}></a></td>
-							    	<td class="text-center" th:text="${route.grade}"></td>
-							    	<td class="text-center" th:text="${route.nbSpits}"></td>
+						        	<td class="text-center"><a class="btn btn-link" th:href="@{'/area/'+ ${area.id}}" th:text=${area.id}></a></td>
+							    	<td class="text-center" th:text="${area.name}"></td>
 							    	<td class="text-center">
-							    		<a class="btn btn-link" th:href="@{'/route/'+ ${route.id}}">Voir</a>
+							    		<a class="btn btn-link" th:href="@{'/area/'+ ${area.id}}">Voir</a>
 							    	</td>
 							    </tr>
 						   </th:block>
 						</table>
+						
+						<!-- pagination -->
+						<nav aria-label="Pages listant les secteurs">
+							<ul class="pagination">
+							    <li th:if="${page.hasPrevious()}" class="page-item">
+							        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
+							        	<span aria-hidden="true">&laquo;</span>
+		        						<span class="sr-only">Précédent</span>
+							       	</a>
+							    </li>
+							    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+							        <li th:if="${page.number == i}" class="active page-item">
+							       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
+							       	</li>
+							        <li th:unless="${page.number == i}" class="page-item">
+							             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
+							        </li>
+							    </th:block>
+						    	<li th:if="${page.hasNext()}" class="page-item">
+						        	<a th:href="@{/''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
+						        		<span aria-hidden="true">&raquo;</span>
+		        						<span class="sr-only">Suivant</span>
+						        	</a>
+						    	</li>
+						    </ul>
+						</nav>
 					</div>
 				</div>
-				
 				<div  class="row">
 					<div class="col">
-						<div class="col-md-4 col-lg-2 my-2">
-							<a class="btn btn-secondary" th:href="@{'/spots/' + ${area.spot.id} + '/areas/list'}">Retour à la liste des secteurs</a>
-						</div>
-						<div class="col-md-4 col-lg-2 my-2">
-							<a class="btn btn-secondary" th:href="@{'/spot/' + ${area.spot.id}}">Retour au site</a>
-						</div>
+						<a class="btn btn-secondary" th:href="@{'/spot/' + ${spot.id}}">Retour au site</a>
 					</div>
 				</div>
 	        </div>
