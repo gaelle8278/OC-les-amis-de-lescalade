@@ -40,7 +40,7 @@ public class AccountController {
 		if(result.hasErrors()) {
 			return "account/signup"; 
 		}
-		userService.add(user);
+		userService.add(user, "ROLE_USER");
 		
 		redirectAttributes.addFlashAttribute("successMessage", "ok");
 		//redirect

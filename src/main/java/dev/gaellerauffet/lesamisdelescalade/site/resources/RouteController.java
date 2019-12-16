@@ -36,12 +36,6 @@ public class RouteController {
         return "route/display";
 	}
 	
-	@GetMapping("/les-routes")
-	public String listRoutes(@PageableDefault(size = 10) Pageable pageable, Model model) {
-		Page<Route> page = routeService.findAllPaginated(pageable);
-		model.addAttribute("page", page);
-        return "route/list";
-	}
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/areas/{areaId}/routes")

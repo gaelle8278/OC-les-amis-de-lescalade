@@ -1,6 +1,7 @@
 package dev.gaellerauffet.lesamisdelescalade.site.resources;
 
-import javax.annotation.security.RolesAllowed;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import dev.gaellerauffet.lesamisdelescalade.model.User;
+import dev.gaellerauffet.lesamisdelescalade.services.RoleService;
 import dev.gaellerauffet.lesamisdelescalade.services.UserService;
 
 @Controller
@@ -23,6 +26,9 @@ public class UserController {
 
 	@Autowired
     UserService userService;
+	
+	@Autowired 
+	RoleService roleService;
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/user/{id}")
@@ -42,17 +48,22 @@ public class UserController {
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/adduser")
-	public String displayUserAddForm(User user) {
+	public String displayUserAddForm(User user, Model model) {
+		Map<String, String> listRoles = roleService.getListAvailableRoles();
+	    model.addAttribute("listRoles", listRoles);
 		return "user/add";
 	}
 	
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/user/add")
-	public String addUser(@Valid User user, BindingResult result, Model model) {
+	public String addUser(@RequestParam String role, @Valid User user, BindingResult result, Model model) {
+		System.out.println(role);
 		if(result.hasErrors()) {
+			Map<String, String> listRoles = roleService.getListAvailableRoles();
+		    model.addAttribute("listRoles", listRoles);
 			return "user/add"; 
 		}
-		userService.add(user);
+		userService.add(user, role);
 		
 		//redirect
 		return "redirect:/admin/les-utilisateurs";
@@ -63,7 +74,8 @@ public class UserController {
 	@GetMapping("/user/edit/{id}")
 	public String displayUserUpdateForm(@PathVariable("id") int id, Model model) {
 	    User user = userService.getUser(id);
-		
+	    Map<String, String> listRoles = roleService.getListAvailableRoles();
+	    model.addAttribute("listRoles", listRoles);
 	    model.addAttribute("user", user);
 	    
 	    return "user/edit";
@@ -73,18 +85,18 @@ public class UserController {
 	@PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") int id, @Valid User user, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	    	user.setId(id);
+	    	Map<String, String> listRoles = roleService.getListAvailableRoles();
+		    model.addAttribute("listRoles", listRoles);
 	        return "user/edit";
 	    }
-	         
-	    userService.update(id, user);
+	    userService.update(user);
 	    return "redirect:/admin/les-utilisateurs";
 	}
 	    
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable("id") int id, Model model) {
-		userService.deleteUser(id);
+		userService.delete(id);
 		return "redirect:/admin/les-utilisateurs";
 	}
 	

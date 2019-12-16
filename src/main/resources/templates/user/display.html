@@ -41,12 +41,12 @@
 	      	<nav th:replace="commons/be-account/menu :: navbar"></nav>
 	
 	      	<div class="container-fluid">
-	          		<h1 class="" >Fiche utilisateur</h1>
+	          	<h1 class="" >Fiche utilisateur</h1>
 				<div class="row my-2">
-		        	<div class="col col-md-6">
+		        	<div class="col col-md-6 col-lg-2">
 		        		<p><span class="font-weight-bold">Prénom : </span><th:block th:text="${user.firstName}"></th:block></p>
 		        	</div>
-		        	<div class="col col-md-6">
+		        	<div class="col col-md-6 col-lg-2">
 		        		<p><span class="font-weight-bold">Nom : </span><th:block th:text="${user.lastName}"></th:block></p>
 		        	</div>
 		        </div>
@@ -66,10 +66,10 @@
 		        	</div>
 		        </div>
 		        <div class="row my-2">
-		        	<div class="col col-md-6">
+		        	<div class="col col-md-6 col-lg-2">
 		        		<p><span class="font-weight-bold">Ville : </span><th:block th:text="${user.city}"></th:block></p>
 		        	</div>
-		        	<div class="col col-md-6">
+		        	<div class="col col-md-6 col-lg-2">
 		        		<p><span class="font-weight-bold">Code postal : </span><th:block th:text="${user.postalCode}"></th:block></p>
 		        	</div>
 		        </div>

@@ -3,20 +3,15 @@ package dev.gaellerauffet.lesamisdelescalade.services.impl;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-
 import javax.persistence.EntityManager;
-import javax.validation.Valid;
-
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
 import dev.gaellerauffet.lesamisdelescalade.model.Role;
-import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.persistance.RoleRepository;
 import dev.gaellerauffet.lesamisdelescalade.persistance.UserRepository;
@@ -41,29 +36,28 @@ public class UserServiceImpl implements UserService {
 	public User getUser(int id) {
 		
 		User user = userRepository.findById(id);
+		//encrypted password is never displayed
+		user.setPassword("");
 		return user;
 	}
 
 	@Override
-	public void add(User user) {
+	public void add(User user, String role) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(true);
-		Role userRole = roleRepository.findByRole("ROLE_USER");
+		Role userRole = roleRepository.findByRole(role);
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public void delete(int id) {
 		//@Todo before check foreign key constraint to delete manually depenencies 
 		//or add delete dependencies on foreign key in database 
 		userRepository.deleteById(id);
 	}
 
-	@Override
-	public void updateUser(User user) {
-		
-	}
+	
 
 	@Override
 	public List<User> getAllUsers() {
@@ -78,12 +72,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(int idUser, User userForm) {
-		User user = em.getReference(User.class,idUser);
+	public void update(User userForm) {
+		User user = em.getReference(User.class,userForm.getId());
 		//on update of a user information checkCGU status doesn't change
 		//active state doesn't change, it change only during user activation process
 		userForm.setCheckedCGU(user.isCheckedCGU());
 		userForm.setActive(user.isActive());
+		userForm.setRoles(user.getRoles());
+		if( ! StringUtils.isBlank(userForm.getPassword()) ) {
+			userForm.setPassword(bCryptPasswordEncoder.encode(userForm.getPassword()));
+		} else {
+			userForm.setPassword(user.getPassword());
+		}
 		
 		userRepository.save(userForm);
 		
@@ -92,6 +92,8 @@ public class UserServiceImpl implements UserService {
 	public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+	
 
 	
 	

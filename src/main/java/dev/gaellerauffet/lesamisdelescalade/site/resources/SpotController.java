@@ -32,13 +32,10 @@ public class SpotController {
 	@Autowired
     SpotService spotService;
 	
+	@Autowired
+    SpotSearchForm spotsearchform;
 	
 	
-	@ModelAttribute("spotsearchform")
-	public SpotSearchForm searchform() {
-	    return new SpotSearchForm();
-	}
-
 	
 	@GetMapping("/spot/{id}")
 	public String displaySpot(@PathVariable("id") int id, Comment comment, Model model) {
@@ -52,9 +49,8 @@ public class SpotController {
 	}
 	
 	@GetMapping("/les-sites")
-	public String listSpots(@PageableDefault(size = 5) Pageable pageable, Model model) {
+	public String listSpots(@PageableDefault(size = 10) Pageable pageable, Model model) {
 		model.addAttribute("spotsearchform", new SpotSearchForm());
-		
 		
 		List<String> listRegions =  spotService.getListRegionsForForm();
 		model.addAttribute("listRegions", listRegions);
@@ -63,8 +59,9 @@ public class SpotController {
 		model.addAttribute("page", page);
         return "spot/list";
 	}
+	
 	@RequestMapping("/les-sites/filtered")
-    public String listSpotsFiltered( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 5) Pageable pageable, Model model) {
+    public String listSpotsFiltered( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 2) Pageable pageable, Model model) {
 		//recherche des sites selon les critères de recherche
 		Page<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform, pageable);
 		if(foundedSpots == null) {

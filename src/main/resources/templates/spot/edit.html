@@ -147,7 +147,7 @@
 									 	</thead>
 										<th:block th:each="area : ${listAreas}">
 											<tr>
-												<td th:text="${area.name}"></td>
+												<td><a th:href="@{'/areas/edit/'+${area.id}}" th:text="${area.name}"></a></td>
 											</tr>
 										</th:block>
 									</table>

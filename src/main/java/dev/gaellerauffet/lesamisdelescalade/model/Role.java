@@ -12,6 +12,8 @@ public class Role {
   
     private String role;
     
+    private String label;
+    
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
 
@@ -38,6 +40,15 @@ public class Role {
 	public void setUsers(Collection<User> users) {
 		this.users = users;
 	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
     
+	
     
 }

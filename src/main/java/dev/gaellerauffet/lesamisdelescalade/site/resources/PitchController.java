@@ -32,14 +32,7 @@ public class PitchController {
 		
         return "pitch/display";
 	}
-	
-	@GetMapping("/les-longueurs")
-	public String listPitchs(@PageableDefault(size = 10) Pageable pageable, Model model) {
-		Page<Pitch> page = pitchService.findAllPaginated(pageable);
-		model.addAttribute("page", page);
-		
-        return "pitch/list";
-	}
+
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/routes/{routeId}/pitches")

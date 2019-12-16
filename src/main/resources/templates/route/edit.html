@@ -40,7 +40,7 @@
 			<nav th:replace="commons/user-account/menu :: navbar"></nav>
 
 			<div class="container-fluid">
-	          		<h1 class="">Modification d'une voie</h1>
+	          	<h1 class="">Modification d'une voie</h1>
 	       
 	        	<div class="row">
 	        		<div class="col">
@@ -93,7 +93,7 @@
 									 	</thead>
 										<th:block th:each="pitch : ${listPitches}">
 											<tr>
-												<td th:text="${pitch.number}"></td>
+												<td><a th:href="@{'/pitches/edit/'+${pitch.id}}" th:text="${pitch.number}"></a></td>
 												<td th:text="${pitch.grade}"></td>
 												<td th:text="${pitch.notice}"></td>
 											</tr>

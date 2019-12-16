@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
@@ -29,6 +29,7 @@ public class User {
 	private String lastName;
 
 	@NotBlank(message = "L''adresse e-mail est obligatoire")
+	@Email(message = "L'email n'est pas valide")
 	private String email;
 	
 	private String pseudo;
@@ -41,10 +42,12 @@ public class User {
 
 	@Column(columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean checkedCGU = false;
+	//@AssertTrue(message="Vous devez accepter les CGU pour pouvoir vous inscrire")
+	private boolean checkedCGU;
+	
 	@Column(columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean active = true;
+	private boolean active;
 	
 	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp

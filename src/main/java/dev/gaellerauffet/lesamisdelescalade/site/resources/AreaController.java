@@ -34,12 +34,7 @@ public class AreaController {
         return "area/display";
 	}
 	
-	@GetMapping("/les-secteurs")
-	public String listAreas(@PageableDefault(size = 10) Pageable pageable, Model model) {
-		Page<Area> page = areaService.findAllPaginated(pageable);
-		model.addAttribute("page", page);
-        return "area/list";
-	}
+	
 	
 	// display add an area form
 	@Secured("ROLE_USER")

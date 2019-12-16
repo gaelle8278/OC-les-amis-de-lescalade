@@ -44,7 +44,7 @@
 	      	<div class="container-fluid">
 	          	<h1 class="section-title">Ajouter un utilisateur</h1>
 				<div class="row">
-					<div class="col">
+					<div class="col col-md-6 col-lg-4">
 			        	<form action="#" th:action="@{/user/add}" th:object="${user}" method="post">
 			        	 	<div class="form-group">
 							    <label for="firstName">Prénom</label>
@@ -72,6 +72,16 @@
 							    <input type="text" th:field="*{password}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('password')} ? is-invalid : ''">
 							    <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 			    			</div>
+			    			
+			    			<div class="form-group">
+						    	<label for="role">Roles</label>
+						    	<select id="role" name="role" class="form-control">
+							    	<option th:each="role : ${listRoles}"
+			           								th:value="${role.key}" 
+			           								th:text="${role.value}" /> 
+								</select>
+						    	<div class="invalid-feedback" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+							</div>
 			    			<div class="form-group">
 							    <label for="phone">Téléphone</label>
 							    <input type="text" th:field="*{phone}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('phone')} ? is-invalid : ''">
@@ -87,12 +97,8 @@
 							    <input type="text" th:field="*{postalCode}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('postalCode')} ? is-invalid : ''">
 							    <div class="invalid-feedback" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
 			    			</div>
-			    			<div class="form-check">
-			    				<input type="checkbox" class="form-check-input" th:field="*{checkedCGU}" th:classappend="${#fields.hasErrors('checkedCGU')} ? is-invalid : ''">
-	    						<label class="form-check-label" for="checkedCGU">Cochez cette case pour accepter les CGU</label>
-							    <div class="invalid-feedback" th:if="${#fields.hasErrors('checkedCGU')}" th:errors="*{checkedCGU}"></div>
-			    			</div>
-			    			<div>
+			    			
+			    			<div class="form-group">
 			    				<input type="submit" value="Ajouter un utilisateur" class="btn btn-primary"> 
 			    				<a class="btn btn-secondary" th:href="@{/admin/les-utilisateurs}">Retour à la liste des utilisateurs</a>
 			    			</div>

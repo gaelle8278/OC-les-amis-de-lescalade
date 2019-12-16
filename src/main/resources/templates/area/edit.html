@@ -55,7 +55,7 @@
 							    <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
 			    			</div>
 			    			<div>
-			    				<input type="submit" value="Modifier le secteur" class="btn btn-primary"> 
+			    				<input type="submit" value="Mettre à jour le secteur" class="btn btn-primary"> 
 			    				<a class="btn btn-primary" th:href="@{'/areas/' + ${area.id} + '/routes'}">Ajouter une voie</a>
 			    				<a class="btn btn-secondary" th:href="@{'/spot/edit/' + ${spotId}}">Retour au site</a>
 			    			</div>
@@ -80,11 +80,11 @@
 										    	<th scope="col" >Remarques</th>
 											</tr>
 									 	</thead>
-										<th:block th:each="area : ${listRoutes}">
+										<th:block th:each="route : ${listRoutes}">
 											<tr>
-												<td th:text="${area.number}"></td>
-												<td th:text="${area.grade}"></td>
-												<td th:text="${area.notice}"></td>
+												<td><a th:href="@{'/routes/edit/'+${route.id}}" th:text="${route.number}"></a></td>
+												<td th:text="${route.grade}"></td>
+												<td th:text="${route.notice}"></td>
 											</tr>
 										</th:block>
 									</table>

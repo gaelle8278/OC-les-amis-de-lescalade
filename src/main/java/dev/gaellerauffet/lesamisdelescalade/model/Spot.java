@@ -26,7 +26,6 @@ public class Spot {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	
 	@NotBlank(message = "Le nom est obligatoire")
 	private String name;
 	@NotBlank(message = "La description est obligatoire")
