@@ -95,7 +95,7 @@
 	     	</div>
 	     </section>
 	     
-	     <section id="spot-comment" class="section-bg">
+	     <section id="spot-comment" class="section-bg pt-2 mt-5">
 	     	<div class="container">
 		     	
 		        <div sec:authorize="hasAuthority('ROLE_USER')">
@@ -119,18 +119,25 @@
 					 </div>
 				</div>
 				
-		        <h3 th:if="${not #lists.isEmpty(listComments)}" class="section-title text-left">Les commentaires</h3>
+		        <h3 th:if="${not #lists.isEmpty(spot.listComment)}" class="section-title text-left">Les commentaires</h3>
 		    
-		        <th:block th:if="${not #lists.isEmpty(listComments)}" th:each="comment : ${listComments}">
-					<div class="row my-2">
-						<div class="col">
-							<p th:text="${#temporals.format(comment.createdDate, 'dd/MM/yyyy à HH:mm')}">
-							<p class="font-weight-bold" th:text="${comment.title}">
-							<p th:text="${comment.content}">
-							
+		    	<div class="comment-list" th:if="${not #lists.isEmpty(spot.listComment)}">
+			        <th:block  th:each="comment : ${spot.listComment}">
+						<div class="row mt-2">
+							<div class="col">
+								<header class="font-weight-lighter">
+									<i class="fa fa-user pr-2"></i><span th:text="${comment.user.firstName} + ' ' + ${comment.user.lastName}"></span> le 
+									<time th:text="${#temporals.format(comment.createdDate, 'dd/MM/yyyy à HH:mm')}"></time>
+								</header>
+								<div class="pb-2">
+									<div class="font-weight-bold" th:text="${comment.title}"></div>
+								
+									<div th:text="${comment.content}"></div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</th:block>
+					</th:block>
+				</div>
 			</div>
 			
 	     </section>

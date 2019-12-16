@@ -40,10 +40,8 @@ public class SpotController {
 	@GetMapping("/spot/{id}")
 	public String displaySpot(@PathVariable("id") int id, Comment comment, Model model) {
 		Spot spot = spotService.getSpot(id);
-		//@TODO récupérer les commentaires
-		List<Comment> listComments = spotService.getListComment(spot);
+		
 		model.addAttribute("spot", spot);
-		model.addAttribute("listComments", listComments);
 		model.addAttribute("comment", comment);
         return "spot/display";
 	}
