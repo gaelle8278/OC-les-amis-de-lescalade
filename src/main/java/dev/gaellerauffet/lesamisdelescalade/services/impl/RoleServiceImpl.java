@@ -16,17 +16,11 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
     RoleRepository roleRepository;
 	
-
 	@Override
-	public Map<String, String> getListAvailableRoles() {
-		List<Role> savedRoles = roleRepository.findAll();
+	public List<Role> getRoles() {
+		List<Role> listRoles = roleRepository.findAll();
 		
-		Map<String, String> listRoles = new HashMap<String, String>();
-		for(Role role : savedRoles) {
-			listRoles.put(role.getRole(), role.getLabel());
-		}
 		return listRoles;
 	}
-	
 
 }

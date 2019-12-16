@@ -1,5 +1,6 @@
 package dev.gaellerauffet.lesamisdelescalade.site.resources;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dev.gaellerauffet.lesamisdelescalade.model.Role;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 import dev.gaellerauffet.lesamisdelescalade.services.RoleService;
 import dev.gaellerauffet.lesamisdelescalade.services.UserService;
@@ -49,21 +51,23 @@ public class UserController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/adduser")
 	public String displayUserAddForm(User user, Model model) {
-		Map<String, String> listRoles = roleService.getListAvailableRoles();
+		List<Role> listRoles = roleService.getRoles();
 	    model.addAttribute("listRoles", listRoles);
 		return "user/add";
 	}
 	
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/user/add")
-	public String addUser(@RequestParam String role, @Valid User user, BindingResult result, Model model) {
-		System.out.println(role);
+	public String addUser(@Valid User user, BindingResult result, Model model) {
+		
 		if(result.hasErrors()) {
-			Map<String, String> listRoles = roleService.getListAvailableRoles();
+			List<Role> listRoles = roleService.getRoles();
 		    model.addAttribute("listRoles", listRoles);
 			return "user/add"; 
 		}
-		userService.add(user, role);
+		//userService.add(user, role);
+		//@RequestParam String role
+		userService.add(user);
 		
 		//redirect
 		return "redirect:/admin/les-utilisateurs";
@@ -74,7 +78,7 @@ public class UserController {
 	@GetMapping("/user/edit/{id}")
 	public String displayUserUpdateForm(@PathVariable("id") int id, Model model) {
 	    User user = userService.getUser(id);
-	    Map<String, String> listRoles = roleService.getListAvailableRoles();
+	    List<Role> listRoles = roleService.getRoles();
 	    model.addAttribute("listRoles", listRoles);
 	    model.addAttribute("user", user);
 	    
@@ -85,7 +89,7 @@ public class UserController {
 	@PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") int id, @Valid User user, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	    	Map<String, String> listRoles = roleService.getListAvailableRoles();
+	    	List<Role> listRoles = roleService.getRoles();
 		    model.addAttribute("listRoles", listRoles);
 	        return "user/edit";
 	    }

@@ -49,6 +49,13 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
 	}
+	
+	@Override
+	public void add(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setActive(true);
+		userRepository.save(user);
+	}
 
 	@Override
 	public void delete(int id) {
@@ -78,7 +85,6 @@ public class UserServiceImpl implements UserService {
 		//active state doesn't change, it change only during user activation process
 		userForm.setCheckedCGU(user.isCheckedCGU());
 		userForm.setActive(user.isActive());
-		userForm.setRoles(user.getRoles());
 		if( ! StringUtils.isBlank(userForm.getPassword()) ) {
 			userForm.setPassword(bCryptPasswordEncoder.encode(userForm.getPassword()));
 		} else {

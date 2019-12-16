@@ -1,8 +1,6 @@
 package dev.gaellerauffet.lesamisdelescalade.services;
 
 import java.util.List;
-import javax.validation.Valid;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,16 +20,8 @@ public interface UserService {
 
 	User findUserByEmail(String name);
 
-	void add(@Valid User user, String role);
+	void add(User user, String role);
+	void add(User user);
 
-	
-
-	
-	
-	//obtenir les sites d'un user
-	//obtenir les topos d'un User
-	//obtenir les pret fait par un user
-	
-	//obtenir les topos disponibles pour le pret
 
 }

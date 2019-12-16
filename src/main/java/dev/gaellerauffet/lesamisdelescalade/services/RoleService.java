@@ -1,9 +1,11 @@
 package dev.gaellerauffet.lesamisdelescalade.services;
 
+import java.util.List;
 import java.util.Map;
 
-public interface RoleService {
+import dev.gaellerauffet.lesamisdelescalade.model.Role;
 
-	Map<String, String> getListAvailableRoles();
+public interface RoleService {
+	List<Role> getRoles();
 
 }
