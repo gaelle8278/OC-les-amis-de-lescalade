@@ -45,13 +45,13 @@
 	        	
 	        	<div class="row mt-5">
 	        		<div class="col-md-4 col-lg-2">
-	        			<p><span class="font-weight-bold">Numéro :</span><th:block th:text="${route.number}"></th:block></p>
+	        			<p><span class="font-weight-bold">Numéro : </span><th:block th:text="${route.number}"></th:block></p>
 	        		</div>
 	        		<div class="col-md-4 col-lg-2">
-	        			<p><span class="font-weight-bold">Cotation :</span><th:block th:text="${route.grade}"></th:block></p>
+	        			<p><span class="font-weight-bold">Cotation : </span><th:block th:text="${route.grade}"></th:block></p>
 	        		</div>
 	        		<div class="col-md-4 col-lg-2">
-	        			<p><span class="font-weight-bold">Nombre de spits :</span><th:block th:text="${route.nbSpits}"></th:block></p>
+	        			<p><span class="font-weight-bold">Nombre de spits : </span><th:block th:text="${route.nbSpits}"></th:block></p>
 	        		</div>
 	        	</div>
 	        	<div class="row mb-5">
@@ -62,13 +62,13 @@
 	        	
 	        	<div th:if="${not #lists.isEmpty(route.listPitchs)}" class="row">
 	        		<div class="col">
-	        			<h5>Voies décrites</h5>
-			        	<!--  table contenant la liste des sites-->
+	        			<h5>Longueurs décrites</h5>
 			        	<table class="table mt-5">
 			        		<thead>
 							    <tr>
 							      	<th scope="col" class="text-center">Numéro</th>
 							      	<th scope="col" class="text-center">Cotation</th>
+							      	<th scope="col" class="text-center"></th>
 							    </tr>
 						 	 </thead>
 						   	<th:block th:each="pitch : ${route.listPitchs}">
@@ -85,14 +85,12 @@
 				</div>
 				
 				<div  class="row">
-					<div class="col">
-						<div class="col-md-4 col-lg-2 my-2">
+						<div class="col-md-4 col-lg-3 my-2">
 							<a class="btn btn-secondary" th:href="@{'/area/' + ${route.area.id}}">Retour au secteur</a>
 						</div>
-						<div class="col-md-4 col-lg-2 my-2">
+						<div class="col-md-4 col-lg-3 my-2">
 							<a class="btn btn-secondary" th:href="@{'/spot/' + ${route.area.spot.id}}">Retour au site</a>
 						</div>
-					</div>
 				</div>
 	        </div>
 		</section>

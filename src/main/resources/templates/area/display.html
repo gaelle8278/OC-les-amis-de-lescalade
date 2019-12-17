@@ -57,6 +57,7 @@
 							      	<th scope="col" class="text-center">Numéro</th>
 							      	<th scope="col" class="text-center">Cotation</th>
 							      	<th scope="col" class="text-center">Nombre de spits</th>
+							      	<th scope="col" class="text-center"></th>
 							    </tr>
 						 	 </thead>
 						   	<th:block th:each="route : ${area.listRoutes}">
@@ -74,10 +75,10 @@
 				</div>
 				
 				<div  class="row">
-						<div class="col-md-4 col-lg-2 my-2">
+						<div class="col-md-4 col-lg-3 my-2">
 							<a class="btn btn-secondary" th:href="@{'/spots/' + ${area.spot.id} + '/areas/list'}">Retour à la liste des secteurs</a>
 						</div>
-						<div class="col-md-4 col-lg-2 my-2">
+						<div class="col-md-4 col-lg-3 my-2">
 							<a class="btn btn-secondary" th:href="@{'/spot/' + ${area.spot.id}}">Retour au site</a>
 						</div>
 				</div>

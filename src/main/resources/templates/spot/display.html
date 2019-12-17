@@ -92,40 +92,45 @@
 		    			<a class="btn btn-success" th:href="@{'/spots/'+${spot.id}+'/areas/list'}">Voir les secteurs</a>
 		    		</div>
 		    	</div>
-	     	</div>
-	     </section>
+		    	<div class="row my-2">
+		    		<div class="col">
+		    			<a class="btn btn-primary" th:href="@{'/les-sites'}">Retour à la liste des sites</a>
+		    		</div>
+		    	</div>
+	     	
 	     
-	     <section id="spot-comment" class="section-bg pt-2 mt-5">
-	     	<div class="container">
-		     	
-		        <div sec:authorize="hasAuthority('ROLE_USER')">
-					 <h3>Laisser un commentaire</h3>	        
-					 <div>
-					 	<form action="#"  th:replace="commons/forms :: comment-form"></form>
-					 </div>
-				</div>
-				
-		        <h3 th:if="${not #lists.isEmpty(spot.listComment)}" class="section-title text-left">Les commentaires</h3>
-		    
-		    	<div class="comment-list" th:if="${not #lists.isEmpty(spot.listComment)}">
-			        <th:block  th:each="comment : ${spot.listComment}">
-						<div class="row mt-2">
-							<div class="col">
-								<header class="font-weight-lighter">
-									<i class="fa fa-user pr-2"></i><span th:text="${comment.user.firstName} + ' ' + ${comment.user.lastName}"></span> le 
-									<time th:text="${#temporals.format(comment.createdDate, 'dd/MM/yyyy à HH:mm')}"></time>
-								</header>
-								<div class="pb-2">
-									<div class="font-weight-bold" th:text="${comment.title}"></div>
-								
-									<div th:text="${comment.content}"></div>
+	     
+	     
+		     	<div id="spot-comment" class="mt-5">
+			     	
+			        <div sec:authorize="hasAuthority('ROLE_USER')">
+						 <h3>Laisser un commentaire</h3>	        
+						 <div>
+						 	<form action="#"  th:replace="commons/forms :: comment-form"></form>
+						 </div>
+					</div>
+					
+			        <h3 th:if="${not #lists.isEmpty(spot.listComment)}" class="section-title text-left">Les commentaires</h3>
+			    
+			    	<div class="comment-list" th:if="${not #lists.isEmpty(spot.listComment)}">
+				        <th:block  th:each="comment : ${spot.listComment}">
+							<div class="row mt-2">
+								<div class="col">
+									<header class="font-weight-lighter">
+										<i class="fa fa-user pr-2"></i><span th:text="${comment.user.firstName} + ' ' + ${comment.user.lastName}"></span> le 
+										<time th:text="${#temporals.format(comment.createdDate, 'dd/MM/yyyy à HH:mm')}"></time>
+									</header>
+									<div class="pb-2">
+										<div class="font-weight-bold" th:text="${comment.title}"></div>
+									
+										<div th:text="${comment.content}"></div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</th:block>
+						</th:block>
+					</div>
 				</div>
 			</div>
-			
 	     </section>
 	     
 	    
