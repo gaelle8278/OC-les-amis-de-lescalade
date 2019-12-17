@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ErrorConfig implements ErrorController  {
 	 @Override
-	    public String getErrorPath() {
+	 public String getErrorPath() {
 	        return "/error";
-	    }
+	 }
 	 
 	 
 	 @RequestMapping("/error")
@@ -28,6 +28,8 @@ public class ErrorConfig implements ErrorController  {
 	         }
 	         else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
 	             return "/error/error-500";
+	         }  else if(statusCode == HttpStatus.FORBIDDEN.value()) {
+	             return "/error/error-403";
 	         }
 	     }
 	     return "/error/error";

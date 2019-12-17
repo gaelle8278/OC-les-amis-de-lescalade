@@ -1001,12 +1001,12 @@ h6 {
 
 
 /* 404 */
-#notfound {
+#status-code {
   position: relative;
   height: 75vh;
 }
 
-#notfound .notfound {
+#status-code .status-code {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1015,19 +1015,19 @@ h6 {
           transform: translate(-50%, -50%);
 }
 
-.notfound {
+.status-code {
   max-width: 520px;
   width: 100%;
   line-height: 1.4;
   text-align: center;
 }
 
-.notfound .notfound-404 {
+.status-code .status-code-message {
   position: relative;
   height: 240px;
 }
 
-.notfound .notfound-404 h1 {
+.status-code .status-code-message h1 {
   font-family: 'Montserrat', sans-serif;
   position: absolute;
   left: 50%;
@@ -1044,11 +1044,11 @@ h6 {
   margin-left: -20px;
 }
 
-.notfound .notfound-404 h1>span {
+.status-code .status-code-message h1>span {
   text-shadow: -8px 0px 0px #fff;
 }
 
-.notfound .notfound-404 h3 {
+.status-code .status-code-message h3 {
   font-family: 'Cabin', sans-serif;
   position: relative;
   font-size: 16px;
@@ -1060,7 +1060,7 @@ h6 {
   padding-left: 6px;
 }
 
-.notfound h2 {
+.status-code h2 {
   font-family: 'Cabin', sans-serif;
   font-size: 20px;
   font-weight: 400;
