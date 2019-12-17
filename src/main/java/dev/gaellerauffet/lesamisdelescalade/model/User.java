@@ -42,7 +42,7 @@ public class User {
 
 	@Column(columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	//@AssertTrue(message="Vous devez accepter les CGU pour pouvoir vous inscrire")
+	@AssertTrue(message="Vous devez accepter les CGU pour pouvoir vous inscrire")
 	private boolean checkedCGU;
 	
 	@Column(columnDefinition = "TINYINT")

@@ -36,8 +36,6 @@ public class UserServiceImpl implements UserService {
 	public User getUser(int id) {
 		
 		User user = userRepository.findById(id);
-		//encrypted password is never displayed
-		user.setPassword("");
 		return user;
 	}
 
@@ -52,15 +50,11 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void add(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setActive(true);
 		userRepository.save(user);
 	}
 
 	@Override
 	public void delete(int id) {
-		//@Todo before check foreign key constraint to delete manually depenencies 
-		//or add delete dependencies on foreign key in database 
 		userRepository.deleteById(id);
 	}
 
@@ -79,18 +73,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(User userForm) {
-		User user = em.getReference(User.class,userForm.getId());
-		//on update of a user information checkCGU status doesn't change
-		//active state doesn't change, it change only during user activation process
-		userForm.setCheckedCGU(user.isCheckedCGU());
-		userForm.setActive(user.isActive());
-		if( ! StringUtils.isBlank(userForm.getPassword()) ) {
-			userForm.setPassword(bCryptPasswordEncoder.encode(userForm.getPassword()));
-		} else {
-			userForm.setPassword(user.getPassword());
-		}
-		
+	public void update(User userForm) {		
 		userRepository.save(userForm);
 		
 	}
