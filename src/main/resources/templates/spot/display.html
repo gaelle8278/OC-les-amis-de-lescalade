@@ -83,7 +83,7 @@
 	        		<div class="col-md-2"><span class="font-weight-bold">Remarques</span></div>
 	        		<div class="col-md-10" th:text="${spot.notice}"></div>
 	        	</div>
-				<div class="row my-2">
+				<div class="row my-5">
 					<div class="col"  th:text="${spot.description}"></div>
 		    	</div>
 		    
@@ -99,7 +99,7 @@
 	     	<div class="container">
 		     	
 		        <div sec:authorize="hasAuthority('ROLE_USER')">
-					<h3>Laisser un commentaire</h3>	        
+					 <h3>Laisser un commentaire</h3>	        
 					 <div>
 					 	<form action="#"  th:replace="commons/forms :: comment-form"></form>
 					 </div>

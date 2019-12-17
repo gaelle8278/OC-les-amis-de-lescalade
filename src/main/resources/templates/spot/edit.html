@@ -40,11 +40,10 @@
 			<nav th:replace="commons/user-account/menu :: navbar"></nav>
 
 			<div class="container-fluid">
-	          	<h1 class="" th:text="'Modification du site ' + ${spot.name}" ></h1>
+	          	<h1 class="section-title" th:text="'Modification du site ' + ${spot.name}" ></h1>
 	       
-	        	<div class="row">
-	        		<div class="col">
-			        	<form action="#" th:action="@{/spot/update/{id}(id=${spot.id})}" th:object="${spot}" method="post">
+	        
+			    <form action="#" th:action="@{/spot/update/{id}(id=${spot.id})}" th:object="${spot}" method="post">
 			        	 	<div class="form-group col-md-6">
 							    <label for="name">Nom</label>
 							    <input type="text" th:field="*{name}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('name')} ? is-invalid : ''">
@@ -74,7 +73,7 @@
 							    <input type="text" th:field="*{orientation}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('orientation')} ? is-invalid : ''">
 							    <div class="invalid-feedback" th:if="${#fields.hasErrors('orientation')}" th:errors="*{orientation}"></div>
 			    			</div>
-			    			<div class="form-row col">
+			    			<div class="form-row">
 				    			<div class="form-group col-md-6 col-lg-2">
 								    <label for="minHeight">Hauteur minimale</label>
 								    <input type="text" th:field="*{minHeight}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('minHeight')} ? is-invalid : ''">
@@ -86,7 +85,7 @@
 								    <div class="invalid-feedback" th:if="${#fields.hasErrors('maxHeight')}" th:errors="*{maxHeight}"></div>
 				    			</div>
 				    		</div>
-				    		<div class="form-row col">
+				    		<div class="form-row">
 					    		<div class="form-group col-md-4 col-lg-2">
 								    <label for="nbAreas">Nombre de secteurs</label>
 								    <input type="text" th:field="*{nbAreas}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('nbAreas')} ? is-invalid : ''">
@@ -103,7 +102,7 @@
 								    <div class="invalid-feedback" th:if="${#fields.hasErrors('nbPitches')}" th:errors="*{nbPitches}"></div>
 			    				</div>
 							</div>
-				    		<div class="form-row col">
+				    		<div class="form-row">
 				    			<div class="form-group col-md-6 col-lg-2">
 								    <label for="minGrade">Cotation minimale</label>
 								    <input type="text" th:field="*{minGrade}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('minGrade')} ? is-invalid : ''">
@@ -126,9 +125,8 @@
 			    				<a class="btn btn-primary" th:href="@{'/spots/'+${spot.id}+'/areas'}">Ajouter un secteur</a>
 			    				<a class="btn btn-secondary" th:href="@{/membre/mes-sites}">Retour à la liste des sites</a>
 			    			</div>
-						</form>
-					</div>
-				</div>
+				</form>
+					
 				<div class="row" th:if="${not #lists.isEmpty(spot.listArea)}">
 					<div class="col">
 						<div class="card">

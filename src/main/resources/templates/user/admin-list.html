@@ -38,60 +38,64 @@
 	
 	      	<nav th:replace="commons/be-account/menu :: navbar"></nav>
 	      	<div class="container-fluid">
-	          	<h1 class="">Les utilisateurs</h1>
+	      		
+	          	<h1 class="section-title">Les utilisateurs</h1>
 	        	
-	        	<!--  table contenant la liste des sites-->
-	        	<table class="table">
-	        		<thead>
-					    <tr>
-					      	<th scope="col" class="text-center">Id</th>
-					      	<th scope="col" class="text-center">Prénom</th>
-					      	<th scope="col" class="text-center">Nom</th>
-					      	<th scope="col" class="text-center">E-mail</th>
-					    </tr>
-				 	 </thead>
-				   	<th:block th:each="user : ${page.content}">
-				   		<tr>
-				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/user/'+ ${user.id}}" th:text="${user.id}"></a></td>
-					    	<td class="text-center" th:text="${user.firstName}"></td>
-					    	<td class="text-center" th:text="${user.lastName}"></td>
-					    	<td class="text-center" th:text="${user.email}"></td>
-					    	<td class="text-center">
-					    		<a class="btn btn-link" th:href="@{'/user/'+ ${user.id}}">Voir</a>
-					    		 | <a class="btn btn-link" th:href="@{'/user/edit/' + ${user.id}}">Modifier</a>
-					    		 | <button class="btn btn-link"   data-toggle="modal" data-target="#deletionModal" 
-					    		 	th:attr="data-link=@{'/user/delete/'+ ${user.id}},data-label=${'l''utilisateur'},data-name=@{${user.firstName} + ' ' + ${user.lastName}}" >Supprimer</button>
-					    	</td>
-					    </tr>
-				   </th:block>
-				</table>
-				
-				<!-- pagination -->
-				<nav aria-label="Pages listant les utilisateurs">
-					<ul class="pagination">
-					    <li th:if="${page.hasPrevious()}" class="page-item">
-					        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
-					        	<span aria-hidden="true">&laquo;</span>
-        						<span class="sr-only">Précédent</span>
-					       	</a>
-					    </li>
-					    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-					        <li th:if="${page.number == i}" class="active page-item">
-					       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
-					       	</li>
-					        <li th:unless="${page.number == i}" class="page-item">
-					             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
-					        </li>
-					    </th:block>
-				    	<li th:if="${page.hasNext()}" class="page-item">
-				        	<a th:href="@{''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
-				        		<span aria-hidden="true">&raquo;</span>
-        						<span class="sr-only">Suivant</span>
-				        	</a>
-				    	</li>
-				    </ul>
-				</nav>
-				
+	        	<div class="row">
+					<div class="col">
+			        	<table class="table">
+			        		<thead>
+							    <tr>
+							      	<th scope="col" class="text-center">Id</th>
+							      	<th scope="col" class="text-center">Prénom</th>
+							      	<th scope="col" class="text-center">Nom</th>
+							      	<th scope="col" class="text-center">E-mail</th>
+							    </tr>
+						 	 </thead>
+						   	<th:block th:each="user : ${page.content}">
+						   		<tr>
+						        	<td class="text-center"><a class="btn btn-link" th:href="@{'/user/'+ ${user.id}}" th:text="${user.id}"></a></td>
+							    	<td class="text-center" th:text="${user.firstName}"></td>
+							    	<td class="text-center" th:text="${user.lastName}"></td>
+							    	<td class="text-center" th:text="${user.email}"></td>
+							    	<td class="text-center">
+							    		<a class="btn btn-link" th:href="@{'/user/'+ ${user.id}}">Voir</a>
+							    		 | <a class="btn btn-link" th:href="@{'/user/edit/' + ${user.id}}">Modifier</a>
+							    		 | <button class="btn btn-link"   data-toggle="modal" data-target="#deletionModal" 
+							    		 	th:attr="data-link=@{'/user/delete/'+ ${user.id}},data-label=${'l''utilisateur'},data-name=@{${user.firstName} + ' ' + ${user.lastName}}" >Supprimer</button>
+							    	</td>
+							    </tr>
+						   </th:block>
+						</table>
+						
+						<!-- pagination -->
+						<nav aria-label="Pages listant les utilisateurs">
+							<ul class="pagination">
+							    <li th:if="${page.hasPrevious()}" class="page-item">
+							        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
+							        	<span aria-hidden="true">&laquo;</span>
+		        						<span class="sr-only">Précédent</span>
+							       	</a>
+							    </li>
+							    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+							        <li th:if="${page.number == i}" class="active page-item">
+							       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
+							       	</li>
+							        <li th:unless="${page.number == i}" class="page-item">
+							             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
+							        </li>
+							    </th:block>
+						    	<li th:if="${page.hasNext()}" class="page-item">
+						        	<a th:href="@{''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
+						        		<span aria-hidden="true">&raquo;</span>
+		        						<span class="sr-only">Suivant</span>
+						        	</a>
+						    	</li>
+						    </ul>
+						</nav>
+					</div>
+				</div>
+					
 				<div class="row">
 					<div class="col py-2">
 				  		<a th:href="@{/adduser}" class="btn btn-primary ">Ajouter un utilisateur</a>

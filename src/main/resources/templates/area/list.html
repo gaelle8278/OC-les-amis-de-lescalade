@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<title>Les amis de l'escalade</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
-
-<!-- Favicons -->
-<link th:href="@{/img/favicon.png}" rel="icon">
-<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
-
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
-	rel="stylesheet">
-
-<!-- Bootstrap CSS File -->
-<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
-	rel="stylesheet">
-
-<!-- Libraries CSS Files -->
-<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
-
-<!-- Main Stylesheet File -->
-<link th:href="@{/css/style.css}" rel="stylesheet">
+	<meta charset="utf-8">
+	<title>Les amis de l'escalade</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+	
+	<!-- Favicons -->
+	<link th:href="@{/img/favicon.png}" rel="icon">
+	<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+	
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+		rel="stylesheet">
+	
+	<!-- Bootstrap CSS File -->
+	<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+		rel="stylesheet">
+	
+	<!-- Libraries CSS Files -->
+	<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+	
+	<!-- Main Stylesheet File -->
+	<link th:href="@{/css/style.css}" rel="stylesheet">
 
 
 </head>
 
 <body>
-	<!--==========================
-  Header
-  ============================-->
 	<header th:replace="commons/header :: header"></header>
 
 
@@ -40,13 +37,12 @@
 	     <section id="spot-list" class="section-bg">
 	      	<div class="container">
 	        	<header class="section-header">
-	          		<h3 class="section-title">Les secteurs du site <span th:text="${spot.name}"></span></h3>
+	          		<h1 class="section-title">Les secteurs du site <span th:text="${spot.name}"></span></h1>
 	        	</header>
 	        	
 	        	
 	        	<div th:if="${page}" class="row">
 	        		<div class="col">
-			        	<!--  table contenant la liste des sites-->
 			        	<table class="table mt-5">
 			        		<thead>
 							    <tr>

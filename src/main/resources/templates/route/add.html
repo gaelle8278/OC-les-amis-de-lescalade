@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<title>Les amis de l'escalade</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
-
-<!-- Favicons -->
-<link th:href="@{/img/favicon.png}" rel="icon">
-<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
-
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
-	rel="stylesheet">
-
-<!-- Bootstrap CSS File -->
-<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
-	rel="stylesheet">
-
-<!-- Libraries CSS Files -->
-<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
-	rel="stylesheet">
-
-<!-- Main Stylesheet File -->
-<link th:href="@{/css/member-account.css}" rel="stylesheet">
+	<meta charset="utf-8">
+	<title>Les amis de l'escalade</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+	
+	<!-- Favicons -->
+	<link th:href="@{/img/favicon.png}" rel="icon">
+	<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+	
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+		rel="stylesheet">
+	
+	<!-- Bootstrap CSS File -->
+	<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+		rel="stylesheet">
+	
+	<!-- Libraries CSS Files -->
+	<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
+		rel="stylesheet">
+	
+	<!-- Main Stylesheet File -->
+	<link th:href="@{/css/member-account.css}" rel="stylesheet">
 
 </head>
 
@@ -40,35 +40,37 @@
 			<nav th:replace="commons/user-account/menu :: navbar"></nav>
 
 			<div class="container-fluid">
-	          		<h1 class="">Ajout d'une voie</h1>
+	          	<h1 class="section-title">Ajout d'une voie</h1>
 	     
-	        	<div>
-		        	<form action="#" th:action="@{'/areas/'+ ${areaId} + '/routes'}" th:object="${route}" method="post">
-		        	 	<div class="form-group">
-						    <label for="number">Numéro</label>
-						    <input type="text" th:field="*{number}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('number')} ? is-invalid : ''">
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
-						</div>
-						<div class="form-group">
-						    <label for="grade">Cotation</label>
-						    <input type="text" th:field="*{grade}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('grade')} ? is-invalid : ''">
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"></div>
-						</div>
-						<div class="form-group">
-						    <label for="nbSpits">Nombre de spits</label>
-						    <input type="text" th:field="*{nbSpits}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('nbSpits')} ? is-invalid : ''">
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('nbSpits')}" th:errors="*{nbSpits}"></div>
-						</div>
-						<div class="form-group">
-						    <label for="notice">Remarques</label>
-						    <textarea class="form-control" th:field="*{notice}" rows="2" th:classappend="${#fields.hasErrors('notice')} ? is-invalid : ''"></textarea>
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('notice')}" th:errors="*{notice}"></div>
-		    			</div>
-		    			<div>
-		    				<input type="submit" value="Ajouter la voie" class="btn btn-primary"> 
-		    				<a class="btn btn-secondary" th:href="@{'/areas/edit/' + ${areaId}}">Retour au secteur</a>
-		    			</div>
-					</form>
+	        	<div class="row">
+					<div class="col-md-6 col-lg-4">
+			        	<form action="#" th:action="@{'/areas/'+ ${areaId} + '/routes'}" th:object="${route}" method="post">
+			        	 	<div class="form-group">
+							    <label for="number">Numéro</label>
+							    <input type="text" th:field="*{number}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('number')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
+							</div>
+							<div class="form-group">
+							    <label for="grade">Cotation</label>
+							    <input type="text" th:field="*{grade}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('grade')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"></div>
+							</div>
+							<div class="form-group">
+							    <label for="nbSpits">Nombre de spits</label>
+							    <input type="text" th:field="*{nbSpits}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('nbSpits')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('nbSpits')}" th:errors="*{nbSpits}"></div>
+							</div>
+							<div class="form-group">
+							    <label for="notice">Remarques</label>
+							    <textarea class="form-control" th:field="*{notice}" rows="2" th:classappend="${#fields.hasErrors('notice')} ? is-invalid : ''"></textarea>
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('notice')}" th:errors="*{notice}"></div>
+			    			</div>
+			    			<div>
+			    				<input type="submit" value="Ajouter la voie" class="btn btn-primary"> 
+			    				<a class="btn btn-secondary" th:href="@{'/areas/edit/' + ${areaId}}">Retour au secteur</a>
+			    			</div>
+						</form>
+					</div>
 				</div>
 	        </div>
 			<!-- /.container-fluid -->

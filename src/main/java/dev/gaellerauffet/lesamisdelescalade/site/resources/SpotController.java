@@ -35,8 +35,6 @@ public class SpotController {
 	@Autowired
     SpotSearchForm spotsearchform;
 	
-	
-	
 	@GetMapping("/spot/{id}")
 	public String displaySpot(@PathVariable("id") int id, Comment comment, Model model) {
 		Spot spot = spotService.getSpot(id);
@@ -59,7 +57,7 @@ public class SpotController {
 	}
 	
 	@RequestMapping("/les-sites/filtered")
-    public String listSpotsFiltered( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 2) Pageable pageable, Model model) {
+    public String listSpotsFiltered( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 10) Pageable pageable, Model model) {
 		//recherche des sites selon les critères de recherche
 		Page<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform, pageable);
 		if(foundedSpots == null) {
@@ -87,28 +85,6 @@ public class SpotController {
 		model.addAttribute("page", page);
         return "spot/admin-list";
 	}
-	
-	@GetMapping("/recherche-site")
-    public String search( Model model) {
-		model.addAttribute("spotsearchform", new SpotSearchForm());
-		//liste des régions
-		List<String> listRegions =  spotService.getListRegionsForForm();
-		model.addAttribute("listRegions", listRegions);
-        return "spot/search";
-    }
-	
-	@PostMapping("/recherche-site")
-    public String search( @ModelAttribute("spotsearchform") SpotSearchForm spotsearchform, BindingResult result, @PageableDefault(size = 10) Pageable pageable, Model model) {
-		//recherche des sites selon les critères de recherche
-		Page<Spot> foundedSpots = spotService.getSpotsForSearchCriteria(spotsearchform, pageable);
-		
-		model.addAttribute("page", foundedSpots);
-		//liste des régions
-		List<String> listRegions =  spotService.getListRegionsForForm();
-		model.addAttribute("listRegions", listRegions);
-		
-        return "spot/search";
-    }
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/addspot")

@@ -40,7 +40,7 @@
 			<nav th:replace="commons/user-account/menu :: navbar"></nav>
 
 			<div class="container-fluid">
-	          	<h1 class="mt-4">Ajouter un site</h1>
+	          	<h1 class="section-title">Ajouter un site</h1>
 	        	
 	        	<div>
 		        	<form action="#" th:action="@{/spot/add}" th:object="${spot}" method="post">
@@ -73,7 +73,7 @@
 						    <input type="text" th:field="*{orientation}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('orientation')} ? is-invalid : ''">
 						    <div class="invalid-feedback" th:if="${#fields.hasErrors('orientation')}" th:errors="*{orientation}"></div>
 		    			</div>
-		    			<div class="form-row col">
+		    			<div class="form-row">
 			    			<div class="form-group col-md-6 col-lg-2">
 							    <label for="minHeight">Hauteur minimale</label>
 							    <input type="text" th:field="*{minHeight}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('minHeight')} ? is-invalid : ''">
@@ -85,7 +85,7 @@
 							    <div class="invalid-feedback" th:if="${#fields.hasErrors('maxHeight')}" th:errors="*{maxHeight}"></div>
 			    			</div>
 			    		</div>
-			    		<div class="form-row col">
+			    		<div class="form-row">
 			    			<div class="form-group col-md-4 col-lg-2">
 							    <label for="nbAreas">Nombre de secteurs</label>
 							    <input type="text" th:field="*{nbAreas}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('nbAreas')} ? is-invalid : ''">
@@ -102,7 +102,7 @@
 							    <div class="invalid-feedback" th:if="${#fields.hasErrors('nbPitches')}" th:errors="*{nbPitches}"></div>
 			    			</div>
 			    		</div>
-			    		<div class="form-row col">
+			    		<div class="form-row">
 			    			<div class="form-group col-md-6 col-lg-2">
 							    <label for="minGrade">Cotation minimale</label>
 							    <input type="text" th:field="*{minGrade}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('minGrade')} ? is-invalid : ''">
@@ -125,7 +125,7 @@
 		    			</div>
 					</form>
 				</div>
-	     </div>
+	     	</div>
 			<!-- /.container-fluid -->
 		</div>
 		<!-- /#page-content-wrapper -->

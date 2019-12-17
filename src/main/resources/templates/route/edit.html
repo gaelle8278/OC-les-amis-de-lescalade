@@ -40,10 +40,10 @@
 			<nav th:replace="commons/user-account/menu :: navbar"></nav>
 
 			<div class="container-fluid">
-	          	<h1 class="">Modification d'une voie</h1>
+	          	<h1 class="section-title">Modification d'une voie</h1>
 	       
 	        	<div class="row">
-	        		<div class="col">
+					<div class="col-md-6 col-lg-4">
 			        	<form action="#" th:action="@{/routes/update/{id}(id=${route.id})}" th:object="${route}" method="post">
 			        	 	<div class="form-group">
 							    <label for="number">Numéro</label>
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 				<div class="row" th:if="${not #lists.isEmpty(route.listPitchs)}">
-					<div class="col">
+					<div class="col-md-6 col-lg-4">
 						<div class="card">
 							<div class="card-header" id="headerPitchs">
 								<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapsePitches" aria-expanded="false" aria-controls="collapsePitches">

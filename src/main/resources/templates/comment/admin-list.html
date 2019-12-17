@@ -37,58 +37,59 @@
 	      	<div class="container-fluid">
 	          	<h1 class="mt-4">Les commentaires</h1>
 	        	
-	        	<!--  table contenant la liste des sites-->
-	        	<table class="table">
-	        		<thead>
-					    <tr>
-					      	<th scope="col" class="text-center">ID</th>
-					      	<th scope="col" class="text-center">Titre</th>
-					      	<th scope="col" class="text-center">Contenu</th>
-					      	<th scope="col" class="text-center">Actions</th>
-					    </tr>
-				 	 </thead>
-				   	<th:block th:each="comment : ${page.content}">
-				   		<tr>
-				        	<td class="text-center"><a class="btn btn-link" th:href="@{'/comment/'+ ${comment.id}}" th:text="${comment.id}"></a></td>
-					    	<td class="text-center" th:text="${comment.title}"></td>
-					    	<td class="text-center" th:text="${comment.content}"></td>
-					    	<td class="text-center">
-					    		 <a class="btn btn-link" th:href="@{'/comment/'+ ${comment.id}}">Voir</a>
-					    		 | <a class="btn btn-link" th:href="@{'/comment/edit/' + ${comment.id}}">Modifier</a>
-					    		 | <button class="btn btn-link"   data-toggle="modal" data-target="#deletionModal" 
-					    		 	th:attr="data-link=@{'/comment/delete/'+ ${comment.id}},data-label=${'le commentaire'},data-name=${comment.title}">Supprimer</button>
-					    	</td>
-					    </tr>
-				   </th:block>
-				</table>
+	        	<div class="row">
+					<div class="col">
+			        	<table class="table">
+			        		<thead>
+							    <tr>
+							      	<th scope="col" class="text-center">ID</th>
+							      	<th scope="col" class="text-center">Titre</th>
+							      	<th scope="col" class="text-center">Contenu</th>
+							      	<th scope="col" class="text-center">Actions</th>
+							    </tr>
+						 	 </thead>
+						   	<th:block th:each="comment : ${page.content}">
+						   		<tr>
+						        	<td class="text-center"><a class="btn btn-link" th:href="@{'/comment/'+ ${comment.id}}" th:text="${comment.id}"></a></td>
+							    	<td class="text-center" th:text="${comment.title}"></td>
+							    	<td class="text-center" th:text="${comment.content}"></td>
+							    	<td class="text-center">
+							    		 <a class="btn btn-link" th:href="@{'/comment/'+ ${comment.id}}">Voir</a>
+							    		 | <a class="btn btn-link" th:href="@{'/comment/edit/' + ${comment.id}}">Modifier</a>
+							    		 | <button class="btn btn-link"   data-toggle="modal" data-target="#deletionModal" 
+							    		 	th:attr="data-link=@{'/comment/delete/'+ ${comment.id}},data-label=${'le commentaire'},data-name=${comment.title}">Supprimer</button>
+							    	</td>
+							    </tr>
+						   </th:block>
+						</table>
 				
-				<!-- pagination -->
-				<nav aria-label="Pages listant les sites d'escalade">
-					<ul class="pagination">
-					    <li th:if="${page.hasPrevious()}" class="page-item">
-					        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
-					        	<span aria-hidden="true">&laquo;</span>
-        						<span class="sr-only">Précédent</span>
-					       	</a>
-					    </li>
-					    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-					        <li th:if="${page.number == i}" class="active page-item">
-					       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
-					       	</li>
-					        <li th:unless="${page.number == i}" class="page-item">
-					             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
-					        </li>
-					    </th:block>
-				    	<li th:if="${page.hasNext()}" class="page-item">
-				        	<a th:href="@{''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
-				        		<span aria-hidden="true">&raquo;</span>
-        						<span class="sr-only">Suivant</span>
-				        	</a>
-				    	</li>
-				    </ul>
-				</nav>
-				
-				
+						<!-- pagination -->
+						<nav aria-label="Pages listant les sites d'escalade">
+							<ul class="pagination">
+							    <li th:if="${page.hasPrevious()}" class="page-item">
+							        <a th:href="@{''(page=${page.number-1},size=${page.size})}" class="page-link" aria-label="Précédent">
+							        	<span aria-hidden="true">&laquo;</span>
+		        						<span class="sr-only">Précédent</span>
+							       	</a>
+							    </li>
+							    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+							        <li th:if="${page.number == i}" class="active page-item">
+							       		<span class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
+							       	</li>
+							        <li th:unless="${page.number == i}" class="page-item">
+							             <a th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
+							        </li>
+							    </th:block>
+						    	<li th:if="${page.hasNext()}" class="page-item">
+						        	<a th:href="@{''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
+						        		<span aria-hidden="true">&raquo;</span>
+		        						<span class="sr-only">Suivant</span>
+						        	</a>
+						    	</li>
+						    </ul>
+						</nav>
+					</div>
+				</div>
 				<div th:replace="commons/modals :: deletion"></div>
 			</div>
 	    </div>

@@ -28,6 +28,12 @@ body {
   margin-left: 0;
 }
 
+.section-title {
+	padding: 25px 0;
+	margin: 0;
+	font-size: 2rem;
+}
+
 @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-left: 0;
@@ -42,3 +48,5 @@ body {
     margin-left: -15rem;
   }
 }
+
+

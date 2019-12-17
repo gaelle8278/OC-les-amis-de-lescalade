@@ -2,44 +2,33 @@
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>Les amis de l'escalade</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
-
-<!-- Favicons -->
-<link th:href="@{/img/favicon.png}" rel="icon">
-<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
-
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
-	rel="stylesheet">
-
-<!-- Bootstrap CSS File -->
-<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
-	rel="stylesheet">
-
-<!-- Libraries CSS Files -->
-<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}"
-	rel="stylesheet">
-<link th:href="@{/assets/animate/animate.min.css}" rel="stylesheet">
-<link th:href="@{/assets/ionicons/css/ionicons.min.css}"
-	rel="stylesheet">
-<link th:href="@{/assets/owlcarousel/assets/owl.carousel.min.css}"
-	rel="stylesheet">
-<link th:href="@{/assets/lightbox/css/lightbox.min.css}"
-	rel="stylesheet">
-
-<!-- Main Stylesheet File -->
-<link th:href="@{/css/style.css}" rel="stylesheet">
-
-<!-- =======================================================
-    Theme Name: Rapid
-    Theme URL: https://bootstrapmade.com/rapid-multipurpose-bootstrap-business-template/
-    Author: BootstrapMade.com
-    License: https://bootstrapmade.com/license/
-  ======================================================= -->
+	<title>Les amis de l'escalade</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+	
+	<!-- Favicons -->
+	<link th:href="@{/img/favicon.png}" rel="icon">
+	<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
+	
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+		rel="stylesheet">
+	
+	<!-- Bootstrap CSS File -->
+	<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+		rel="stylesheet">
+	
+	<!-- Libraries CSS Files -->
+	<link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/animate/animate.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/ionicons/css/ionicons.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/lightbox/css/lightbox.min.css}" rel="stylesheet">
+	
+	<!-- Main Stylesheet File -->
+	<link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -60,9 +49,6 @@
 					<h2>
 						Les amis <br>de <span>l'escalade</span>
 					</h2>
-					<!-- <div>
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-          </div>-->
 				</div>
 				<div class="col-md-6 intro-img order-md-last order-first">
 					<img th:src="@{/img/presentation.jpg}" alt="" class="img-fluid">
@@ -79,7 +65,7 @@
 		<section id="services" class="section-bg">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 wow bounceInUp" data-wow-duration="1.4s">
+					<div class="col wow bounceInUp" data-wow-duration="1.4s">
 						<div class="box">
 							<div class="icon" style="background: #fceef3;">
 								<i class="ion-ios-analytics-outline" style="color: #ff689b;"></i>
@@ -87,18 +73,10 @@
 							<h4 class="title">
 								<a th:href="@{les-sites}">Les sites</a>
 							</h4>
-							<p class="description">Les sites d'escalade</p>
-						</div>
-					</div>
-					<div class="col-md-6 wow bounceInUp" data-wow-duration="1.4s">
-						<div class="box">
-							<div class="icon" style="background: #fff0da;">
-								<i class="ion-ios-bookmarks-outline" style="color: #e98e06;"></i>
-							</div>
-							<h4 class="title">
-								<a th:href="@{/recherche-site}">Trouver un site</a>
-							</h4>
-							<p class="description">Trouver votre prochaine grimpe</p>
+							<p class="description">
+								Parcourez les spots partagés par les membres des Amis de l'escalade.
+								Trouvez votre prochaine grimpe avec le formulaire de recherche intégré !
+							</p>
 						</div>
 					</div>
 				</div>
@@ -117,8 +95,7 @@
 						<p class="cta-text"></p>
 					</div>
 					<div class="col-lg-3 cta-btn-container text-center">
-						<a class="cta-btn align-middle" th:href="@{/inscription}">Créer
-							un compte</a>
+						<a class="cta-btn align-middle" th:href="@{/acces-compte}">Créer un compte</a>
 					</div>
 				</div>
 			</div>
@@ -135,52 +112,28 @@
 					<h3 class="section-title">Le portfolio</h3>
 				</header>
 
-				<div class="row">
-					<div class="col-lg-12">
-						<ul id="portfolio-flters">
-							<li data-filter="*" class="filter-active">All</li>
-							<li data-filter=".filter-app">App</li>
-							<li data-filter=".filter-card">Card</li>
-							<li data-filter=".filter-web">Web</li>
-						</ul>
-					</div>
-				</div>
 
 				<div class="row portfolio-container">
 
 					<div class="col-lg-4 col-md-6 portfolio-item filter-app">
 						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/app1.jpg}" class="img-fluid" alt="">
+							<img th:src="@{/img/portfolio/escalade-spot-1.jpg}" class="img-fluid" alt="">
 							<div class="portfolio-info">
 								<h4>
-									<a href="#">App 1</a>
+									<a th:href="@{/spot/1}">En suspension</a>
 								</h4>
-								<p>App</p>
-								<div>
-									<a href="img/portfolio/app1.jpg" data-lightbox="portfolio"
-										data-title="App 1" class="link-preview" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
+								
 							</div>
 						</div>
 					</div>
 
-					<div class="col-lg-4 col-md-6 portfolio-item filter-web"
-						data-wow-delay="0.1s">
+					<div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="0.1s">
 						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/web3.jpg}" class="img-fluid" alt="">
+							<img th:src="@{/img/portfolio/escalade-spot-2.jpg}" class="img-fluid" alt="">
 							<div class="portfolio-info">
 								<h4>
-									<a href="#">Web 3</a>
+									<a href="#">En forêt</a>
 								</h4>
-								<p>Web</p>
-								<div>
-									<a href="img/portfolio/web3.jpg" class="link-preview"
-										data-lightbox="portfolio" data-title="Web 3" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -188,37 +141,22 @@
 					<div class="col-lg-4 col-md-6 portfolio-item filter-app"
 						data-wow-delay="0.2s">
 						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/app2.jpg}" class="img-fluid" alt="">
+							<img th:src="@{/img/portfolio/escalade-spot-3.jpg}" class="img-fluid" alt="">
 							<div class="portfolio-info">
 								<h4>
-									<a href="#">App 2</a>
+									<a href="#">Sur la glace</a>
 								</h4>
-								<p>App</p>
-								<div>
-									<a href="img/portfolio/app2.jpg" class="link-preview"
-										data-lightbox="portfolio" data-title="App 2" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
 						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/card2.jpg}" class="img-fluid"
-								alt="">
+							<img th:src="@{/img/portfolio/escalade-spot-4.jpg}" class="img-fluid" alt="">
 							<div class="portfolio-info">
 								<h4>
-									<a href="#">Card 2</a>
+									<a href="#">Dans les profondeurs</a>
 								</h4>
-								<p>Card</p>
-								<div>
-									<a href="img/portfolio/card2.jpg" class="link-preview"
-										data-lightbox="portfolio" data-title="Card 2" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -226,18 +164,11 @@
 					<div class="col-lg-4 col-md-6 portfolio-item filter-web"
 						data-wow-delay="0.1s">
 						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/web2.jpg}" class="img-fluid" alt="">
+							<img th:src="@{/img/portfolio/escalade-spot-5.jpg}" class="img-fluid" alt="">
 							<div class="portfolio-info">
 								<h4>
-									<a href="#">Web 2</a>
+									<a href="#">Tout en haut !</a>
 								</h4>
-								<p>Web</p>
-								<div>
-									<a href="img/portfolio/web2.jpg" class="link-preview"
-										data-lightbox="portfolio" data-title="Web 2" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -245,37 +176,23 @@
 					<div class="col-lg-4 col-md-6 portfolio-item filter-app"
 						data-wow-delay="0.2s">
 						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/app3.jpg}" class="img-fluid" alt="">
+							<img th:src="@{/img/portfolio/escalade-spot-6.jpg}" class="img-fluid" alt="">
 							<div class="portfolio-info">
 								<h4>
-									<a href="#">App 3</a>
+									<a href="#">Pas facile</a>
 								</h4>
-								<p>App</p>
-								<div>
-									<a href="img/portfolio/app3.jpg" class="link-preview"
-										data-lightbox="portfolio" data-title="App 3" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-4 col-md-6 portfolio-item filter-card">
 						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/card1.jpg}" class="img-fluid"
+							<img th:src="@{/img/portfolio/escalade-spot-7.jpg}" class="img-fluid"
 								alt="">
 							<div class="portfolio-info">
 								<h4>
-									<a href="#">Card 1</a>
+									<a href="#">Faut y aller</a>
 								</h4>
-								<p>Card</p>
-								<div>
-									<a href="img/portfolio/card1.jpg" class="link-preview"
-										data-lightbox="portfolio" data-title="Card 1" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -283,44 +200,16 @@
 					<div class="col-lg-4 col-md-6 portfolio-item filter-card"
 						data-wow-delay="0.1s">
 						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/card3.jpg}" class="img-fluid"
+							<img th:src="@{/img/portfolio/escalade-spot-8.jpg}" class="img-fluid"
 								alt="">
 							<div class="portfolio-info">
 								<h4>
-									<a href="#">Card 3</a>
+									<a href="#">En plein effort</a>
 								</h4>
-								<p>Card</p>
-								<div>
-									<a href="img/portfolio/card3.jpg" class="link-preview"
-										data-lightbox="portfolio" data-title="Card 3" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="col-lg-4 col-md-6 portfolio-item filter-web"
-						data-wow-delay="0.2s">
-						<div class="portfolio-wrap">
-							<img th:src="@{/img/portfolio/web1.jpg}" class="img-fluid" alt="">
-							<div class="portfolio-info">
-								<h4>
-									<a href="#">Web 1</a>
-								</h4>
-								<p>Web</p>
-								<div>
-									<a href="img/portfolio/web1.jpg" class="link-preview"
-										data-lightbox="portfolio" data-title="Web 1" title="Preview"><i
-										class="ion ion-eye"></i></a> <a href="#" class="link-details"
-										title="More Details"><i class="ion ion-android-open"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-
 				</div>
-
 			</div>
 		</section>
 		<!-- #portfolio -->

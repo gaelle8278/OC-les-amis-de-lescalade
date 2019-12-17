@@ -36,61 +36,63 @@
 
 	    <!-- Page Content -->
 	    <div id="page-content-wrapper">
-				<nav th:replace="commons/user-account/menu :: navbar"></nav>
+			<nav th:replace="commons/user-account/menu :: navbar"></nav>
 	      
 
-	      		<div class="container-fluid">
-					<h1 class="mt-4">Mes demandes de réservation</h1>
+	      	<div class="container-fluid">
+				<h1 class="section-title">Mes demandes de réservation</h1>
 	
-					<!--  table contenant la liste des sites-->
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Topo</th>
-								<th scope="col">Date de la demande</th>
-								<th scope="col">Statut</th>
-								<th scope="col">Actions</th>
-							</tr>
-						</thead>
-						<th:block th:each="booking : ${page.content}">
-							<tr>
-								<td th:text="${booking.guidebook.name}"></td>
-								<td th:text="${#temporals.format(booking.createdDate, 'dd/MM/yyyy')}"></td>
-								<td th:text="${booking.status}"></td>
-								<td> <a class="btn btn-primary" th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_PENDING_STATUS }" 
-			        					th:href="@{'/mybookings/' + ${booking.id} + '/manage-status/' + ${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_DB_CANCELLED_STATUS} }">Annuler ma demande</a></td>
-							</tr>
-						</th:block>
-					</table>
-	
-					<!-- pagination -->
-					<nav aria-label="Pages listant les demandes de réservation de topo de l'utilisateur connecté">
-						<ul class="pagination">
-							<li th:if="${page.hasPrevious()}" class="page-item"><a
-								th:href="@{''(page=${page.number-1},size=${page.size})}"
-								class="page-link" aria-label="Précédent"> <span
-									aria-hidden="true">&laquo;</span> <span class="sr-only">Précédent</span>
-							</a></li>
-							<th:block
-								th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-								<li th:if="${page.number == i}" class="active page-item"><span
-									class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
-								</li>
-								<li th:unless="${page.number == i}" class="page-item"><a
-									th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
-								</li>
+				<div class="row">
+					<div class="col">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Topo</th>
+									<th scope="col">Date de la demande</th>
+									<th scope="col">Statut</th>
+									<th scope="col">Actions</th>
+								</tr>
+							</thead>
+							<th:block th:each="booking : ${page.content}">
+								<tr>
+									<td th:text="${booking.guidebook.name}"></td>
+									<td th:text="${#temporals.format(booking.createdDate, 'dd/MM/yyyy')}"></td>
+									<td th:text="${booking.status}"></td>
+									<td> <a class="btn btn-primary" th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_PENDING_STATUS }" 
+				        					th:href="@{'/mybookings/' + ${booking.id} + '/manage-status/' + ${T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_DB_CANCELLED_STATUS} }">Annuler ma demande</a></td>
+								</tr>
 							</th:block>
-							<li th:if="${page.hasNext()}" class="page-item"><a
-								th:href="@{/''(page=${page.number+1},size=${page.size})}"
-								class="page-link" aria-lable="Suivant"> <span
-									aria-hidden="true">&raquo;</span> <span class="sr-only">Suivant</span>
-							</a></li>
-						</ul>
-					</nav>
-					<a class="btn btn-primary" th:href="@{/les-topos}">Voir les topos</a>
-					
+						</table>
+		
+						<!-- pagination -->
+						<nav aria-label="Pages listant les demandes de réservation de topo de l'utilisateur connecté">
+							<ul class="pagination">
+								<li th:if="${page.hasPrevious()}" class="page-item"><a
+									th:href="@{''(page=${page.number-1},size=${page.size})}"
+									class="page-link" aria-label="Précédent"> <span
+										aria-hidden="true">&laquo;</span> <span class="sr-only">Précédent</span>
+								</a></li>
+								<th:block
+									th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+									<li th:if="${page.number == i}" class="active page-item"><span
+										class="page-link">[[${i}+1]]<span class="sr-only">(actuel)</span></span>
+									</li>
+									<li th:unless="${page.number == i}" class="page-item"><a
+										th:href="@{''(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
+									</li>
+								</th:block>
+								<li th:if="${page.hasNext()}" class="page-item"><a
+									th:href="@{/''(page=${page.number+1},size=${page.size})}"
+									class="page-link" aria-lable="Suivant"> <span
+										aria-hidden="true">&raquo;</span> <span class="sr-only">Suivant</span>
+								</a></li>
+							</ul>
+						</nav>
+						<a class="btn btn-primary" th:href="@{/les-topos}">Voir les topos</a>
+					</div>
 				</div>
-				<!-- /.container-fluid -->
+			</div>
+			<!-- /.container-fluid -->
 		</div>
 		<!-- /#page-content-wrapper -->
 

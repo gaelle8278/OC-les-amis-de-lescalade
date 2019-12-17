@@ -41,10 +41,10 @@
 	      	<nav th:replace="commons/be-account/menu :: navbar"></nav>
 	
 	      	<div class="container-fluid">
-	          		<h1 class="" th:text="${'Modification de l''utilisateur'} + ' ' + ${userDto.firstName} + ' ' + ${userDto.lastName}" ></h1>
+	          	<h1 class="" th:text="${'Modification de l''utilisateur'} + ' ' + ${userDto.firstName} + ' ' + ${userDto.lastName}" ></h1>
 	        
 				<div class="row">
-					<div class="col col-md-6 col-lg-4">
+					<div class="col-md-6 col-lg-4">
 			        	<form action="#" th:action="@{/user/update/{id}(id=${userDto.id})}" th:object="${userDto}" method="post">
 			        	 	<div class="form-group">
 							    <label for="firstName">Prénom</label>

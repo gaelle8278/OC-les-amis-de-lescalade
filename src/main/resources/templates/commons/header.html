@@ -20,21 +20,15 @@
 		</div>
 		<div class="container">
 			<div class="logo float-left">
-				<!-- Uncomment below if you prefer to use an image logo -->
-				<!-- <h1 class="text-light"><a href="#intro" class="scrollto"><span>Rapid</span></a></h1>-->
-				<a href="#header" class="scrollto"><img src="img/logo.png"
-					alt="" class="img-fluid"></a>
+				<a th:href="@{/}" class="scrollto"><img th:src="@{/img/logo.png}" alt="" class="img-fluid"></a>
 			</div>
 			<nav class="main-nav float-right d-none d-lg-block">
 				<ul>
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li><a th:href="@{/les-sites}">Les sites</a></li>
-					<li><a th:href="@{/recherche-site}">Trouver un site</a></li>
 					<li sec:authorize="hasAuthority('ROLE_USER')">
 						<a th:href="@{/les-topos}">Les topos</a>
 					</li>
-					<!--  <li><a th:href="@{/les-commentaires}">Les commentaires</a></li> -->
-					<!--  <li><a th:href="@{/les-utilisateurs}">Les utilisateurs</a></li> -->
 					
 				</ul>
 			</nav>

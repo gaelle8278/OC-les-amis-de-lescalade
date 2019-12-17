@@ -40,29 +40,31 @@
 			<nav th:replace="commons/user-account/menu :: navbar"></nav>
 
 			<div class="container-fluid">
-	          	<h1 class="">Modification d'une longueur</h1>
-	        	<div>
-		        	<form action="#" th:action="@{/pitches/update/{id}(id=${pitch.id})}" th:object="${pitch}" method="post">
-		        	 	<div class="form-group">
-						    <label for="number">Numéro</label>
-						    <input type="text" th:field="*{number}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('number')} ? is-invalid : ''">
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
-						</div>
-						<div class="form-group">
-						    <label for="grade">Cotation</label>
-						    <input type="text" th:field="*{grade}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('grade')} ? is-invalid : ''">
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"></div>
-						</div>
-						<div class="form-group">
-						    <label for="notice">Remarques</label>
-						    <textarea class="form-control" th:field="*{notice}" rows="2" th:classappend="${#fields.hasErrors('notice')} ? is-invalid : ''"></textarea>
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('notice')}" th:errors="*{notice}"></div>
-		    			</div>
-		    			<div>
-		    				<input type="submit" value="Modifier la longueur" class="btn btn-primary"> 
-		    				<a class="btn btn-secondary" th:href="@{'/routes/edit/' + ${pitch.route.id}}">Retour à la voie</a>
-		    			</div>
-					</form>
+	          	<h1 class="section-title">Modification d'une longueur</h1>
+	        	<div class="row">
+					<div class="col-md-6 col-lg-4">
+			        	<form action="#" th:action="@{/pitches/update/{id}(id=${pitch.id})}" th:object="${pitch}" method="post">
+			        	 	<div class="form-group">
+							    <label for="number">Numéro</label>
+							    <input type="text" th:field="*{number}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('number')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
+							</div>
+							<div class="form-group">
+							    <label for="grade">Cotation</label>
+							    <input type="text" th:field="*{grade}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('grade')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"></div>
+							</div>
+							<div class="form-group">
+							    <label for="notice">Remarques</label>
+							    <textarea class="form-control" th:field="*{notice}" rows="2" th:classappend="${#fields.hasErrors('notice')} ? is-invalid : ''"></textarea>
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('notice')}" th:errors="*{notice}"></div>
+			    			</div>
+			    			<div>
+			    				<input type="submit" value="Modifier la longueur" class="btn btn-primary"> 
+			    				<a class="btn btn-secondary" th:href="@{'/routes/edit/' + ${pitch.route.id}}">Retour à la voie</a>
+			    			</div>
+						</form>
+					</div>
 				</div>
 	      </div>
 			<!-- /.container-fluid -->

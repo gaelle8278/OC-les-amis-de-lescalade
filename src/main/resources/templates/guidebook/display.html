@@ -40,41 +40,33 @@
 		<section id="spot-add" class="section-bg">
 	      	<div class="container">
 	        	<header class="section-header">
-	          		<h3 class="section-title">Topo</h3>
+	          		<h1 class="section-title" th:text="'Topo : ' + ${guidebook.name}">Topo</h1>
 	        	</header>
 	        	<div class="row my-2">
-		        	<div class="col col-md-6">
-		        	 	<p><span class="font-weight-bold">Nom: </span><th:block th:text="${guidebook.name}"></th:block></p>
-		        	 	
+		        	<div class="col-md-6">
 		        	 	<div>
 			        	 	<span class="font-weight-bold">Description :</span>
-			        		<div>
+			        		<div class="py-5">
 			        			<th:block th:text="${guidebook.description}"></th:block>
 			        		</div>
 			        	</div>
 			        	
 			        	<p><span class="font-weight-bold">Lieu : </span><th:block th:text="${guidebook.place}"></th:block></p>
 			        	
-			     		<p><span class="font-weight-bold">Date de parution: </span>
+			     		<p>
+			     			<span class="font-weight-bold">Date de parution: </span>
 			     			<th:block th:text="${#temporals.format(guidebook.releaseDate, 'dd/MM/yyyy')}"></th:block>
 			     		</p>
 			        	
 		        	</div>
 		        	
-		        	<div sec:authorize="hasAuthority('ROLE_USER')" class="col col-md-6">
-		        	<!--  autre condition : le topo n'appartient pas à l'utilisateur connecté et il n'a pas déjà fait une demande en cours
-		    		faire le calcul dans le service et le récuperer dans le controleur -->
+		        	<div sec:authorize="hasAuthority('ROLE_USER')" class="col-md-6">
 		        		<a th:if="${displayBooking}" class="btn btn-primary" 
-		        		th:href="@{'/guidebooks/' + ${guidebook.id} + '/bookings'}">Demander une réservation</a>
+		        			th:href="@{'/guidebooks/' + ${guidebook.id} + '/bookings'}">Demander une réservation</a>
 		        	</div>
-		        	
-		        	
 		        </div>
 		        
-		       
-		       	
-		       	
-				<div class="row my-2">
+				<div class="row my-5">
 		    		<div class="col">
 		    			<a class="btn btn-secondary" th:href="@{/les-topos}">Retour à la liste des topos</a>
 		    		</div>

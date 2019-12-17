@@ -44,24 +44,26 @@
 	      	<nav th:replace="commons/be-account/menu :: navbar"></nav>
 	
 	      	<div class="container-fluid">
-	          		<h1 class="">Modifier un commentaire</h1>
-	        	<div>
-		        	<form action="#" th:action="@{/comment/update/{id}(id=${comment.id})}" th:object="${comment}" method="post">
-		        	 	<div class="form-group">
-						    <label for="title">Titre</label>
-						    <input type="text" th:field="*{title}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('title')} ? is-invalid : ''">
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
-						</div>
-						<div class="form-group">
-						    <label for="content">Contenu</label>
-						    <textarea class="form-control" th:field="*{content}" rows="5" th:classappend="${#fields.hasErrors('content')} ? is-invalid : ''"></textarea>
-						    <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
-		    			</div>
-		    			<div>
-		    				<input type="submit" value="Mettre à jour" class="btn btn-primary"> 
-		    				<a class="btn btn-secondary" th:href="@{/admin/les-commentaires}">Retour à la liste des commentaires</a>
-		    			</div>
-					</form>
+	          	<h1 class="section-title">Modifier un commentaire</h1>
+	        	<div class="row">
+					<div class="col-md-6 col-lg-4">
+			        	<form action="#" th:action="@{/comment/update/{id}(id=${comment.id})}" th:object="${comment}" method="post">
+			        	 	<div class="form-group">
+							    <label for="title">Titre</label>
+							    <input type="text" th:field="*{title}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('title')} ? is-invalid : ''">
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+							</div>
+							<div class="form-group">
+							    <label for="content">Contenu</label>
+							    <textarea class="form-control" th:field="*{content}" rows="5" th:classappend="${#fields.hasErrors('content')} ? is-invalid : ''"></textarea>
+							    <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
+			    			</div>
+			    			<div>
+			    				<input type="submit" value="Mettre à jour" class="btn btn-primary"> 
+			    				<a class="btn btn-secondary" th:href="@{/admin/les-commentaires}">Retour à la liste des commentaires</a>
+			    			</div>
+						</form>
+					</div>
 				</div>
 	       </div>
 	    </div>
