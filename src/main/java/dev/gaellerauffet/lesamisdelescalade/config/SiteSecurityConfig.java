@@ -50,7 +50,6 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
         		.antMatchers("/*").permitAll()
         		.antMatchers("/membre/**").hasAuthority("ROLE_USER")
         		.antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
-        		.anyRequest().authenticated()
         		.and()
         	.formLogin()
         		.loginPage("/connexion")
