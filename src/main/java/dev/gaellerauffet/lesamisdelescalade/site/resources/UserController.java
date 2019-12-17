@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Role;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
-import dev.gaellerauffet.lesamisdelescalade.model.dto.AdminUpdateUserDTO;
+import dev.gaellerauffet.lesamisdelescalade.model.dto.AdminUserDto;
 import dev.gaellerauffet.lesamisdelescalade.services.RoleService;
 import dev.gaellerauffet.lesamisdelescalade.services.UserService;
 
@@ -56,7 +57,7 @@ public class UserController {
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/adduser")
-	public String displayUserAddForm(@ModelAttribute("userDto") AdminUpdateUserDTO userDto, Model model) {
+	public String displayUserAddForm(@ModelAttribute("userDto") AdminUserDto userDto, Model model) {
 		List<Role> listRoles = roleService.getRoles();
 	    model.addAttribute("listRoles", listRoles);
 		return "user/add";
@@ -64,7 +65,7 @@ public class UserController {
 	
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/user/add")
-	public String addUser( @Valid @ModelAttribute("userDto") AdminUpdateUserDTO userDto, BindingResult result, Model model) {
+	public String addUser( @Valid @ModelAttribute("userDto") AdminUserDto userDto, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
 			List<Role> listRoles = roleService.getRoles();
@@ -82,7 +83,7 @@ public class UserController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/user/edit/{id}")
 	public String displayUserUpdateForm(@PathVariable("id") int id, Model model) {
-		AdminUpdateUserDTO userDto = convertToDto(userService.getUser(id));
+		AdminUserDto userDto = convertToDto(userService.getUser(id));
 	    List<Role> listRoles = roleService.getRoles();
 	    model.addAttribute("listRoles", listRoles);
 	    model.addAttribute("userDto", userDto);
@@ -92,7 +93,7 @@ public class UserController {
 	
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/user/update/{id}")
-	public String updateUser(@PathVariable("id") int id, @Valid @ModelAttribute("userDto") AdminUpdateUserDTO userDto, BindingResult result, Model model) {
+	public String updateUser(@PathVariable("id") int id, @Valid @ModelAttribute("userDto") AdminUserDto userDto, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
 	    	List<Role> listRoles = roleService.getRoles();
 		    model.addAttribute("listRoles", listRoles);
@@ -111,13 +112,13 @@ public class UserController {
 	}
 	
 	
-	private AdminUpdateUserDTO convertToDto(User user) {
-		AdminUpdateUserDTO adminUpdateUserDto = modelMapper.map(user, AdminUpdateUserDTO.class);
+	private AdminUserDto convertToDto(User user) {
+		AdminUserDto adminUpdateUserDto = modelMapper.map(user, AdminUserDto.class);
 	   
 	    return adminUpdateUserDto;
 	}
 	
-	private User convertToEntity(AdminUpdateUserDTO adminUpdateUserDto) {
+	private User convertToEntity(AdminUserDto adminUpdateUserDto) {
 	    User user = modelMapper.map(adminUpdateUserDto, User.class);
 	    
 	  

@@ -21,10 +21,10 @@ public interface AreaService {
 
 	List<Route> getListRoutes(int areaId);
 
-	void update(int areaId, Area area);
-
 	Spot getParentSpot(int areaId);
 
 	Page<Area> getListAreasOfSpot(int spotId, Pageable pageable);
+
+	void update(Area area);
 
 }

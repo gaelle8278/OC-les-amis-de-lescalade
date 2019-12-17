@@ -55,27 +55,25 @@ public class PitchController {
     }
 	
 	@Secured("ROLE_USER")
-	@GetMapping("/pitches/edit/{pitchId}")
-	public String displayUpdateForm(@PathVariable("pitchId") int pitchId, Model model) {
-	    Pitch pitch = pitchService.getPitch(pitchId);
+	@GetMapping("/pitches/edit/{id}")
+	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
+	    Pitch pitch = pitchService.getPitch(id);
 	    model.addAttribute("pitch", pitch);
-	    
-	    model.addAttribute("routeId", pitch.getRoute().getId());
 	    
 	    return "pitch/edit";
 	}
 	
 	@Secured("ROLE_USER")
-	@PostMapping("/pitches/update/{pitchId}")
-	public String updatePitch(@PathVariable("pitchId") int pitchId, @Valid Pitch pitch, BindingResult result, Model model) {
+	@PostMapping("/pitches/update/{id}")
+	public String updatePitch(@PathVariable("id") int id, @Valid Pitch pitch, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	    	pitch.setId(pitchId);
+	    	pitch.setRoute(pitchService.getPitch(id).getRoute());
 	        return "pitch/edit";
 	    }
 	         
-	    pitchService.update(pitchId, pitch);
+	    pitchService.update(pitch);
 	    
-	    return "redirect:/routes/edit/"+pitchService.getParentRoute(pitchId).getId();
+	    return "redirect:/routes/edit/"+pitchService.getParentRoute(id).getId();
 	}
 	
 	@Secured("ROLE_USER")

@@ -58,28 +58,25 @@ public class RouteController {
     }
 	
 	@Secured("ROLE_USER")
-	@GetMapping("/routes/edit/{routeId}")
-	public String displayUpdateForm(@PathVariable("routeId") int routeId, Model model) {
-		Route route = routeService.getRoute(routeId);
+	@GetMapping("/routes/edit/{id}")
+	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
+		Route route = routeService.getRoute(id);
 	    model.addAttribute("route", route);
-	    List<Pitch> listPitches = routeService.getListPitches(routeId);
-	    model.addAttribute("listPitches", listPitches);
-	    model.addAttribute("areaId", route.getArea().getId());
 	    
 	    return "route/edit";
 	}
 	
 	@Secured("ROLE_USER")
-	@PostMapping("/routes/update/{routeId}")
-	public String updateRoute(@PathVariable("routeId") int routeId, @Valid Route route, BindingResult result, Model model) {
+	@PostMapping("/routes/update/{id}")
+	public String updateRoute(@PathVariable("id") int id, @Valid Route route, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	    	route.setId(routeId);
+	    	route.setArea(routeService.getRoute(id).getArea());
 	        return "route/edit";
 	    }
 	         
-	    routeService.update(routeId, route);
+	    routeService.update(route);
 	    
-	    Area area = routeService.getParentArea(routeId);
+	    Area area = routeService.getParentArea(id);
 	    
 	 
 	    //after update it return to area parent edition

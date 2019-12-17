@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,7 +20,9 @@ public class Pitch {
 	private int id;
 	
 	private String notice;
+	@NotBlank(message = "Le numéro est obligatoire.")
 	private String number;
+	@NotBlank(message = "La cotation est obligatoire.")
 	private String grade;
 	
 	@Column(name = "created_at",updatable = false)

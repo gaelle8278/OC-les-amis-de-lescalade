@@ -37,8 +37,6 @@ public interface SpotService {
 
 	List<Area> getListAreas(int id);
 
-	void update(int id, @Valid Spot spot);
-
 	List<Comment> getListComment(Spot spot);
 
 	Page<Spot> getUserSpots(Pageable pageable);
@@ -48,5 +46,7 @@ public interface SpotService {
 	void addTagSpot(int id);
 
 	void deleteTagSpot(int id);
+
+	void update(Spot spot);
 	
 }

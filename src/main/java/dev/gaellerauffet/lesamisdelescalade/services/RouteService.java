@@ -2,8 +2,6 @@ package dev.gaellerauffet.lesamisdelescalade.services;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,8 +21,9 @@ public interface RouteService {
 
 	List<Pitch> getListPitches(int routeId);
 
-	void update(int routeId, @Valid Route route);
 
 	Area getParentArea(int routeId);
+
+	void update(Route route);
 
 }

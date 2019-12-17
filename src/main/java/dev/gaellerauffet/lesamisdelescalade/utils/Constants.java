@@ -19,5 +19,9 @@ public class Constants {
 	public final static String SPOT_TAG = "Officiel Les amis de l'escalade";
 	
 	
+	public final static String SPOT_TYPE_CLIFF = "Falaise";
+	public final static String SPOT_TYPE_BLOCK = "Bloc";
+	public final static String SPOT_TYPE_CLIFF_AND_BLOCK = "Falaise, Bloc";
+	
 
 }

@@ -25,7 +25,7 @@ public interface BookingService {
 
 	Page<Booking> findUserBookingsToManage(Pageable pageable);
 
-	List<Booking> getBoookingByUserAndGb(User user, Guidebook gb);
+	List<Booking> getBoookingByUserAndGbAndStatus(User user, Guidebook gb, String status);
 
 	void manageStatus(int bookingId, String status);
 

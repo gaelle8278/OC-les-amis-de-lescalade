@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,11 +21,12 @@ public class Route {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
+	@NotBlank(message = "Le numéro est obligatoire.")
 	private String number;
 	private String notice;
 	@Column(name = "nb_spits")
 	private Integer nbSpits;
+	@NotBlank(message = "La cotation est obligatoire.")
 	private String grade;
 	
 	@Column(name = "created_at",updatable = false)

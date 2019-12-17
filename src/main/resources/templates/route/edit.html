@@ -68,15 +68,15 @@
 			    			<div>
 			    				<input type="submit" value="Modifier la voie" class="btn btn-primary"> 
 			    				<a class="btn btn-primary" th:href="@{'/routes/' + ${route.id} + '/pitches'}">Ajouter une longueur</a>
-			    				<a class="btn btn-secondary" th:href="@{'/areas/edit/' + ${areaId}}">Retour au secteur</a>
+			    				<a class="btn btn-secondary" th:href="@{'/areas/edit/' + ${route.area.id}}">Retour au secteur</a>
 			    			</div>
 						</form>
 					</div>
 				</div>
-				<div class="row" th:if="${not #lists.isEmpty(listPitches)}">
+				<div class="row" th:if="${not #lists.isEmpty(route.listPitchs)}">
 					<div class="col">
 						<div class="card">
-							<div class="card-header" id="headerPitches">
+							<div class="card-header" id="headerPitchs">
 								<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapsePitches" aria-expanded="false" aria-controls="collapsePitches">
 			    					Voir les longueurs
 			  					</button>
@@ -91,7 +91,7 @@
 										    	<th scope="col" >Remarques</th>
 											</tr>
 									 	</thead>
-										<th:block th:each="pitch : ${listPitches}">
+										<th:block th:each="pitch : ${route.listPitchs}">
 											<tr>
 												<td><a th:href="@{'/pitches/edit/'+${pitch.id}}" th:text="${pitch.number}"></a></td>
 												<td th:text="${pitch.grade}"></td>

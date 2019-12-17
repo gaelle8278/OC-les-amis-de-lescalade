@@ -57,12 +57,12 @@
 			    			<div>
 			    				<input type="submit" value="Mettre à jour le secteur" class="btn btn-primary"> 
 			    				<a class="btn btn-primary" th:href="@{'/areas/' + ${area.id} + '/routes'}">Ajouter une voie</a>
-			    				<a class="btn btn-secondary" th:href="@{'/spot/edit/' + ${spotId}}">Retour au site</a>
+			    				<a class="btn btn-secondary" th:href="@{'/spot/edit/' + ${area.spot.id}}">Retour au site</a>
 			    			</div>
 						</form>
 					</div>
 				</div>
-				<div class="row" th:if="${not #lists.isEmpty(listRoutes)}">
+				<div class="row" th:if="${not #lists.isEmpty(area.listRoutes)}">
 					<div class="col">
 						<div class="card">
 							<div class="card-header" id="headerRoutes">
@@ -80,7 +80,7 @@
 										    	<th scope="col" >Remarques</th>
 											</tr>
 									 	</thead>
-										<th:block th:each="route : ${listRoutes}">
+										<th:block th:each="route : ${area.listRoutes}">
 											<tr>
 												<td><a th:href="@{'/routes/edit/'+${route.id}}" th:text="${route.number}"></a></td>
 												<td th:text="${route.grade}"></td>

@@ -52,8 +52,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void update(int idComment, Comment commentForm) {
-		Comment comment = em.getReference(Comment.class, idComment);
+	public void update(Comment commentForm) {
+		Comment comment = em.getReference(Comment.class, commentForm.getId());
 		commentForm.setSpot(comment.getSpot());
 		commentForm.setUser(comment.getUser());
 		commentRepository.save(commentForm);

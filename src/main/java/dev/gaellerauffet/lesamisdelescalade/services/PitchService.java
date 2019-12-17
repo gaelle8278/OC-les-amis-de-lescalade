@@ -1,7 +1,5 @@
 package dev.gaellerauffet.lesamisdelescalade.services;
 
-import javax.validation.Valid;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,14 +12,14 @@ public interface PitchService {
 
 	Page<Pitch> findAllPaginated(Pageable pageable);
 
-	void add(@Valid Pitch pitch);
+	void add(Pitch pitch);
 
 	void deletePitch(int id);
 
 	void add(int pitchId, Pitch pitch);
 
-	void update(int pitchId, Pitch pitch);
-
 	Route getParentRoute(int pitchId);
+
+	void update(Pitch pitch);
 
 }

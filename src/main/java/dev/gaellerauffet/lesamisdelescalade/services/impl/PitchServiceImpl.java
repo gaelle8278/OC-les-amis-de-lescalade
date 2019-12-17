@@ -56,9 +56,8 @@ public class PitchServiceImpl implements PitchService {
 	}
 
 	@Override
-	public void update(int pitchId, Pitch pitchForm) {
-		Pitch pitch = em.getReference(Pitch.class, pitchId);
-		//pitchform.setCreatedDate(pitch.getCreatedDate());
+	public void update(Pitch pitchForm) {
+		Pitch pitch = em.getReference(Pitch.class, pitchForm.getId());
 		pitchForm.setRoute(pitch.getRoute());
 		//update pitch
 		picthRepository.save(pitchForm);

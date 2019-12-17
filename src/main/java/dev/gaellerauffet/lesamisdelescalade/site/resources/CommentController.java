@@ -17,14 +17,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import dev.gaellerauffet.lesamisdelescalade.model.Comment;
 import dev.gaellerauffet.lesamisdelescalade.model.Guidebook;
+import dev.gaellerauffet.lesamisdelescalade.model.Spot;
 import dev.gaellerauffet.lesamisdelescalade.services.CommentService;
 import dev.gaellerauffet.lesamisdelescalade.services.GuidebookService;
+import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 
 @Controller
 public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private SpotService spotService;
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/comment/{id}")
@@ -42,19 +47,14 @@ public class CommentController {
         return "comment/admin-list";
 	}
 	
-	/*@Secured("ROLE_USER")
-	@GetMapping("/spots/{spotId}/comments")
-    public String displayAddForm(@PathVariable("spotId") int spotId, Comment comment, Model model) {
-		model.addAttribute("spotId", spotId);
-		model.addAttribute("comment",comment);
-        return "comment/add";
-    }*/
 	
 	@Secured("ROLE_USER")
 	@PostMapping("/spots/{spotId}/comments")
     public String addComment(@PathVariable("spotId") int spotId, @Valid Comment comment, BindingResult result, Model model) {
         if (result.hasErrors()) {
-        	return "comment/add";
+        	Spot spot = spotService.getSpot(spotId);
+        	model.addAttribute("spot", spot);
+        	return "spot/display";
         }
         
         //save comment and redirect to spot page
@@ -76,11 +76,10 @@ public class CommentController {
 	@PostMapping("/comment/update/{id}")
 	public String updateComment(@PathVariable("id") int id, @Valid Comment comment, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	    	comment.setId(id);
 	        return "comment/edit";
 	    }
 	         
-	    commentService.update(id,comment);
+	    commentService.update(comment);
 	    return "redirect:/admin/les-commentaires";
 	}
 	

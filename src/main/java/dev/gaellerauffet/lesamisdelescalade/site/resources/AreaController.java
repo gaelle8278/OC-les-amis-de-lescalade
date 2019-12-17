@@ -72,33 +72,27 @@ public class AreaController {
 	
 	// display an update area form
 	@Secured("ROLE_USER")
-	@GetMapping("/areas/edit/{areaId}")
-	public String displayUpdateForm(@PathVariable("areaId") int areaId, Model model) {
-	    Area area = areaService.getArea(areaId);
-	    List<Route> listRoutes = areaService.getListRoutes(areaId);
-	    //Spot spot = areaService.getParentSpot(areaId);
+	@GetMapping("/areas/edit/{id}")
+	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
+	    Area area = areaService.getArea(id);
 	    model.addAttribute("area", area);
-	    model.addAttribute("listRoutes", listRoutes);
-	    //model.addAttribute("spot", spot);
-	    
-	    model.addAttribute("spotId", area.getSpot().getId());
 	    
 	    return "area/edit";
 	}
 	
 	//save updates
 	@Secured("ROLE_USER")
-	@PostMapping("/areas/update/{areaId}")
-	public String updateArea(@PathVariable("areaId") int areaId, @Valid Area area, BindingResult result) {
+	@PostMapping("/areas/update/{id}")
+	public String updateArea(@PathVariable("id") int id, @Valid Area area, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	    	area.setId(areaId);
+	    	
+	 	    area.setSpot(areaService.getArea(id).getSpot());
 	        return "area/edit";
 	    }
 	         
-	    areaService.update(areaId, area);
+	    areaService.update(area);
 	    
-	    Spot spot = areaService.getParentSpot(areaId);
-	    //model.addAttribute("spotId", spot.getId());
+	    Spot spot = areaService.getParentSpot(id);
 	 
 	    //after update it return to spot parent edition
 	    return "redirect:/spot/edit/" + spot.getId();

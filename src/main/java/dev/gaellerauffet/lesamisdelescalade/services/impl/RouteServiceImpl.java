@@ -67,8 +67,8 @@ public class RouteServiceImpl implements RouteService {
 	}
 
 	@Override
-	public void update(int routeId, Route routeForm) {
-		Route route = em.getReference(Route.class, routeId);
+	public void update(Route routeForm) {
+		Route route = em.getReference(Route.class, routeForm.getId());
 		//routeform.setCreatedDate(route.getCreatedDate());
 		routeForm.setArea(route.getArea());
 		//update area

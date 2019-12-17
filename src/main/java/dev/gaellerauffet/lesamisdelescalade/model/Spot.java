@@ -26,9 +26,9 @@ public class Spot {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank(message = "Le nom est obligatoire")
+	@NotBlank(message = "Le nom est obligatoire.")
 	private String name;
-	@NotBlank(message = "La description est obligatoire")
+	@NotBlank(message = "La description est obligatoire.")
 	private String description;
 	private String notice;
 	private String type;
@@ -59,10 +59,6 @@ public class Spot {
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
-	
-	//@TODO enforce default value to test saving of spot entity : replace when there is authentification
-	/*@Column(name = "user_id")
-	private int userId = 1;*/
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = true)
     private User user;

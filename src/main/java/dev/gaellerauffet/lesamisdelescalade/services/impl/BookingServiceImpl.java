@@ -1,5 +1,7 @@
 package dev.gaellerauffet.lesamisdelescalade.services.impl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -98,8 +100,8 @@ public class BookingServiceImpl implements BookingService{
 	}
 	
 	@Override
-	 public List<Booking> getBoookingByUserAndGb(User user, Guidebook gb) {
-		 return bookingRepository.findAllByUserAndGuidebook(user, gb);
+	 public List<Booking> getBoookingByUserAndGbAndStatus(User user, Guidebook gb, String status) {
+		 return bookingRepository.findAllByUserAndGuidebookAndStatus(user, gb, status);
 	 }
 
 	@Override
@@ -108,11 +110,10 @@ public class BookingServiceImpl implements BookingService{
 		booking.setStatus(status);
 		
 		Guidebook gb = em.getReference(Guidebook.class, booking.getGuidebook().getId());
-		System.out.println("toto " + gb.isAvailable());
-		System.out.println(gb.getId());
+		
 		if(status.equals(Constants.BOOKING_DB_APPROVED_STATUS)) {
 			gb.setAvailable(false);
-			System.out.println("toto " + gb.isAvailable());
+			
 			guidebookRepository.save(gb);
 			
 		} 
@@ -121,6 +122,8 @@ public class BookingServiceImpl implements BookingService{
 			guidebookRepository.save(gb);
 		}
 		
+		
+		booking.setStatusDate(LocalDateTime.now());
 		bookingRepository.save(booking);
 	}
 

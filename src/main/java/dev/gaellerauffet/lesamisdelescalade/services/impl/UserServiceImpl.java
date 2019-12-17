@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void add(User user, String role) {
+		//@Todo method used for member inscription => specific Dto should be used
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(true);
 		Role userRole = roleRepository.findByRole(role);

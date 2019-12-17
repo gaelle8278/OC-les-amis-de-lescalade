@@ -28,8 +28,7 @@ public class GuidebookController {
 	public String displayGuidebook(@PathVariable("id") int id, Model model) {
 		Guidebook guidebook = guidebookService.getGuidebook(id);
 		boolean displayBooking = guidebookService.isBookingAvalaible(guidebook);
-		// calculer l'affichage du bouton de réservation et ajouter une variable dans le modèle indiquant le résutat du calcul 
-		// pour afficher le bouton dans le modème
+		
 		model.addAttribute("guidebook", guidebook);
 		model.addAttribute("displayBooking", displayBooking);
         return "guidebook/display";
@@ -61,7 +60,6 @@ public class GuidebookController {
 	@Secured("ROLE_USER")
 	@PostMapping("/guidebook/add")
     public String addGuidebook(@Valid Guidebook guidebook, BindingResult result, Model model) {
-		//System.out.print(guidebook.getReleaseDate());
         if (result.hasErrors()) {
         	return "guidebook/add";
         }
@@ -76,20 +74,19 @@ public class GuidebookController {
 	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
 	   Guidebook guidebook = guidebookService.getGuidebook(id);
 		
-	    model.addAttribute("guidebook", guidebook);
+	   model.addAttribute("guidebook", guidebook);
 	    
-	    return "guidebook/edit";
+	   return "guidebook/edit";
 	}
 	
 	@Secured("ROLE_USER")
 	@PostMapping("/guidebook/update/{id}")
 	public String updateGuidebook(@PathVariable("id") int id, @Valid Guidebook guidebook, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	    	guidebook.setId(id);
 	        return "guidebook/edit";
 	    }
 	         
-	    guidebookService.update(id, guidebook);
+	    guidebookService.update(guidebook);
 	    return "redirect:/membre/mes-topos";
 	}
 	

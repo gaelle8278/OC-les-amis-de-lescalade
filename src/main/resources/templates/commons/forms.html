@@ -5,36 +5,36 @@
 	</head>
 	<body>
 		<!-- formualaire d'inscription membre -->
-		<form th:fragment="signup-form"  action="#" th:action="@{/inscription}" th:object="${user}" method="post" 
-			    	class="form-horizontal" role="form" autocomplete="off">
+		<form th:fragment="signup-form"  action="#" th:action="@{/inscription}" th:object="${user}" method="post" >
 			<div class="form-group">
 				<label for="firstName">Prénom</label>
-				<input type="text" th:field="*{firstName}" placeholder="" class="form-control" /> 
-				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="validation-message"> </p>
+				<input type="text" th:field="*{firstName}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('firstName')} ? is-invalid : ''" /> 
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="invalid-feedback"> </p>
 			</div>
 	
 			<div class="form-group">
 				<label for="lastName">Nom</label>
-				<input type="text" th:field="*{lastName}" placeholder="" class="form-control" /> 
-				<p	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="validation-message"></p>
+				<input type="text" th:field="*{lastName}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('firstName')} ? is-invalid : ''" /> 
+				<p	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="invalid-feedback"></p>
 			</div>
 			<div class="form-group">
 				<label for="email">Adresse e-mail</label>
-				<input type="text" th:field="*{email}" placeholder="" class="form-control" /> 
-				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></p>
+				<input type="text" th:field="*{email}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('firstName')} ? is-invalid : ''" /> 
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></p>
 			</div>
 			<div class="form-group">
 				<label for="password">Mot de passe</label>
-				<input type="password" th:field="*{password}" placeholder="" class="form-control" /> 
-				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></p>
+				<input type="password" th:field="*{password}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('firstName')} ? is-invalid : ''" /> 
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></p>
 			</div>
 	
 			<div class="form-check">
 			  	<input type="checkbox" class="form-check-input" th:field="*{checkedCGU}" th:classappend="${#fields.hasErrors('checkedCGU')} ? is-invalid : ''">
 	    		<label class="form-check-label" for="checkedCGU">Cochez cette case pour accepter les CGU</label>
+	    		<p th:if="${#fields.hasErrors('checkedCGU')}" th:errors="*{checkedCGU}" class="invalid-feedback"></p>
 			</div>
 			<div class="form-group text-center">
-					<button type="submit" class="btn btn-lg btn-primary">S'inscrire</button>
+				<button type="submit" class="btn btn-lg btn-primary">S'inscrire</button>
 			</div>		
 		</form>
 		
@@ -109,6 +109,25 @@
 			</div>
 			
 		</form>
+		
+		<!--  formulaire d'ajout d'un commentaire sur une page site -->
+		<form th:fragment="comment-form" action="#" th:action="@{'/spots/'+ ${spot.id} + '/comments'}" th:object="${comment}" method="post">
+			<div class="form-group">
+				<label for="title">Titre</label>
+				<input type="text" th:field="*{title}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('title')} ? is-invalid : ''">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+			</div>
+			<div class="form-group">
+			    <label for="content">Contenu</label>
+			    <textarea class="form-control" th:field="*{content}" rows="5" th:classappend="${#fields.hasErrors('content')} ? is-invalid : ''"></textarea>
+		  		<div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
+			</div>
+			<div>
+				<input type="submit" value="Ajouter un commentaire" class="btn btn-secondary"> 
+			</div>
+		</form>
+					 	
+					 
 		
 	</body>
 </html>

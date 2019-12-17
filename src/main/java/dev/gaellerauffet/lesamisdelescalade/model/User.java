@@ -8,9 +8,13 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.springframework.web.util.HtmlUtils;
 
 @Entity
 @DynamicUpdate
@@ -21,23 +25,31 @@ public class User {
 	private Integer id;
 
 	@Column(name = "first_name")
-	@NotBlank(message = "Veuillez saisir un prénom")
+	@NotBlank(message = "Veuillez saisir un prénom.")
 	private String firstName;
 
-	@NotBlank(message = "Veuillez saisir un nom")
+	
 	@Column(name = "last_name")
+	@NotBlank(message = "Veuillez saisir un nom.")
 	private String lastName;
 
-	@NotBlank(message = "L''adresse e-mail est obligatoire")
-	@Email(message = "L'email n'est pas valide")
+	@NotBlank(message = "L''adresse e-mail est obligatoire.")
+	@Email(message = "L''adresse e-mail n'est pas valide.")
 	private String email;
 	
 	private String pseudo;
+	
+	@NotBlank(message = "Veuillez un mot de passe.")
+	@Size(min = 6, max = 12, message = "Le mot de passe doit comporter entre 6 et 12 caractères.")
 	private String password;
+	
+	@Size(min = 10, max = 10, message = "Le numéro de téléphone doit comporter 10 chiffres.")
 	private String phone;
+	
 	private String city;
 	
 	@Column(name = "postal_code")
+	@Size(min = 5, max = 5, message = "Le code postal doit comporter 5 chiffres.")
 	private String postalCode;
 
 	@Column(columnDefinition = "TINYINT")
@@ -82,11 +94,13 @@ public class User {
 	}
 
 	public String getFirstName() {
+		
 		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		String secureFirstName = HtmlUtils.htmlEscape(firstName);
+		this.firstName = secureFirstName;
 	}
 
 	public String getLastName() {

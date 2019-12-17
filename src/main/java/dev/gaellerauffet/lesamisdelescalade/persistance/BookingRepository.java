@@ -22,5 +22,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 	Page<Booking> findAllByGuidebookIn(List<Guidebook> listGuidebooks, Pageable pageable);
 	
 	List<Booking> findAllByUserAndGuidebook(User user, Guidebook guidebook);
+
+	List<Booking> findAllByUserAndGuidebookAndStatus(User user, Guidebook gb, String status);
 }
 

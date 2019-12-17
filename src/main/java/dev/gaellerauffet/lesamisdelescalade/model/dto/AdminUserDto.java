@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +14,7 @@ import dev.gaellerauffet.lesamisdelescalade.model.Role;
 import dev.gaellerauffet.lesamisdelescalade.model.User;
 
 @Component
-public class AdminUpdateUserDTO {
+public class AdminUserDto {
 	
 	// injection doesn't work why ?
 	/*@Autowired
@@ -22,23 +23,28 @@ public class AdminUpdateUserDTO {
     
     private Integer id;
 	
-	@NotBlank(message = "Veuillez saisir un prénom")
+	@NotBlank(message = "Veuillez saisir un prénom.")
 	private String firstName;
 
-	@NotBlank(message = "Veuillez saisir un nom")
-	
+	@NotBlank(message = "Veuillez saisir un nom.")
 	private String lastName;
 
-	@NotBlank(message = "L''adresse e-mail est obligatoire")
-	@Email(message = "L'email n'est pas valide")
+	@NotBlank(message = "L''adresse e-mail est obligatoire.")
+	@Email(message = "L''adresse e-mail n'est pas valide.")
 	private String email;
 	
 	private String pseudo;
+	
+	@NotBlank(message = "Veuillez un mot de passe.")
+	@Size(min = 6, max = 12, message = "Le mot de passe doit comporter entre 6 et 12 caractères.")
 	private String password;
+	
+	@Size(min = 10, max = 10, message = "Le numéro de téléphone doit comporter 10 chiffres.")
 	private String phone;
+	
 	private String city;
 	
-	
+	@Size(min = 5, max = 5, message = "Le code postal doit comporter 5 chiffres.")
 	private String postalCode;
 	
 	private  Collection<Role> roles;

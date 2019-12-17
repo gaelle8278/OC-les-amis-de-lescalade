@@ -38,7 +38,7 @@ public class AccountController {
 	                            "L'adresse e-mail est déjà utilisé pour un compte existant");
 	    }
 		if(result.hasErrors()) {
-			return "account/signup"; 
+			return "account/access"; 
 		}
 		userService.add(user, "ROLE_USER");
 		

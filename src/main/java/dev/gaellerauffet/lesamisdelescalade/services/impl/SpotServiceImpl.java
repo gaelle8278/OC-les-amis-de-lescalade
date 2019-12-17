@@ -22,7 +22,7 @@ import dev.gaellerauffet.lesamisdelescalade.model.form.SpotSearchForm;
 import dev.gaellerauffet.lesamisdelescalade.persistance.SpotRepository;
 import dev.gaellerauffet.lesamisdelescalade.services.SpotService;
 import dev.gaellerauffet.lesamisdelescalade.services.UserService;
-
+import dev.gaellerauffet.lesamisdelescalade.utils.Constants;
 import dev.gaellerauffet.lesamisdelescalade.utils.Helpers;
 
 @Service
@@ -151,10 +151,10 @@ public class SpotServiceImpl implements SpotService {
 	@Override
 	public List<String> getListTypesForForm() {
 		List<String> types = new ArrayList<String>();
-		//@TODO in v2 add management of types in admin back-office
-		types.add("Falaise");
-		types.add("Bloc");
-		types.add("Bloc, Falaise");
+		//@TODO in v2 add management of types in admin
+		types.add(Constants.SPOT_TYPE_CLIFF);
+		types.add(Constants.SPOT_TYPE_BLOCK);
+		types.add(Constants.SPOT_TYPE_CLIFF_AND_BLOCK);
 		return types;
 	}
 
@@ -173,8 +173,8 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public void update(int spotId, Spot spotForm) {
-		Spot spot = em.getReference(Spot.class, spotId);
+	public void update(Spot spotForm) {
+		Spot spot = em.getReference(Spot.class, spotForm.getId());
 		spotForm.setUser(spot.getUser());
 		spotRepository.save(spotForm);
 		

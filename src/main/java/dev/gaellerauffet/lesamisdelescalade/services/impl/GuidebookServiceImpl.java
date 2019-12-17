@@ -66,16 +66,14 @@ public class GuidebookServiceImpl implements GuidebookService {
 	}
 
 	@Override
-	public void update(int idGb, Guidebook guidebookForm) {
-		Guidebook gb = em.getReference(Guidebook.class,idGb);
+	public void update(Guidebook guidebookForm) {
+		Guidebook gb = em.getReference(Guidebook.class,guidebookForm.getId());
 		//on update of a guidebook information available status doesn't change
 		//it change only change during booking management ith asetStatus
 		guidebookForm.setAvailable(gb.isAvailable());
 		guidebookForm.setUser(gb.getUser());
 		
 		guidebookRepository.save(guidebookForm);
-		
-		
 	}
 
 	@Override
@@ -94,23 +92,14 @@ public class GuidebookServiceImpl implements GuidebookService {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			User connectedUser = userService.findUserByEmail(auth.getName());
 			if( connectedUser.getId() != guidebook.getUser().getId() ) {
-				//display = true;
+				
 				//chek is user has alreadu set a booking in pending
-				List<Booking> listUserBooking = bookingService.getBoookingByUserAndGb(connectedUser,guidebook) ;
+				List<Booking> listUserBooking = bookingService.getBoookingByUserAndGbAndStatus(connectedUser,guidebook, Constants.BOOKING_DB_PENDING_STATUS) ;
 				if(listUserBooking.isEmpty()) {
 					display = true;
-				} else {
-					for(int i=0; i < listUserBooking.size(); i++) {
-						Booking booking = listUserBooking.get(i);
-						//System.out.print(booking.getUser().getId());
-						if( booking.getStatus() != Constants.BOOKING_APP_PENDING_STATUS) {
-							 display = true;
-							 break;
-						}
-					}
 				}
 			}
-		}
+		} 
 		return display;
 	}
 

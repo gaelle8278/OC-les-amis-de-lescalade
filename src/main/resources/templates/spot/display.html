@@ -101,21 +101,7 @@
 		        <div sec:authorize="hasAuthority('ROLE_USER')">
 					<h3>Laisser un commentaire</h3>	        
 					 <div>
-					 	<form action="#" th:action="@{'/spots/'+ ${spot.id} + '/comments'}" th:object="${comment}" method="post">
-				        	 	<div class="form-group">
-								    <label for="title">Titre</label>
-								    <input type="text" th:field="*{title}" placeholder="" class="form-control" th:classappend="${#fields.hasErrors('title')} ? is-invalid : ''">
-								    <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
-								</div>
-								<div class="form-group">
-								    <label for="content">Contenu</label>
-								    <textarea class="form-control" th:field="*{content}" rows="5" th:classappend="${#fields.hasErrors('content')} ? is-invalid : ''"></textarea>
-								    <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
-				    			</div>
-				    			<div>
-				    				<input type="submit" value="Ajouter un commentaire" class="btn btn-secondary"> 
-				    			</div>
-							</form>
+					 	<form action="#"  th:replace="commons/forms :: comment-form"></form>
 					 </div>
 				</div>
 				

@@ -62,8 +62,6 @@ public class BookingController {
 	public String manageMyBookingStatus(@PathVariable("bookingId") int bookingId, @PathVariable("status") String status, Model model) {
 		bookingService.manageStatus(bookingId, status);
 		
-		//String referer = request.getHeader("Referer");
-	    //return "redirect:"+ referer;
 		return "redirect:/membre/mes-reservations";
 		
 	}
@@ -76,36 +74,6 @@ public class BookingController {
 		return "redirect:/membre/gestion-reservations";
 		
 	}
-	
-	/*@PostMapping("/guidebooks/{gbId}/bookings")
-    public String addBooking(@PathVariable("areaId") int areaId, @Valid Booking booking, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "booking/add";
-        }
-        
-        //save spot and redirect
-        bookingService.add(booking);
-        return "redirect:/les-reservations";
-    }*/
-	
-	
-	/*@GetMapping("/booking/edit/{id}")
-	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
-	    Booking booking = bookingService.getBooking(id);
-	    model.addAttribute("booking", booking);
-	    
-	    return "booking/edit";
-	}
-	
-	@PostMapping("/booking/update/{id}")
-	public String updateBooking(@PathVariable("id") int id, @Valid Booking booking, BindingResult result, Model model) {
-	    if (result.hasErrors()) {
-	        return "booking/edit";
-	    }
-	         
-	    bookingService.add(booking);
-	    return "redirect:/les-reservations";
-	}*/
 	
 	@Secured("ROLE_USER")
 	@GetMapping("/booking/delete/{id}")

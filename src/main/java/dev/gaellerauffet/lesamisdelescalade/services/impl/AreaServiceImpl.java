@@ -74,8 +74,8 @@ public class AreaServiceImpl implements AreaService {
 
 
 	@Override
-	public void update(int areaId,Area areaForm) {
-		Area area = em.getReference(Area.class, areaId);
+	public void update(Area areaForm) {
+		Area area = em.getReference(Area.class, areaForm.getId());
 		areaForm.setSpot(area.getSpot());
 		//update area
 		areaRepository.save(areaForm);

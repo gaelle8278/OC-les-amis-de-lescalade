@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -21,12 +22,10 @@ public class Area {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank(message = "Le nom est obligatoire.")
 	private String name;
 	
 	private String description;
-	
-	/*@Column(name = "spot_id")
-	private int spotId;*/
 	
 	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp

@@ -49,10 +49,6 @@ public class Guidebook {
 	@Column(name = "created_at",updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
-
-	//@TODO enforce default value to test saving of spot entity (must be replace when there will be session/authentification)
-	/*@Column(name = "user_id")
-	private int userID = 1;*/
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = true)

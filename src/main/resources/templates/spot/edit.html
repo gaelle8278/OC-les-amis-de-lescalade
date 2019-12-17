@@ -129,7 +129,7 @@
 						</form>
 					</div>
 				</div>
-				<div class="row" th:if="${not #lists.isEmpty(listAreas)}">
+				<div class="row" th:if="${not #lists.isEmpty(spot.listArea)}">
 					<div class="col">
 						<div class="card">
 							<div class="card-header" id="headerAreas">
@@ -145,7 +145,7 @@
 										    	<th scope="col" >Nom</th>
 											</tr>
 									 	</thead>
-										<th:block th:each="area : ${listAreas}">
+										<th:block th:each="area : ${spot.listArea}">
 											<tr>
 												<td><a th:href="@{'/areas/edit/'+${area.id}}" th:text="${area.name}"></a></td>
 											</tr>

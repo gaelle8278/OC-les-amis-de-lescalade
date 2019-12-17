@@ -138,23 +138,22 @@ public class SpotController {
 	public String displayUpdateForm(@PathVariable("id") int id, Model model) {
 	    Spot spot = spotService.getSpot(id);
 	    List<String> listTypes =  spotService.getListTypesForForm();
-		List<Area> listAreas = spotService.getListAreas(id);
 	    model.addAttribute("listTypes", listTypes);
 	    model.addAttribute("spot", spot);
-	    model.addAttribute("listAreas", listAreas);
 	    
 	    return "spot/edit";
 	}
 	
 	@Secured("ROLE_USER")
 	@PostMapping("/spot/update/{id}")
-	public String updateSpot(@PathVariable("id") int id, @Valid Spot spot, BindingResult result) {
+	public String updateSpot(@PathVariable("id") int id, @Valid Spot spot, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	        spot.setId(id);
+	    	List<String> listTypes =  spotService.getListTypesForForm();
+	    	model.addAttribute("listTypes", listTypes);
 	        return "spot/edit";
 	    }
 	         
-	    spotService.update(id,spot);
+	    spotService.update(spot);
 	    return "redirect:/membre/mes-sites";
 	}
 	
