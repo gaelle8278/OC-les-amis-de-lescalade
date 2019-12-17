@@ -1104,9 +1104,6 @@ h6 {
 }
 
 @media (max-width: 991px) {
-  #topbar {
-    display: none;
-  }
 
   #header {
     height: 70px;
