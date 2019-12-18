@@ -61,7 +61,8 @@
 									<td th:text="${booking.status}"></td>
 									<td>
 										<th:block th:if="${booking.status == T(dev.gaellerauffet.lesamisdelescalade.utils.Constants).BOOKING_APP_APPROVED_STATUS }">
-											<span th:text="${booking.user.email}"></span>
+											<div th:text="${booking.user.firstName} + ' ' + ${booking.user.lastName}"></div>
+											<div  th:text="${booking.user.email}"></div>
 										</th:block>
 									</td>
 									<td> 

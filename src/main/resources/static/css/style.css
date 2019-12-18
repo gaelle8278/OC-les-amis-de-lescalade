@@ -1000,6 +1000,20 @@ h6 {
 	text-transform: uppercase;
 }
 
+#spotslist {
+	padding-top : 15px;
+	padding-bottom: 15px;
+}
+
+#spotslist .card {
+	margin-top : 15px;
+	margin-bottom: 15px;
+	
+}
+#spotslist .btn {
+	position: absolute;
+	bottom: 10px;
+}
 
 /* 404 */
 #status-code {
