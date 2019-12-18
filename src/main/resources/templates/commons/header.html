@@ -13,7 +13,6 @@
 						<a sec:authorize="hasAuthority('ROLE_USER')" th:href="@{/membre/mon-compte}" class="btn btn-primary float-md-right">Mon compte</a>
 						<a sec:authorize="isAnonymous()" th:href="@{/acces-compte}" class="btn btn-primary float-md-right">Accéder à mon compte</a>
 						<a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{/admin/dashboard}" class="btn btn-primary float-md-right">Accès back-office</a>
-						
 					</div>
 				</div>
 			</div>
@@ -24,7 +23,7 @@
 			</div>
 			<nav class="main-nav float-right d-none d-lg-block">
 				<ul>
-					<li><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Accueil</a></li>
 					<li><a th:href="@{/les-sites}">Les sites</a></li>
 					<li sec:authorize="hasAuthority('ROLE_USER')">
 						<a th:href="@{/les-topos}">Les topos</a>

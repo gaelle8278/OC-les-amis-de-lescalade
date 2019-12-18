@@ -83,7 +83,7 @@
 								        </li>
 								    </th:block>
 							    	<li th:if="${page.hasNext()}" class="page-item">
-							        	<a th:href="@{/''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
+							        	<a th:href="@{''(page=${page.number+1},size=${page.size})}" class="page-link" aria-lable="Suivant">
 							        		<span aria-hidden="true">&raquo;</span>
 			        						<span class="sr-only">Suivant</span>
 							        	</a>
